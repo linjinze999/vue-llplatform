@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { MessageBox } from 'element-ui'
+import router from '@/router'
+import {MessageBox} from 'element-ui'
 
 /*
  * 一、request：
@@ -20,8 +21,8 @@ import { MessageBox } from 'element-ui'
  *          "success": true/false,         //请求成功或失败
  *          "result": {},                  //请求成功后的结果
  *          "error":{
- *            "code": 100001,            //请求失败错误码
- *            "message": "用户名字重复"  //请求失败描述
+ *            "code": 100001,              //请求失败错误码
+ *            "message": "用户名字重复"    //请求失败描述
  *          }
  *        }
  *
@@ -37,19 +38,31 @@ import { MessageBox } from 'element-ui'
  *
  **/
 
-let baseURL = ''
+/* 为每个请求设置默认baseURL，并添加token */
+axios.defaults.baseURL = ''
+axios.interceptors.request.use(function (config) {
+  config.headers.Authorization = localStorage.getItem('user-token')
+  return config
+})
 
+/* 普通请求 */
 export const request = (url, params, config = {}, auto_error_res = true, auto_error_data = true) => {
   const args = Object.assign({
     'method': 'post',
     'url': url,
-    'baseURL': baseURL,
     'data': params
   }, config)
   return axios(args).then((res) => {
+    /* 后台返回指定错误 */
     if (!res.data.success) {
       res.data.error = res.data.error || {}
       console.error(res.data.error)
+      /* token失效 */
+      if (res.data.error.code === '100000') {
+        router.push('/login')
+        return Promise.reject(res.data.error)
+      }
+      /* 其他错误 */
       if (auto_error_data) {
         const err_msg = res.data.error.message || '未知的服务器错误，请联系管理员！'
         const err_cod = res.data.error.code || -1
@@ -59,6 +72,7 @@ export const request = (url, params, config = {}, auto_error_res = true, auto_er
     }
     return res.data.result
   }, (error) => {
+    /* 网络请求异常 */
     console.error(error)
     if (auto_error_res) {
       const err_status = error.response.status || -100
@@ -68,6 +82,7 @@ export const request = (url, params, config = {}, auto_error_res = true, auto_er
   })
 }
 
+/* 使用sessionStorage缓存的请求 */
 export const sessionRequest = (url, params, out_time = -1, config = {}, auto_error_res = true, auto_error_data = true) => {
   const item_key = url + '#' + JSON.stringify(params)
   let item_val = sessionStorage.getItem(item_key)
@@ -88,6 +103,7 @@ export const sessionRequest = (url, params, out_time = -1, config = {}, auto_err
   })
 }
 
+/* 使用localStorage缓存的请求 */
 export const localRequest = (url, params, out_time = 604800, config = {}, auto_error_res = true, auto_error_data = true) => {
   const item_key = url + '#' + JSON.stringify(params)
   let item_val = localStorage.getItem(item_key)
