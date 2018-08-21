@@ -50,15 +50,12 @@ router.beforeEach((to, from, next) => {
   /* 上次会话结束，重新获取用户信息 */
   if (!user_info) {
     requestUserInfo({}).then(user_info => {
-      console.log('tesst')
       const permissions = user_info.permissions || []
       router_init(permissions)
       page_permission(permissions, to.fullPath, next)
-      console.log('tesst2')
     }).catch((err) => {
-      /* token失效，重新登录 */
-      console.warn(err)
-      next({path: '/login'})
+      /* 获取用户信息异常 */
+      console.error(err)
     })
   } else {
     /* 已登录时判断页面权限 */

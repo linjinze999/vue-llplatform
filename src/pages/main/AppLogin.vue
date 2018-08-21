@@ -50,10 +50,8 @@ export default {
           this.logining = true
           var loginParams = {username: this.ruleForm2.account, password: this.ruleForm2.checkPass}
           requestLogin(loginParams).then(data => {
-            localStorage.setItem('user-token', JSON.stringify(data.token))
             this.logining = false
             this.$router.push({path: '/index'})
-            return data
           }).catch(err => {
             this.logining = false
             console.log(err)
