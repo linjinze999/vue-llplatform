@@ -1,6 +1,6 @@
 <template>
   <div class='page'>
-    <form>
+    <div class="login-box">
       <div class="svgContainer">
         <div>
           <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -13,11 +13,10 @@
             </clipPath>
             <circle cx="100" cy="100" r="100" fill="#a9ddf3"/>
             <g class="body">
-              <path class="bodyBGchanged" style="display: none;" fill="#FFFFFF"
-                    d="M200,122h-35h-14.9V72c0-27.6-22.4-50-50-50s-50,22.4-50,50v50H35.8H0l0,91h200L200,122z"/>
-              <path class="bodyBGnormal" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
-                    stroke-linejoinn="round" fill="#FFFFFF"
-                    d="M200,158.5c0-20.2-14.8-36.5-35-36.5h-14.9V72.8c0-27.4-21.7-50.4-49.1-50.8c-28-0.5-50.9,22.1-50.9,50v50 H35.8C16,122,0,138,0,157.8L0,213h200L200,158.5z"/>
+              <path fill="#FFFFFF"
+                    d="M193.3,135.9c-5.8-8.4-15.5-13.9-26.5-13.9H151V72c0-27.6-22.4-50-50-50S51,44.4,51,72v50H32.1 c-10.6,0-20,5.1-25.8,13l0,78h187L193.3,135.9z"/>
+              <path fill="none" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoinn="round"
+                    d="M193.3,135.9 c-5.8-8.4-15.5-13.9-26.5-13.9H151V72c0-27.6-22.4-50-50-50S51,44.4,51,72v50H32.1c-10.6,0-20,5.1-25.8,13"/>
               <path fill="#DDF1FA"
                     d="M100,156.4c-22.9,0-43,11.1-54.1,27.7c15.6,10,34.2,15.9,54.1,15.9s38.5-5.8,54.1-15.9 C143,167.5,122.9,156.4,100,156.4z"/>
             </g>
@@ -35,15 +34,16 @@
               </g>
             </g>
             <g class="earR">
-              <g class="outerEar">
-                <circle fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" cx="153" cy="83" r="11.5"/>
-                <path fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M153.7,78.9 c2.3,0,4.1,1.9,4.1,4.1c0,2.3-1.9,4.1-4.1,4.1"/>
+              <g class="outerEar" fill="#ddf1fa" stroke="#3a5e77" stroke-width="2.5">
+                <circle cx="155" cy="83" r="11.5"/>
+                <path d="M155.7 78.9c2.3 0 4.1 1.9 4.1 4.1 0 2.3-1.9 4.1-4.1 4.1" stroke-linecap="round"
+                      stroke-linejoin="round"/>
               </g>
               <g class="earHair">
-                <rect x="134" y="64" fill="#FFFFFF" width="15" height="35"/>
-                <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M146.6,62.8 c4.9,4.6,8.4,9.4,10.6,14.2c-3.4-0.1-6.8-0.1-10.1,0.1c4,3.7,6.8,7.6,8.2,11.6c-2.1,0-4.2,0-6.3,0.2c2.6,4.1,3.8,8.3,3.7,12.5 c-1.2-0.7-3.4-1.4-5.2-1.9"/>
+                <rect x="131" y="64" fill="#FFFFFF" width="20" height="35"/>
+                <path
+                  d="M148.6 62.8c4.9 4.6 8.4 9.4 10.6 14.2-3.4-.1-6.8-.1-10.1.1 4 3.7 6.8 7.6 8.2 11.6-2.1 0-4.2 0-6.3.2 2.6 4.1 3.8 8.3 3.7 12.5-1.2-.7-3.4-1.4-5.2-1.9"
+                  fill="#fff" stroke="#3a5e77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
             </g>
             <path class="chin"
@@ -100,43 +100,20 @@
                   d="M97.7 79.9h4.7c1.9 0 3 2.2 1.9 3.7l-2.3 3.3c-.9 1.3-2.9 1.3-3.8 0l-2.3-3.3c-1.3-1.6-.2-3.7 1.8-3.7z"
                   fill="#3a5e77"/>
             <g class="arms" clip-path="url(#armMask)">
-              <g class="armL" style="visibility: hidden;">
-                <polygon fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
-                         stroke-linejoin="round" stroke-miterlimit="10"
-                         points="121.3,98.4 111,59.7 149.8,49.3 169.8,85.4"/>
-                <path fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      d="M134.4,53.5l19.3-5.2c2.7-0.7,5.4,0.9,6.1,3.5v0c0.7,2.7-0.9,5.4-3.5,6.1l-10.3,2.8"/>
-                <path fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      d="M150.9,59.4l26-7c2.7-0.7,5.4,0.9,6.1,3.5v0c0.7,2.7-0.9,5.4-3.5,6.1l-21.3,5.7"/>
-
-                <g class="twoFingers">
-                  <path fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-miterlimit="10"
-                        d="M158.3,67.8l23.1-6.2c2.7-0.7,5.4,0.9,6.1,3.5v0c0.7,2.7-0.9,5.4-3.5,6.1l-23.1,6.2"/>
-                  <path fill="#A9DDF3"
-                        d="M180.1,65l2.2-0.6c1.1-0.3,2.2,0.3,2.4,1.4v0c0.3,1.1-0.3,2.2-1.4,2.4l-2.2,0.6L180.1,65z"/>
-                  <path fill="#DDF1FA" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-miterlimit="10"
-                        d="M160.8,77.5l19.4-5.2c2.7-0.7,5.4,0.9,6.1,3.5v0c0.7,2.7-0.9,5.4-3.5,6.1l-18.3,4.9"/>
-                  <path fill="#A9DDF3"
-                        d="M178.8,75.7l2.2-0.6c1.1-0.3,2.2,0.3,2.4,1.4v0c0.3,1.1-0.3,2.2-1.4,2.4l-2.2,0.6L178.8,75.7z"/>
-                </g>
-                <path fill="#A9DDF3"
-                      d="M175.5,55.9l2.2-0.6c1.1-0.3,2.2,0.3,2.4,1.4v0c0.3,1.1-0.3,2.2-1.4,2.4l-2.2,0.6L175.5,55.9z"/>
-                <path fill="#A9DDF3"
-                      d="M152.1,50.4l2.2-0.6c1.1-0.3,2.2,0.3,2.4,1.4v0c0.3,1.1-0.3,2.2-1.4,2.4l-2.2,0.6L152.1,50.4z"/>
-                <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M123.5,97.8 c-41.4,14.9-84.1,30.7-108.2,35.5L1.2,81c33.5-9.9,71.9-16.5,111.9-21.8"/>
-                <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M108.5,60.4 c7.7-5.3,14.3-8.4,22.8-13.2c-2.4,5.3-4.7,10.3-6.7,15.1c4.3,0.3,8.4,0.7,12.3,1.3c-4.2,5-8.1,9.6-11.5,13.9 c3.1,1.1,6,2.4,8.7,3.8c-1.4,2.9-2.7,5.8-3.9,8.5c2.5,3.5,4.6,7.2,6.3,11c-4.9-0.8-9-0.7-16.2-2.7"/>
-                <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M94.5,103.8 c-0.6,4-3.8,8.9-9.4,14.7c-2.6-1.8-5-3.7-7.2-5.7c-2.5,4.1-6.6,8.8-12.2,14c-1.9-2.2-3.4-4.5-4.5-6.9c-4.4,3.3-9.5,6.9-15.4,10.8 c-0.2-3.4,0.1-7.1,1.1-10.9"/>
-                <path fill="#FFFFFF" stroke="#3A5E77" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                      d="M97.5,63.9 c-1.7-2.4-5.9-4.1-12.4-5.2c-0.9,2.2-1.8,4.3-2.5,6.5c-3.8-1.8-9.4-3.1-17-3.8c0.5,2.3,1.2,4.5,1.9,6.8c-5-0.6-11.2-0.9-18.4-1 c2,2.9,0.9,3.5,3.9,6.2"/>
+              <g class="armL">
+                <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="2.5" d="M121.3 97.4L111 58.7l38.8-10.4 20 36.1z"/>
+                <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-miterlimit="10" stroke-width="2.5"
+                      d="M134.4 52.5l19.3-5.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1L146 59.7M160.8 76.5l19.4-5.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-18.3 4.9M158.3 66.8l23.1-6.2c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-23.1 6.2M150.9 58.4l26-7c2.7-.7 5.4.9 6.1 3.5.7 2.7-.9 5.4-3.5 6.1l-21.3 5.7"/>
+                <path fill="#a9ddf3"
+                      d="M178.8 74.7l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM180.1 64l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM175.5 54.9l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8zM152.1 49.4l2.2-.6c1.1-.3 2.2.3 2.4 1.4.3 1.1-.3 2.2-1.4 2.4l-2.2.6-1-3.8z"/>
+                <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                      d="M123.5 96.8c-41.4 14.9-84.1 30.7-108.2 35.5L1.2 80c33.5-9.9 71.9-16.5 111.9-21.8"/>
+                <path fill="#fff" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                      d="M108.5 59.4c7.7-5.3 14.3-8.4 22.8-13.2-2.4 5.3-4.7 10.3-6.7 15.1 4.3.3 8.4.7 12.3 1.3-4.2 5-8.1 9.6-11.5 13.9 3.1 1.1 6 2.4 8.7 3.8-1.4 2.9-2.7 5.8-3.9 8.5 2.5 3.5 4.6 7.2 6.3 11-4.9-.8-9-.7-16.2-2.7M94.5 102.8c-.6 4-3.8 8.9-9.4 14.7-2.6-1.8-5-3.7-7.2-5.7-2.5 4.1-6.6 8.8-12.2 14-1.9-2.2-3.4-4.5-4.5-6.9-4.4 3.3-9.5 6.9-15.4 10.8-.2-3.4.1-7.1 1.1-10.9M97.5 62.9c-1.7-2.4-5.9-4.1-12.4-5.2-.9 2.2-1.8 4.3-2.5 6.5-3.8-1.8-9.4-3.1-17-3.8.5 2.3 1.2 4.5 1.9 6.8-5-.6-11.2-.9-18.4-1 2 2.9.9 3.5 3.9 6.2"/>
               </g>
-              <g class="armR" style="visibility: hidden;">
+              <g class="armR">
                 <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
                       stroke-miterlimit="10" stroke-width="2.5" d="M265.4 97.3l10.4-38.6-38.9-10.5-20 36.1z"/>
                 <path fill="#ddf1fa" stroke="#3a5e77" stroke-linecap="round" stroke-linejoin="round"
@@ -154,31 +131,34 @@
         </div>
       </div>
 
-      <div class="inputGroup inputGroup1">
-        <label for="loginEmail" id="loginEmailLabel">Email</label>
-        <input type="email" id="loginEmail" maxlength="254"/>
-        <p class="helper helper1">email@domain.com</p>
-      </div>
-      <div class="inputGroup inputGroup2">
-        <label for="loginPassword" id="loginPasswordLabel">Password</label>
-        <input type="password" id="loginPassword"/>
-        <label id="showPasswordToggle" for="showPasswordCheck">Show
-          <input id="showPasswordCheck" type="checkbox"/>
-          <div class="indicator"></div>
+      <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px"
+               class="demo-ruleForm login-container">
+        <h3 class="title">系统登录</h3>
+        <el-form-item prop="account">
+          <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"
+                    id="loginEmail"></el-input>
+        </el-form-item>
+        <el-form-item prop="checkPass">
+          <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"
+                    id="loginPassword"></el-input>
+        </el-form-item>
+        <label id="showPasswordToggle">
+          <el-checkbox v-model="checked" id="showPasswordCheck">显示密码</el-checkbox>
         </label>
-      </div>
-      <div class="inputGroup inputGroup3">
-        <button id="login">Log in</button>
-      </div>
-    </form>
+        <el-form-item style="width:100%;">
+          <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录
+          </el-button>
+          <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
 import {requestLogin} from '@/api/user'
-import {TweenMax, Expo} from 'gsap'
-import MorphSVG from '../../assets/js/plugin/MorphSVGPlugin'
+import {TweenMax, Expo, Power2} from 'gsap/all'
 
 export default {
   name: 'app-login',
@@ -197,14 +177,13 @@ export default {
           {required: true, message: '请输入密码', trigger: 'blur'}
         ]
       },
-      checked: true
+      checked: false
     }
   },
   mounted: () => {
-    var emailLabel = document.querySelector('#loginEmailLabel'), email = document.querySelector('#loginEmail'),
-      passwordLabel = document.querySelector('#loginPasswordLabel'),
+    var email = document.querySelector('#loginEmail'),
       password = document.querySelector('#loginPassword'),
-      showPasswordCheck = document.querySelector('#showPasswordCheck'),
+      showPasswordCheck = document.querySelector('#showPasswordCheck input'),
       showPasswordToggle = document.querySelector('#showPasswordToggle'),
       mySVG = document.querySelector('.svgContainer'), twoFingers = document.querySelector('.twoFingers'),
       armL = document.querySelector('.armL'), armR = document.querySelector('.armR'),
@@ -329,15 +308,18 @@ export default {
       // very crude email validation to trigger effects
       if (curEmailIndex > 0) {
         if (mouthStatus == 'small') {
+          console.log('test1')
           mouthStatus = 'medium'
           TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
             morphSVG: mouthMediumBG,
             shapeIndex: 8,
             ease: Expo.easeOut
           })
+          console.log(tooth)
           TweenMax.to(tooth, 1, {x: 0, y: 0, ease: Expo.easeOut})
           TweenMax.to(tongue, 1, {x: 0, y: 1, ease: Expo.easeOut})
           TweenMax.to([eyeL, eyeR], 1, {scaleX: .85, scaleY: .85, ease: Expo.easeOut})
+          console.log('test3')
           eyeScale = .85
         }
         if (value.includes('@')) {
@@ -353,6 +335,7 @@ export default {
           })
           eyeScale = .65
         } else {
+          console.log('test4')
           mouthStatus = 'medium'
           TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {morphSVG: mouthMediumBG, ease: Expo.easeOut})
           TweenMax.to(tooth, 1, {x: 0, y: 0, ease: Expo.easeOut})
@@ -361,6 +344,7 @@ export default {
           eyeScale = .85
         }
       } else {
+        console.log('test5')
         mouthStatus = 'small'
         TweenMax.to([mouthBG, mouthOutline, mouthMaskPath], 1, {
           morphSVG: mouthSmallBG,
@@ -377,8 +361,6 @@ export default {
     function onEmailFocus (e) {
       activeElement = 'email'
       e.target.parentElement.classList.add('focusWithText')
-      //stopBlinking();
-      //calculateFaceMove();
       onEmailInput()
     }
 
@@ -390,14 +372,9 @@ export default {
           if (e.target.value == '') {
             e.target.parentElement.classList.remove('focusWithText')
           }
-          //startBlinking();
           resetFace()
         }
       }, 100)
-    }
-
-    function onEmailLabelClick (e) {
-      activeElement = 'email'
     }
 
     function onPasswordFocus (e) {
@@ -460,11 +437,11 @@ export default {
     }
 
     function onPasswordToggleClick (e) {
-      //console.log("click: " + e.target.id);
       e.target.focus()
     }
 
     function spreadFingers () {
+      console.log('a')
       TweenMax.to(twoFingers, .35, {
         transformOrigin: 'bottom left',
         rotation: 30,
@@ -587,7 +564,6 @@ export default {
       email.addEventListener('focus', onEmailFocus)
       email.addEventListener('blur', onEmailBlur)
       email.addEventListener('input', onEmailInput)
-      emailLabel.addEventListener('click', onEmailLabelClick)
 
       // handle events for password input
       password.addEventListener('focus', onPasswordFocus)
@@ -661,7 +637,7 @@ export default {
 
 .page {
   background-color: #eff3f4;
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
   font-size: 16px;
@@ -670,7 +646,7 @@ export default {
   -webkit-font-smoothing: antialiased;
 }
 
-form {
+.login-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -688,7 +664,7 @@ form {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-form .svgContainer {
+.login-box .svgContainer {
   position: relative;
   width: 200px;
   height: 200px;
@@ -697,7 +673,7 @@ form .svgContainer {
   pointer-events: none;
 }
 
-form .svgContainer div {
+.login-box .svgContainer div {
   position: relative;
   width: 100%;
   height: 0;
@@ -706,7 +682,7 @@ form .svgContainer div {
   padding-bottom: 100%;
 }
 
-form .svgContainer .mySVG {
+.login-box .svgContainer .mySVG {
   position: absolute;
   left: 0;
   top: 0;
@@ -715,7 +691,7 @@ form .svgContainer .mySVG {
   pointer-events: none;
 }
 
-form .svgContainer:after {
+.login-box .svgContainer:after {
   content: "";
   position: absolute;
   top: 0;
@@ -726,165 +702,6 @@ form .svgContainer:after {
   box-sizing: border-box;
   border: solid 2.5px #217093;
   border-radius: 50%;
-}
-
-form .inputGroup {
-  margin: 0 0 2em;
-  padding: 0;
-  position: relative;
-}
-
-form .inputGroup:last-of-type {
-  margin-bottom: 0;
-}
-
-form label {
-  margin: 0 0 12px;
-  display: block;
-  font-size: 1.25em;
-  color: #217093;
-  font-weight: 700;
-  font-family: inherit;
-}
-
-form input[type='email'], form input[type="text"], form input[type="number"], form input[type="url"], form input[type="search"], form input[type="password"] {
-  display: block;
-  margin: 0;
-  padding: 0 1em 0;
-  padding: .875em 1em 0;
-  background-color: #f3fafd;
-  border: solid 2px #217093;
-  border-radius: 4px;
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  width: 100%;
-  height: 65px;
-  font-size: 1.55em;
-  color: #353538;
-  font-weight: 600;
-  font-family: inherit;
-  transition: box-shadow .2s linear, border-color .25s ease-out;
-}
-
-form input[type='email']:focus, form input[type="text"]:focus, form input[type="number"]:focus, form input[type="url"]:focus, form input[type="search"]:focus, form input[type="password"]:focus {
-  outline: none;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  border: solid 2px #4eb8dd;
-}
-
-form button {
-  display: block;
-  margin: 0;
-  padding: .65em 1em 1em;
-  background-color: #4eb8dd;
-  border: none;
-  border-radius: 4px;
-  box-sizing: border-box;
-  box-shadow: none;
-  width: 100%;
-  height: 65px;
-  font-size: 1.55em;
-  color: #FFF;
-  font-weight: 600;
-  font-family: inherit;
-  transition: background-color .2s ease-out;
-}
-
-form button:hover, form button:active {
-  background-color: #217093;
-}
-
-form .inputGroup1 .helper {
-  position: absolute;
-  z-index: 1;
-  font-family: inherit;
-}
-
-form .inputGroup1 .helper1 {
-  top: 0;
-  left: 0;
-  -webkit-transform: translate(1em, 2.2em) scale(1);
-  transform: translate(1em, 2.2em) scale(1);
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
-  color: #217093;
-  font-size: 1.55em;
-  font-weight: 400;
-  opacity: .65;
-  pointer-events: none;
-  transition: opacity .2s linear, -webkit-transform .2s ease-out;
-  transition: transform .2s ease-out, opacity .2s linear;
-  transition: transform .2s ease-out, opacity .2s linear, -webkit-transform .2s ease-out;
-}
-
-form .inputGroup1.focusWithText .helper {
-  -webkit-transform: translate(1em, 1.55em) scale(0.6);
-  transform: translate(1em, 1.55em) scale(0.6);
-  opacity: 1;
-}
-
-form .inputGroup2 input[type="password"] {
-  padding: .4em 1em .5em;
-}
-
-form .inputGroup2 input[type="text"] {
-  padding: .025em 1em 0;
-}
-
-form .inputGroup2 #showPasswordToggle {
-  display: block;
-  padding: 0 0 0 1.45em;
-  position: absolute;
-  top: .25em;
-  right: 0;
-  font-size: 1em;
-}
-
-form .inputGroup2 #showPasswordToggle input {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-}
-
-form .inputGroup2 #showPasswordToggle .indicator {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: .85em;
-  width: .85em;
-  background-color: #f3fafd;
-  border: solid 2px #217093;
-  border-radius: 3px;
-}
-
-form .inputGroup2 #showPasswordToggle .indicator:after {
-  content: "";
-  position: absolute;
-  left: .25em;
-  top: .025em;
-  width: .2em;
-  height: .5em;
-  border: solid #217093;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  visibility: hidden;
-}
-
-form .inputGroup2 #showPasswordToggle input:checked ~ .indicator:after {
-  visibility: visible;
-}
-
-form .inputGroup2 #showPasswordToggle input:focus ~ .indicator, form .inputGroup2 #showPasswordToggle input:hover ~ .indicator {
-  border-color: #4eb8dd;
-}
-
-form .inputGroup2 #showPasswordToggle input:disabled ~ .indicator {
-  opacity: .5;
-}
-
-form .inputGroup2 #showPasswordToggle input:disabled ~ .indicator:after {
-  visibility: hidden;
 }
 
 </style>
