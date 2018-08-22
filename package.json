@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.6",
+    "gsap": "^2.0.1",
     "mock": "^0.1.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
