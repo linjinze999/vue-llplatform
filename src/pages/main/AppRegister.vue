@@ -105,7 +105,7 @@
 
       <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px"
                class="demo-ruleForm login-container" status-icon>
-        <h3 class="title">系统登录</h3>
+        <h3 class="title">用户注册</h3>
         <el-form-item prop="account">
           <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"
                     id="loginEmail"></el-input>
@@ -113,19 +113,19 @@
         <el-form-item prop="checkPass">
           <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"
                     id="loginPassword"></el-input>
-          <label id="showPasswordToggle">
-            <el-checkbox v-model="checked" id="showPasswordCheck">显示密码</el-checkbox>
-          </label>
-            <router-link to="#" style="float: right; color: #bbbbbb">忘记密码？</router-link>
+        </el-form-item>
+        <el-form-item prop="checkPass">
+          <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="重复密码"
+                    id="loginPasswordAgain"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">
-            登录
+            注册
           </el-button>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button style="width:100%;">
-            注册
+            登录
           </el-button>
         </el-form-item>
       </el-form>
