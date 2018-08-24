@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import whiteList from './whiteList'
-import staticRoute from './staticRoute'
+import staticRouter from './staticRouter'
 import {requestUserInfo} from '@/api/user'
 
 Vue.use(Router)
 
 const router = new Router({
-  routes: staticRoute
+  routes: staticRouter
 })
 
 /* 利用router.meta保存数据级权限 */
@@ -46,11 +46,9 @@ router.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.fullPath) >= 0) {
     return next()
   }
-  console.log('test')
   let user_info = JSON.parse(sessionStorage.getItem('user-info'))
   /* 上次会话结束，重新获取用户信息 */
   if (!user_info) {
-    console.log(user_info)
     requestUserInfo({}).then(user_info => {
       const permissions = user_info.permissions || []
       router_init(permissions)

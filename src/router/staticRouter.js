@@ -5,7 +5,7 @@ import AppError401 from '@/pages/main/AppError401'
 import AppError404 from '@/pages/main/AppError404'
 
 /* 静态页面路由 */
-const staticRoute = [
+const staticRouter = [
   {
     path: '/',
     redirect: '/index'
@@ -32,4 +32,4 @@ const staticRoute = [
   }
 ]
 
-export default staticRoute
+export default staticRouter

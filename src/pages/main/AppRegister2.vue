@@ -3,28 +3,28 @@
     <div class="login-box">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px"
                class="demo-ruleForm login-container" status-icon>
-        <h3 class="title">系统登录</h3>
+        <h3 class="title">注册</h3>
         <el-form-item prop="account">
           <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="账号"
                     id="loginEmail"></el-input>
         </el-form-item>
-        <el-form-item prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="密码"
+        <el-form-item prop="password">
+          <el-input type="password" v-model="ruleForm.password" auto-complete="off" placeholder="密码"
                     id="loginPassword"></el-input>
-          <label id="showPasswordToggle">
-            <el-checkbox v-model="checked" id="showPasswordCheck">显示密码</el-checkbox>
-          </label>
-          <router-link to="/" style="float: right; color: #bbbbbb">忘记密码？</router-link>
+        </el-form-item>
+        <el-form-item prop="checkPass">
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="重复密码"
+                    id="loginCheckPass"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">
-            登录
+            注册
           </el-button>
         </el-form-item>
         <el-form-item style="width:100%;">
-          <router-link to="/register">
+          <router-link to="/login">
             <el-button style="width:100%;">
-              注册
+              登录
             </el-button>
           </router-link>
         </el-form-item>
@@ -34,26 +34,48 @@
 </template>
 
 <script>
-import {requestLogin} from '@/api/user'
+import {requestRegister} from '@/api/user'
 
 export default {
   name: 'app-login',
   data () {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
+        }
+        callback()
+      }
+    }
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.ruleForm.password) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
     return {
       logining: false,
       ruleForm: {
-        account: 'admin',
-        checkPass: '123456'
+        account: '',
+        password: '',
+        checkPass: ''
       },
       rules: {
         account: [
           {required: true, message: '请输入账号', trigger: 'blur'}
         ],
+        password: [
+          {validator: validatePass, trigger: 'blur'}
+        ],
         checkPass: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          {validator: validatePass2, trigger: 'blur'}
         ]
-      },
-      checked: false
+      }
     }
   },
   methods: {
@@ -61,14 +83,18 @@ export default {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.logining = true
-          var loginParams = {username: this.ruleForm.account, password: this.ruleForm.checkPass}
-          requestLogin(loginParams).then(data => {
+          var registerParams = {
+            username: this.ruleForm.account,
+            password: this.ruleForm.password,
+            checkPass: this.ruleForm.checkPass
+          }
+          requestRegister(registerParams).then(data => {
             this.logining = false
             this.$message({
-              message: '登录成功！',
+              message: '注册成功！',
               type: 'success'
             })
-            this.$router.push({path: '/index'})
+            this.$router.push({path: '/login'})
           }).catch(err => {
             this.logining = false
             console.log(err)
@@ -117,6 +143,15 @@ export default {
   border: solid 1px #DDD;
   border-radius: .5em;
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+.login-box .svgContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1em;
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 </style>

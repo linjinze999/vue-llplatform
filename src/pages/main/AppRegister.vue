@@ -579,7 +579,7 @@ export default {
             this.$message({
               message: '注册成功！',
               type: 'success'
-            });
+            })
             this.$router.push({path: '/login'})
           }).catch(err => {
             this.logining = false
