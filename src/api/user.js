@@ -7,6 +7,10 @@ export const requestLogin = params => {
   })
 }
 
+export const requestRegister = params => {
+  return request('/api/user/register', params)
+}
+
 export const requestUserInfo = params => {
   return request('/api/user/info', params).then((data) => {
     sessionStorage.setItem('user-info', JSON.stringify(data))

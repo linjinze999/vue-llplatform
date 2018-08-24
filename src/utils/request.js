@@ -1,6 +1,5 @@
 import axios from 'axios'
-import router from '@/router'
-import {MessageBox} from 'element-ui'
+import {MessageBox, Message} from 'element-ui'
 
 /*
  * 一、request：
@@ -58,8 +57,12 @@ export const request = (url, params, config = {}, auto_error_res = true, auto_er
       res.data.error = res.data.error || {}
       console.error(res.data.error)
       /* token失效 */
-      if (res.data.error.code === '100000') {
-        router.push('/login')
+      if (res.data.error.code === 100000) {
+        Message({
+          message: '登录失效，请重新登录',
+          type: 'error'
+        })
+        window.location.href = '/#/login'
         return Promise.reject(res.data.error)
       }
       /* 其他错误 */

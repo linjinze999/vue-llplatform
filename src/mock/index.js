@@ -8,6 +8,12 @@ export default {
         'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
       }
     })
+    Mock.mock('/api/user/register', {
+      'success': true,
+      'result': {
+        'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
+      }
+    })
     Mock.mock('/api/user/info', {
       'success': true,
       'result': {

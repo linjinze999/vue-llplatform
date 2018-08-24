@@ -46,13 +46,15 @@ router.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.fullPath) >= 0) {
     return next()
   }
+  console.log('test')
   let user_info = JSON.parse(sessionStorage.getItem('user-info'))
   /* 上次会话结束，重新获取用户信息 */
   if (!user_info) {
+    console.log(user_info)
     requestUserInfo({}).then(user_info => {
       const permissions = user_info.permissions || []
       router_init(permissions)
-      page_permission(permissions, to.fullPath, next)
+      page_permission(permissions, to.path, next)
     }).catch((err) => {
       /* 获取用户信息异常 */
       console.error(err)
@@ -60,7 +62,7 @@ router.beforeEach((to, from, next) => {
   } else {
     /* 已登录时判断页面权限 */
     const permissions = user_info.permissions || []
-    page_permission(permissions, to.fullPath, next)
+    page_permission(permissions, to.path, next)
   }
 })
 
