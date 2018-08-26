@@ -1,14 +1,18 @@
 <template>
-  <el-container  style="height: 100%">
-    <the-sidebar></the-sidebar>
-    <el-container  direction="vertical" class="right">
-      <the-header></the-header>
-      <el-container  direction="vertical" style="height: 100%">
-        <the-main></the-main>
-        <the-footer></the-footer>
-      </el-container>
-    </el-container>
-  </el-container>
+  <el-row class="page">
+    <el-col :span="24">
+      <the-header :open-nav="openNav" @toogle-open="toggleOpen"></the-header>
+    </el-col>
+    <el-col :span="24" class="page-main">
+      <the-sidebar></the-sidebar>
+      <section class="page-content">
+        <GeminiScrollbar>
+          <the-main></the-main>
+          <the-footer></the-footer>
+        </GeminiScrollbar>
+      </section>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -19,6 +23,16 @@ import TheMain from './TheMain'
 
 export default {
   name: 'app-index',
+  data () {
+    return {
+      openNav: true
+    }
+  },
+  methods: {
+    toggleOpen () {
+      this.openNav = !this.openNav
+    }
+  },
   components: {
     'the-header': TheHeader,
     'the-sidebar': TheSidebar,
@@ -28,9 +42,24 @@ export default {
 }
 </script>
 
-<style scoped>
-.right{
-  margin-left: 240px;
+<style scoped lang="scss">
+.page {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
+  width: 100%;
+  .page-main {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    .page-content {
+      position: absolute;
+      left: 240px;
+      right: 0;
+      height: 100%;
+    }
+  }
 }
 </style>

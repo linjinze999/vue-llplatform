@@ -6,10 +6,13 @@ import router from './router/index'
 import Mock from './mock/index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'font-awesome/scss/font-awesome.scss'
+import GeminiScrollbar from 'vue-gemini-scrollbar'
 
 Mock.mockData()
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(GeminiScrollbar)
 
 /* eslint-disable no-new */
 new Vue({

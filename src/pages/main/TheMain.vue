@@ -1,5 +1,5 @@
 <template>
-  <el-main class="main"></el-main>
+  <el-main class="content">主页面</el-main>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style scoped>
-.main{
-  height: 100%;
+.content{
+  min-height: 600px;
 }
 </style>

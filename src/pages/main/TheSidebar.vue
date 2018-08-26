@@ -1,7 +1,7 @@
 <template>
-  <el-aside class="sidebar" style="width: 240px;">
-    <el-scrollbar style="height: 100%; border-right: 1px solid #e6e6e6;">
-      <el-menu :default-openeds="['1', '3']" style="border: none;">
+  <aside class="sidebar">
+    <el-menu :default-openeds="['1', '3']" class="sidebar-menu">
+      <GeminiScrollbar autoshow>
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>导航一</template>
           <el-menu-item-group>
@@ -47,9 +47,9 @@
             <el-menu-item index="3-4-1">选项4-1</el-menu-item>
           </el-submenu>
         </el-submenu>
-      </el-menu>
-    </el-scrollbar>
-  </el-aside>
+      </GeminiScrollbar>
+    </el-menu>
+  </aside>
 </template>
 
 <script>
@@ -58,17 +58,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .sidebar {
   width: 240px;
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
-}
-</style>
-<style>
-.el-scrollbar__wrap {
-  overflow-y: auto;
-  overflow-x: hidden;
+  .sidebar-menu {
+    height: 100%;
+  }
 }
 </style>
