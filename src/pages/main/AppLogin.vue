@@ -642,7 +642,7 @@ export default {
               message: '登录成功！',
               type: 'success'
             });
-            this.$router.push({path: '/index'})
+            this.$router.go(-1)
           }).catch(err => {
             this.logining = false
             console.log(err)

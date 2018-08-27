@@ -1,9 +1,11 @@
 <template>
   <el-header class="header">
-    <div class="logo">
-      <img src="../../assets/logo.png" class="image"/>
-      LLPlatform
-    </div>
+    <router-link to="/index">
+      <div class="logo">
+        <img src="../../assets/logo.png" class="image"/>
+        LLPlatform
+      </div>
+    </router-link>
     <div class="content">
       <i class="fa fa-align-justify toggle"></i>
     </div>
@@ -31,11 +33,12 @@ export default {
   line-height: 60px;
   background-color: #409EFF;
   color: #ffffff;
-  div{
+  div {
     display: inline-block;
   }
   .logo {
     box-sizing: border-box;
+    color: #fff;
     width: 240px;
     border-right: 1px solid #C0C4CC;
     margin-left: -20px;
@@ -48,9 +51,9 @@ export default {
       vertical-align: middle;
     }
   }
-  .content{
+  .content {
     padding: 0 20px;
-    .toggle{
+    .toggle {
       font-size: 14px;
       cursor: pointer;
     }

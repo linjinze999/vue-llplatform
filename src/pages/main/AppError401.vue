@@ -16,7 +16,9 @@
             <div class="msg">OH!<span class="triangle"></span></div>
           </div>
           <h2 class="h1">对不起！您没有访问该页面的权限</h2>
-          <el-button round plain type="primary">返回首页</el-button>
+          <router-link to="/index">
+            <el-button round plain type="primary">返回首页</el-button>
+          </router-link>
         </div>
       </div>
     </div>

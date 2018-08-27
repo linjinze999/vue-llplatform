@@ -34,7 +34,7 @@ const page_permission = (permissions, to_path, next) => {
 /* 权限控制 */
 router.beforeEach((to, from, next) => {
   /* 忽略错误页面的权限判断 */
-  if (to.path.indexOf('/error') === 0) {
+  if (to.name.indexOf('错误') === 0) {
     return next()
   }
   /* 进入登录页面将注销用户信息 */

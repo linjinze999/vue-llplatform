@@ -23,11 +23,11 @@ const staticRouter = [
     component: AppIndex
   }, {
     path: '/error/401',
-    name: '401',
+    name: '错误401',
     component: AppError401
   }, {
     path: '*',
-    name: '404',
+    name: '错误404',
     component: AppError404
   }
 ]
