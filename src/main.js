@@ -7,12 +7,20 @@ import Mock from './mock/index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/scss/font-awesome.scss'
-import GeminiScrollbar from 'vue-gemini-scrollbar'
+import VueScroll from 'vuescroll'
+import 'vuescroll/dist/vuescroll.css'
+import './assets/css/common.css'
 
 Mock.mockData()
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.use(GeminiScrollbar)
+Vue.use(VueScroll, {
+  ops: {
+    bar: {
+      background: '#C0C4CC'
+    }
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

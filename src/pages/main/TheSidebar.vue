@@ -1,7 +1,7 @@
 <template>
   <aside class="sidebar">
     <el-menu :default-openeds="['1', '3']" class="sidebar-menu">
-      <GeminiScrollbar autoshow>
+      <vue-scroll>
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>导航一</template>
           <el-menu-item-group>
@@ -47,7 +47,7 @@
             <el-menu-item index="3-4-1">选项4-1</el-menu-item>
           </el-submenu>
         </el-submenu>
-      </GeminiScrollbar>
+      </vue-scroll>
     </el-menu>
   </aside>
 </template>

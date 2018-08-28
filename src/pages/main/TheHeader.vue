@@ -24,7 +24,8 @@
 
 <script>
 export default {
-  name: 'the-header'
+  name: 'the-header',
+  props: ['open-nav']
 }
 </script>
 
@@ -37,7 +38,6 @@ export default {
     display: inline-block;
   }
   .logo {
-    box-sizing: border-box;
     color: #fff;
     width: 240px;
     border-right: 1px solid #C0C4CC;

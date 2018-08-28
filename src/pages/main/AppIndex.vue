@@ -6,10 +6,10 @@
     <el-col :span="24" class="page-main">
       <the-sidebar></the-sidebar>
       <section class="page-content">
-        <GeminiScrollbar>
+        <vue-scroll>
           <the-main></the-main>
           <the-footer></the-footer>
-        </GeminiScrollbar>
+        </vue-scroll>
       </section>
     </el-col>
   </el-row>
