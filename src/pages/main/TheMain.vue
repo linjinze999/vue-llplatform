@@ -1,5 +1,9 @@
 <template>
-  <el-main :style="mainStyle" >主页面</el-main>
+  <el-main :style="mainStyle" >
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
+  </el-main>
 </template>
 
 <script>

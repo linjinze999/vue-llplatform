@@ -1,22 +1,26 @@
 <template>
   <el-header class="header">
     <router-link to="/index">
-      <div class="logo">
+      <div class="logo" :class="{'logo-hide': !openNav}">
         <img src="../../assets/logo.png" class="image"/>
-        LLPlatform
+        <span class="text">LLPlatform</span>
       </div>
     </router-link>
     <div class="content">
-      <i class="fa fa-align-justify toggle"></i>
+      <i class="fa fa-align-justify toggle" @click="navOpenToggle" title="显示/隐藏菜单"></i>
     </div>
     <el-dropdown trigger="hover" class="user">
       <span class="user-info">
-        王小虎<i class="fa fa-user-circle-o fa-2x" style="margin-left: 10px"></i>
+        {{ user_name }}<i class="fa fa-user-circle-o fa-2x" style="margin-left: 10px"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>我的账号</el-dropdown-item>
         <el-dropdown-item>修改密码</el-dropdown-item>
-        <el-dropdown-item divided>退出登录</el-dropdown-item>
+        <el-dropdown-item divided>主题设置</el-dropdown-item>
+        <el-dropdown-item>语言选择</el-dropdown-item>
+        <el-dropdown-item divided>
+          <router-link to="/login">退出登录</router-link>
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-header>
@@ -25,7 +29,19 @@
 <script>
 export default {
   name: 'the-header',
-  props: ['open-nav']
+  props: ['openNav'],
+  data () {
+    const user_info = JSON.parse(sessionStorage.getItem('user-info'))
+    const user_name = user_info['name']
+    return {
+      user_name: user_name
+    }
+  },
+  methods: {
+    navOpenToggle () {
+      this.$emit('toggle-open')
+    }
+  }
 }
 </script>
 
@@ -38,7 +54,6 @@ export default {
     display: inline-block;
   }
   .logo {
-    color: #fff;
     width: 240px;
     border-right: 1px solid #C0C4CC;
     margin-left: -20px;
@@ -49,6 +64,12 @@ export default {
       width: 40px;
       height: 40px;
       vertical-align: middle;
+    }
+  }
+  .logo-hide {
+    width: 65px;
+    .text {
+      display: none;
     }
   }
   .content {

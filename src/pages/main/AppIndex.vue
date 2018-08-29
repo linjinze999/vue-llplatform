@@ -1,11 +1,11 @@
 <template>
   <el-row class="page">
     <el-col :span="24">
-      <the-header :open-nav="openNav" @toogle-open="toggleOpen"></the-header>
+      <the-header :open-nav="openNav" @toggle-open="toggleOpen"></the-header>
     </el-col>
     <el-col :span="24" class="page-main">
-      <the-sidebar></the-sidebar>
-      <section class="page-content">
+      <the-sidebar :open-nav="openNav"></the-sidebar>
+      <section class="page-content" :class="{'page-content-hide-aside': !openNav}">
         <vue-scroll>
           <the-main></the-main>
           <the-footer></the-footer>
@@ -59,6 +59,9 @@ export default {
       left: 240px;
       right: 0;
       height: 100%;
+    }
+    .page-content-hide-aside {
+      left: 65px;
     }
   }
 }
