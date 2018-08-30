@@ -191,7 +191,7 @@ import {requestLogin} from '@/api/user'
 import {TweenMax, Expo, Power2} from 'gsap/all'
 
 export default {
-  name: 'app-login',
+  name: 'AppLogin',
   data () {
     return {
       logining: false,

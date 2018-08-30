@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'the-sidebar',
+  name: 'TheLayoutSidebar',
   props: ['openNav']
 }
 </script>

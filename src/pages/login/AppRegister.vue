@@ -191,7 +191,7 @@ import {requestRegister} from '@/api/user'
 import {TweenMax, Expo, Power2} from 'gsap/all'
 
 export default {
-  name: 'app-login',
+  name: 'AppRegister',
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {

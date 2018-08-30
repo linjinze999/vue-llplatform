@@ -20,7 +20,6 @@
     "mock": "^0.1.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
-    "vue-gemini-scrollbar": "^2.0.0",
     "vue-router": "^3.0.1",
     "vuescroll": "latest"
   },
@@ -39,6 +38,7 @@
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
+    "babel-runtime": "^6.26.0",
     "chalk": "^2.0.1",
     "chromedriver": "^2.27.2",
     "copy-webpack-plugin": "^4.0.1",
@@ -47,6 +47,7 @@
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
+    "eslint-import-resolver-node": "^0.3.2",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",

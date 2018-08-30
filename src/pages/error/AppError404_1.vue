@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'app-error-404',
+  name: 'AppError404',
   mounted: () => {
     /* eslint-disable */
     (function () {

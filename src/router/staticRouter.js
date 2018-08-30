@@ -1,8 +1,10 @@
-import AppLogin from '@/pages/main/AppLogin'
-import AppRegister from '@/pages/main/AppRegister'
-import AppIndex from '@/pages/main/AppIndex'
-import AppError401 from '@/pages/main/AppError401'
-import AppError404 from '@/pages/main/AppError404'
+import TheLayout from '@/pages/layout/TheLayout'
+import AppLogin from '@/pages/login/AppLogin'
+import AppRegister from '@/pages/login/AppRegister'
+import AppError401 from '@/pages/error/AppError401'
+import AppError404 from '@/pages/error/AppError404'
+import FuncHome from '@/pages/functions/home/FuncHome'
+import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
 
 /* 静态页面路由 */
 const staticRouter = [
@@ -18,9 +20,20 @@ const staticRouter = [
     name: '注册',
     component: AppRegister
   }, {
-    path: '/index',
-    name: '首页',
-    component: AppIndex
+    path: '/',
+    component: TheLayout,
+    children: [
+      {
+        path: '/index',
+        alias: '/home',
+        name: '首页',
+        component: FuncHome
+      }, {
+        path: '/user/password',
+        name: '用户密码',
+        component: FuncUserPassword
+      }
+    ]
   }, {
     path: '/error/401',
     name: '错误401',

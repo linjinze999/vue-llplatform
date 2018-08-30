@@ -37,7 +37,7 @@
 import {requestLogin} from '@/api/user'
 
 export default {
-  name: 'app-login',
+  name: 'AppLogin',
   data () {
     return {
       logining: false,

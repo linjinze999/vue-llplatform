@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import TheHeader from './TheHeader'
-import TheSidebar from './TheSidebar'
-import TheFooter from './TheFooter'
-import TheMain from './TheMain'
+import TheLayoutHeader from './TheLayoutHeader'
+import TheLayoutSidebar from './TheLayoutSidebar'
+import TheLayoutFooter from './TheLayoutFooter'
+import TheLayoutMain from './TheLayoutMain'
 
 export default {
-  name: 'app-index',
+  name: 'TheLayout',
   data () {
     return {
       openNav: true
@@ -34,10 +34,10 @@ export default {
     }
   },
   components: {
-    'the-header': TheHeader,
-    'the-sidebar': TheSidebar,
-    'the-footer': TheFooter,
-    'the-main': TheMain
+    'the-header': TheLayoutHeader,
+    'the-sidebar': TheLayoutSidebar,
+    'the-footer': TheLayoutFooter,
+    'the-main': TheLayoutMain
   }
 }
 </script>

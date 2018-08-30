@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'app-error-401',
+  name: 'AppError401',
   mounted: () => {
     /* eslint-disable */
     function randomNum () {

@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'the-main',
+  name: 'TheLayoutMain',
   data () {
     const win_height = window.innerHeight - 100 + 'px'
     return {

@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'the-header',
+  name: 'TheLayoutHeader',
   props: ['openNav'],
   data () {
     const user_info = JSON.parse(sessionStorage.getItem('user-info'))

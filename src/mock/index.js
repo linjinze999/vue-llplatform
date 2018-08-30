@@ -25,7 +25,7 @@ export default {
             // 一个路径一个对象，路径名为完整路径名
             path: '/index'
           }, {
-            path: '/user/show',
+            path: '/user/password',
             // permission存储数据级权限控制
             permission: ['modify', 'delete']
           }
