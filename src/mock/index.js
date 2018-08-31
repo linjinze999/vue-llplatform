@@ -25,9 +25,21 @@ export default {
             // 一个路径一个对象，路径名为完整路径名
             path: '/index'
           }, {
-            path: '/user/password',
+            path: '/table',
             // permission存储数据级权限控制
             permission: ['modify', 'delete']
+          }, {
+            path: '/forms/base'
+          }, {
+            path: '/forms/edit'
+          }, {
+            path: '/charts'
+          }, {
+            path: '/user/language'
+          }, {
+            path: '/user/theme'
+          }, {
+            path: '/user/password'
           }
         ]
       },

@@ -4,7 +4,12 @@ import AppRegister from '@/pages/login/AppRegister'
 import AppError401 from '@/pages/error/AppError401'
 import AppError404 from '@/pages/error/AppError404'
 import FuncHome from '@/pages/functions/home/FuncHome'
+import FuncCharts from '@/pages/functions/charts/FuncCharts'
+import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
+import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
 import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
+import FuncUserLanguage from '@/pages/functions/user/FuncUserLanguage'
+import FuncUserTheme from '@/pages/functions/user/FuncUserTheme'
 
 /* 静态页面路由 */
 const staticRouter = [
@@ -22,15 +27,63 @@ const staticRouter = [
   }, {
     path: '/',
     component: TheLayout,
+    menu: true,
     children: [
       {
         path: '/index',
         alias: '/home',
         name: '首页',
+        icon: 'el-icon-menu',
         component: FuncHome
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    name: '表单',
+    icon: 'el-icon-tickets',
+    children: [
+      {
+        path: '/forms/base',
+        name: '基本表单',
+        component: FuncFormsBase
+      }, {
+        path: '/forms/edit',
+        name: '富文本编辑器',
+        component: FuncFormsEdit
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    children: [
+      {
+        path: '/charts',
+        name: '图表',
+        icon: 'el-icon-picture',
+        component: FuncCharts
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    name: '个人设置',
+    icon: 'el-icon-setting',
+    children: [
+      {
+        path: '/user/language',
+        name: '语言设置',
+        component: FuncUserLanguage
+      }, {
+        path: '/user/theme',
+        name: '主题设置',
+        component: FuncUserTheme
       }, {
         path: '/user/password',
-        name: '用户密码',
+        name: '密码设置',
         component: FuncUserPassword
       }
     ]

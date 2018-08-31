@@ -15,6 +15,7 @@ const router_init = (permissions) => {
   permissions.forEach(function (v) {
     let routeItem = router.match(v.path)
     if (routeItem) {
+      routeItem.show = true
       routeItem.meta.permission = v.permission ? v.permission : []
     }
   })
