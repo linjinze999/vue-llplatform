@@ -8,6 +8,6 @@ a {
   color: inherit;
 }
 /* [vue-scroll] show when hover */
-.__vuescroll:hover .__bar-is-vertical{
+.__vuescroll:hover .__bar-is-vertical, .__vuescroll:hover .__bar-is-horizontal{
   opacity: 1 !important;
 }

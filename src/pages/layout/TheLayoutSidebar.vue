@@ -2,26 +2,29 @@
   <aside class="sidebar" :class="{'sidebar-hide': !openNav}">
     <vue-scroll>
       <el-menu :default-active="$route.path" class="sidebar-menu" :collapse="!openNav" @select="menuSelect">
-        <template v-for="(item, index) in $router.options.routes" v-if="item.menu ">
+        <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
           <!-- 一级菜单 -->
-          <el-menu-item v-if="item.children.length === 1" :index="item.children[0].path" :key="index+''">
-            <i :class="item.children[0].icon"></i>{{item.children[0].name}}
+          <el-menu-item v-if="level1.children.length === 1 && permissions.indexOf(level1.children[0].path) > -1"
+                        :index="level1.children[0].path" :key="index1">
+            <i :class="level1.children[0].icon"></i><span slot="title">{{level1.children[0].name}}</span>
           </el-menu-item>
-          <el-submenu :index="index+''" v-if="item.children.length > 1" :key="index+''">
-            <template slot="title"><i :class="item.icon"></i>{{item.name}}</template>
-            <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
+          <el-submenu :index="index1+''" v-if="level1.children.length > 1" :key="index1+''">
+            <template slot="title"><i :class="level1.icon"></i><span slot="title">{{level1.name}}</span></template>
+            <template v-for="(level2, index2) in level1.children">
               <!-- 二级菜单 -->
-              <el-menu-item v-if="item.children.length === 1" :index="item.children[0].path" :key="index+''">
-                <i :class="item.children[0].icon"></i>{{child.name}}
+              <el-menu-item v-if="!level2.children && permissions.indexOf(level2.path) > -1"
+                            :index="level2.path" :key="index1+'-'+index2">
+                {{level2.name}}
               </el-menu-item>
-              <el-submenu :index="index+''" v-if="child.children" :key="index+''">
+              <el-submenu :index="index1+'-'+index2" v-if="level2.children" :key="index1+'-'+index2">
                 <!-- 三级菜单 -->
-                <template slot="title"><i :class="item.icon"></i>{{item.name}}</template>
-                <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
-                  {{child.name}}
+                <template slot="title"><i :class="level2.icon"></i>{{level2.name}}</template>
+                <el-menu-item v-for="(level3, index3) in level2.children" :index="level3.path"
+                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.indexOf(level3.path) > -1">
+                  {{level3.name}}
                 </el-menu-item>
               </el-submenu>
-            </el-menu-item>
+            </template>
           </el-submenu>
         </template>
       </el-menu>
@@ -33,9 +36,18 @@
 export default {
   name: 'TheLayoutSidebar',
   props: ['openNav'],
+  data () {
+    let user_info = JSON.parse(sessionStorage.getItem('user-info')).permissions || []
+    let permissions = []
+    user_info.forEach(p => {
+      permissions.push(p.path)
+    })
+    return {
+      permissions
+    }
+  },
   methods: {
     menuSelect (index) {
-      console.log(index)
       this.$router.push(index)
     }
   }
