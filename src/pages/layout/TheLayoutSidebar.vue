@@ -6,7 +6,7 @@
                @select="menuSelect">
         <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
           <!-- 一级菜单 -->
-          <el-menu-item v-if="level1.children.length === 1 && permissions.indexOf(level1.children[0].path) > -1"
+          <el-menu-item v-if="level1.children.length === 1 && permissions.includes(level1.children[0].path)"
                         :index="level1.children[0].path" :key="index1">
             <i :class="level1.children[0].icon"></i><span slot="title">{{level1.children[0].name}}</span>
           </el-menu-item>
@@ -14,7 +14,7 @@
             <template slot="title"><i :class="level1.icon"></i><span slot="title">{{level1.name}}</span></template>
             <template v-for="(level2, index2) in level1.children">
               <!-- 二级菜单 -->
-              <el-menu-item v-if="!level2.children && permissions.indexOf(level2.path) > -1"
+              <el-menu-item v-if="!level2.children && permissions.includes(level2.path)"
                             :index="level2.path" :key="index1+'-'+index2">
                 {{level2.name}}
               </el-menu-item>
@@ -22,7 +22,7 @@
                 <!-- 三级菜单 -->
                 <template slot="title"><i :class="level2.icon"></i>{{level2.name}}</template>
                 <el-menu-item v-for="(level3, index3) in level2.children" :index="level3.path"
-                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.indexOf(level3.path) > -1">
+                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.includes(level3.path)">
                   {{level3.name}}
                 </el-menu-item>
               </el-submenu>
@@ -34,7 +34,7 @@
       <el-menu :default-active="$route.path" class="sidebar-menu" v-show="!openNav" collapse @select="menuSelect">
         <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
           <!-- 一级菜单 -->
-          <el-menu-item v-if="level1.children.length === 1 && permissions.indexOf(level1.children[0].path) > -1"
+          <el-menu-item v-if="level1.children.length === 1 && permissions.includes(level1.children[0].path)"
                         :index="level1.children[0].path" :key="index1">
             <i :class="level1.children[0].icon"></i><span slot="title">{{level1.children[0].name}}</span>
           </el-menu-item>
@@ -42,7 +42,7 @@
             <template slot="title"><i :class="level1.icon"></i><span slot="title">{{level1.name}}</span></template>
             <template v-for="(level2, index2) in level1.children">
               <!-- 二级菜单 -->
-              <el-menu-item v-if="!level2.children && permissions.indexOf(level2.path) > -1"
+              <el-menu-item v-if="!level2.children && permissions.includes(level2.path)"
                             :index="level2.path" :key="index1+'-'+index2">
                 {{level2.name}}
               </el-menu-item>
@@ -50,7 +50,7 @@
                 <!-- 三级菜单 -->
                 <template slot="title"><i :class="level2.icon"></i>{{level2.name}}</template>
                 <el-menu-item v-for="(level3, index3) in level2.children" :index="level3.path"
-                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.indexOf(level3.path) > -1">
+                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.includes(level3.path)">
                   {{level3.name}}
                 </el-menu-item>
               </el-submenu>
