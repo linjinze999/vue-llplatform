@@ -1,7 +1,37 @@
 <template>
   <aside class="sidebar" :class="{'sidebar-hide': !openNav}">
     <vue-scroll>
-      <el-menu :default-active="$route.path" class="sidebar-menu" :collapse="!openNav" @select="menuSelect">
+      <!-- 展开菜单 -->
+      <el-menu :default-active="$route.path" class="sidebar-menu" v-show="openNav" :collapse="false"
+               @select="menuSelect">
+        <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
+          <!-- 一级菜单 -->
+          <el-menu-item v-if="level1.children.length === 1 && permissions.indexOf(level1.children[0].path) > -1"
+                        :index="level1.children[0].path" :key="index1">
+            <i :class="level1.children[0].icon"></i><span slot="title">{{level1.children[0].name}}</span>
+          </el-menu-item>
+          <el-submenu :index="index1+''" v-if="level1.children.length > 1" :key="index1+''">
+            <template slot="title"><i :class="level1.icon"></i><span slot="title">{{level1.name}}</span></template>
+            <template v-for="(level2, index2) in level1.children">
+              <!-- 二级菜单 -->
+              <el-menu-item v-if="!level2.children && permissions.indexOf(level2.path) > -1"
+                            :index="level2.path" :key="index1+'-'+index2">
+                {{level2.name}}
+              </el-menu-item>
+              <el-submenu :index="index1+'-'+index2" v-if="level2.children" :key="index1+'-'+index2">
+                <!-- 三级菜单 -->
+                <template slot="title"><i :class="level2.icon"></i>{{level2.name}}</template>
+                <el-menu-item v-for="(level3, index3) in level2.children" :index="level3.path"
+                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.indexOf(level3.path) > -1">
+                  {{level3.name}}
+                </el-menu-item>
+              </el-submenu>
+            </template>
+          </el-submenu>
+        </template>
+      </el-menu>
+      <!-- 折叠菜单 -->
+      <el-menu :default-active="$route.path" class="sidebar-menu" v-show="!openNav" collapse @select="menuSelect">
         <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
           <!-- 一级菜单 -->
           <el-menu-item v-if="level1.children.length === 1 && permissions.indexOf(level1.children[0].path) > -1"
@@ -64,6 +94,7 @@ export default {
   .sidebar-menu {
     border: none;
     height: 100%;
+    width: 100% !important;
   }
 }
 
