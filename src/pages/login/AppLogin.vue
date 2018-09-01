@@ -187,6 +187,7 @@
 </template>
 
 <script>
+import sha256 from 'crypto-js/sha256'
 import {requestLogin} from '@/api/user'
 import {TweenMax, Expo, Power2} from 'gsap/all'
 
@@ -635,7 +636,7 @@ export default {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.logining = true
-          var loginParams = {username: this.ruleForm.account, password: this.ruleForm.checkPass}
+          const loginParams = {username: this.ruleForm.account, password: sha256(this.ruleForm.checkPass)}
           requestLogin(loginParams).then(data => {
             this.logining = false
             this.$message({
@@ -662,6 +663,7 @@ export default {
 
 .title {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .page {
