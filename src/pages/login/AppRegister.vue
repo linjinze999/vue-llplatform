@@ -600,6 +600,7 @@ export default {
 
 .title {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .page {

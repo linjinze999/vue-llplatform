@@ -663,7 +663,7 @@ export default {
 
 .title {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .page {
