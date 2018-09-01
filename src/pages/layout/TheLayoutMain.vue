@@ -1,5 +1,5 @@
 <template>
-  <el-main :style="mainStyle" >
+  <el-main :style="mainStyle">
     <transition name="fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -21,7 +21,4 @@ export default {
 </script>
 
 <style scoped>
-.content {
-  min-height: 600px;
-}
 </style>
