@@ -1,7 +1,7 @@
 {
   "name": "vue-llplatform",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Management system by vue and element",
   "author": "linjinze <linjinze999@163.com>",
   "private": true,
   "scripts": {
@@ -17,8 +17,8 @@
     "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
     "element-ui": "^2.4.6",
+    "font-awesome": "^4.7.0",
     "gsap": "^2.0.1",
-    "mock": "^0.1.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
@@ -57,7 +57,6 @@
     "eslint-plugin-vue": "^4.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
-    "font-awesome": "^4.7.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
