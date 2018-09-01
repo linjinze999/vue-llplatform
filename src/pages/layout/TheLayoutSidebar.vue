@@ -65,7 +65,6 @@ export default {
   .sidebar-menu {
     border: none;
     height: 100%;
-    width: 100% !important;
   }
 }
 .sidebar-hide {

@@ -321,9 +321,9 @@
       </g>
     </svg>
     <div class="content">
-      <h3>404错误</h3>
+      <h3>401错误</h3>
       <p>
-        找不到页面，请确认您访问的地址是否正确。
+        对不起，您没有访问该页面的权限。
         <router-link to="/index">
           <el-button size="small" round plain>返回首页</el-button>
         </router-link>
