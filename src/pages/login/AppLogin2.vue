@@ -42,6 +42,7 @@ export default {
   data () {
     return {
       logining: false,
+      fromUrl: '/',
       ruleForm: {
         account: 'admin',
         checkPass: '123456'
@@ -69,7 +70,7 @@ export default {
               message: '登录成功！',
               type: 'success'
             })
-            this.$router.go(-1)
+            this.$router.push(this.fromUrl)
           }).catch(err => {
             this.logining = false
             console.log(err)
@@ -80,6 +81,11 @@ export default {
         }
       })
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.fromUrl = from.fullPath
+    })
   }
 }
 
