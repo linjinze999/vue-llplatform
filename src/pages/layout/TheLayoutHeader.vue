@@ -7,22 +7,31 @@
       </div>
     </router-link>
     <div class="content">
-      <i class="fa fa-align-justify toggle" @click="navOpenToggle" title="显示/隐藏菜单"></i>
+      <i class="fa fa-outdent toggle" @click="navOpenToggle" title="显示/隐藏菜单" v-show="openNav"></i>
+      <i class="fa fa-indent toggle" @click="navOpenToggle" title="显示/隐藏菜单" v-show="!openNav"></i>
     </div>
-    <el-dropdown trigger="hover" class="user">
+    <div class="right">
+      <div class="right-item">
+        <i class="fa fa-envelope-o fa-fw"></i>
+        <el-badge :value="1" class="item"></el-badge>
+      </div>
+      <div class="right-item">
+        <el-dropdown trigger="hover">
       <span class="user-info">
-        {{ user_name }}<i class="fa fa-user-circle-o fa-2x" style="margin-left: 10px"></i>
+        {{ user_name }}<i class="fa fa-user-o" style="margin-left: 10px"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>我的账号</el-dropdown-item>
-        <el-dropdown-item>修改密码</el-dropdown-item>
-        <el-dropdown-item divided>主题设置</el-dropdown-item>
-        <el-dropdown-item>语言选择</el-dropdown-item>
-        <el-dropdown-item divided>
-          <router-link to="/login">退出登录</router-link>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>我的账号</el-dropdown-item>
+            <el-dropdown-item>修改密码</el-dropdown-item>
+            <el-dropdown-item divided>主题设置</el-dropdown-item>
+            <el-dropdown-item>语言选择</el-dropdown-item>
+            <el-dropdown-item divided>
+              <router-link to="/login">退出登录</router-link>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
   </el-header>
 </template>
 
@@ -79,14 +88,20 @@ export default {
       cursor: pointer;
     }
   }
-  .user {
+  .right {
     float: right;
-    cursor: pointer;
+    .right-item {
+      display: inline-block;
+      cursor: pointer;
+      padding: 0 10px;
+      min-width: 60px;
+      text-align: center;
+    }
+    .right-item:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
     .user-info {
       color: #ffffff;
-      i {
-        vertical-align: middle;
-      }
     }
   }
 }
