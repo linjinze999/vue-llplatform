@@ -90,10 +90,12 @@ const staticRouter = [
   }, {
     path: '/error/401',
     name: '错误401',
+    meta: {errorPage: true},
     component: AppError401
   }, {
     path: '*',
     name: '错误404',
+    meta: {errorPage: true},
     component: AppError404
   }
 ]
