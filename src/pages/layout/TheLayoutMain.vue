@@ -1,5 +1,5 @@
 <template>
-  <el-main :style="mainStyle">
+  <el-main :style="mainStyle" class="page-sub-main">
     <transition name="fade" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -21,4 +21,8 @@ export default {
 </script>
 
 <style scoped>
+.page-sub-main {
+  background-color: #EBEEF5;
+  color: #666666;
+}
 </style>
