@@ -9,7 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/scss/font-awesome.scss'
 import VueScroll from 'vuescroll'
 import 'vuescroll/dist/vuescroll.css'
-import './assets/css/common.css'
+import './assets/css/common.scss'
 
 Mock.mockData()
 Vue.config.productionTip = false

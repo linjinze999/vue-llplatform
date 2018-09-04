@@ -23,7 +23,6 @@
     "mockjs": "^1.0.1-beta3",
     "v-charts": "^1.17.10",
     "vue": "^2.5.2",
-    "vue-echarts": "^3.1.2",
     "vue-router": "^3.0.1",
     "vuescroll": "latest"
   },
