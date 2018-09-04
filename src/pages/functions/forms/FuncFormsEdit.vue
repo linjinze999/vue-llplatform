@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-card shadow="hover">
+    <el-card>
       请参考<a style="color: #409eff" href="https://www.awesomes.cn/repo/surmon-china/vue-quill-editor">
       vue-quill-editor</a>。
     </el-card>
     <br/>
-    <el-card shadow="hover" style="height: 610px;">
+    <el-card style="height: 610px;">
       <quill-editor
         v-model="content"
         ref="myQuillEditor"
