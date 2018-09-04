@@ -25,6 +25,7 @@
     "vue": "^2.5.2",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
+    "vuedraggable": "^2.16.0",
     "vuescroll": "latest"
   },
   "devDependencies": {

@@ -7,6 +7,7 @@ import FuncHome from '@/pages/functions/home/FuncHome'
 import FuncCharts from '@/pages/functions/charts/FuncCharts'
 import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
 import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
+import FuncDrag from '@/pages/functions/drag/FuncDrag'
 import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
 import FuncUserLanguage from '@/pages/functions/user/FuncUserLanguage'
 import FuncUserTheme from '@/pages/functions/user/FuncUserTheme'
@@ -64,6 +65,18 @@ const staticRouter = [
         name: '图表',
         icon: 'el-icon-picture',
         component: FuncCharts
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    children: [
+      {
+        path: '/drag',
+        name: '拖曳',
+        icon: 'el-icon-rank',
+        component: FuncDrag
       }
     ]
   }, {

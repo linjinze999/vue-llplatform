@@ -35,6 +35,8 @@ export default {
           }, {
             path: '/charts'
           }, {
+            path: '/drag'
+          }, {
             path: '/user/language'
           }, {
             path: '/user/theme'
