@@ -48,5 +48,11 @@ export default {
         'message': '无效的token'
       }
     })
+    Mock.mock('/api/user/changePassword', {
+      'success': true,
+      'result': {
+        'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
+      }
+    })
   }
 }

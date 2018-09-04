@@ -74,17 +74,17 @@ const staticRouter = [
     icon: 'el-icon-setting',
     children: [
       {
-        path: '/user/language',
-        name: '语言设置',
-        component: FuncUserLanguage
+        path: '/user/password',
+        name: '修改密码',
+        component: FuncUserPassword
       }, {
         path: '/user/theme',
         name: '主题设置',
         component: FuncUserTheme
       }, {
-        path: '/user/password',
-        name: '密码设置',
-        component: FuncUserPassword
+        path: '/user/language',
+        name: '语言设置',
+        component: FuncUserLanguage
       }
     ]
   }, {

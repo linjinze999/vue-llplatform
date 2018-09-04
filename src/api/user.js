@@ -17,3 +17,10 @@ export const requestUserInfo = params => {
     return data
   })
 }
+
+export const requestChangePassword = params => {
+  return request('/api/user/changePassword', params).then(data => {
+    localStorage.setItem('user-token', JSON.stringify(data.token))
+    return data
+  })
+}
