@@ -4,6 +4,7 @@ import AppRegister from '@/pages/login/AppRegister'
 import AppError401 from '@/pages/error/AppError401_1'
 import AppError404 from '@/pages/error/AppError404_3'
 import FuncHome from '@/pages/functions/home/FuncHome'
+import FuncTable from '@/pages/functions/table/FuncTable'
 import FuncCharts from '@/pages/functions/charts/FuncCharts'
 import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
 import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
@@ -36,6 +37,18 @@ const staticRouter = [
         name: '首页',
         icon: 'el-icon-menu',
         component: FuncHome
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    children: [
+      {
+        path: '/table',
+        name: '表格',
+        icon: 'el-icon-search',
+        component: FuncTable
       }
     ]
   }, {
