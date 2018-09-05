@@ -56,5 +56,17 @@ export default {
         'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
       }
     })
+    Mock.mock('/api/user/query', {
+      'success': true,
+      'result': {
+        'data|30-60': [
+          {
+            'name|1': [Mock.mock('@cname'), Mock.mock('@cname'), Mock.mock('@cname'), Mock.mock('@cname')],
+            'date|1': [Mock.mock('@date("yyyy-MM-dd")'), Mock.mock('@date("yyyy-MM-dd")'), Mock.mock('@date("yyyy-MM-dd")')],
+            'address|1': [Mock.mock('@county(true)'), Mock.mock('@county(true)'), Mock.mock('@county(true)')]
+          }
+        ]
+      }
+    })
   }
 }

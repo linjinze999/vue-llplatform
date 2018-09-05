@@ -24,3 +24,7 @@ export const requestChangePassword = params => {
     return data
   })
 }
+
+export const requestUserQuery = params => {
+  return request('/api/user/query', params)
+}
