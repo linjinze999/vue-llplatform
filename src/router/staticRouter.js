@@ -1,8 +1,8 @@
 import TheLayout from '@/pages/layout/TheLayout'
 import AppLogin from '@/pages/login/AppLogin'
 import AppRegister from '@/pages/login/AppRegister'
-import AppError401 from '@/pages/error/AppError401_1'
-import AppError404 from '@/pages/error/AppError404_3'
+import AppError401 from '@/pages/error/AppError401'
+import AppError404 from '@/pages/error/AppError404'
 import FuncHome from '@/pages/functions/home/FuncHome'
 import FuncTable from '@/pages/functions/table/FuncTable'
 import FuncCharts from '@/pages/functions/charts/FuncCharts'
@@ -78,6 +78,23 @@ const staticRouter = [
         name: '图表',
         icon: 'el-icon-picture',
         component: FuncCharts
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    name: '错误',
+    icon: 'el-icon-picture',
+    children: [
+      {
+        path: '/err/401',
+        name: '401',
+        component: AppError401
+      }, {
+        path: '/err/404',
+        name: '404',
+        component: AppError404
       }
     ]
   }, {

@@ -28,21 +28,16 @@ export default {
             path: '/table',
             // permission存储数据级权限控制
             permission: ['modify', 'delete']
-          }, {
-            path: '/forms/base'
-          }, {
-            path: '/forms/edit'
-          }, {
-            path: '/charts'
-          }, {
-            path: '/drag'
-          }, {
-            path: '/user/language'
-          }, {
-            path: '/user/theme'
-          }, {
-            path: '/user/password'
-          }
+          },
+          {path: '/forms/base'},
+          {path: '/forms/edit'},
+          {path: '/charts'},
+          {path: '/err/401'},
+          {path: '/err/404'},
+          {path: '/drag'},
+          {path: '/user/language'},
+          {path: '/user/theme'},
+          {path: '/user/password'}
         ]
       },
       'error': {
