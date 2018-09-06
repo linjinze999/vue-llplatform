@@ -3,9 +3,11 @@
     <el-card>
       1. 实现：请参考<a style="color: #409eff"
                   href="http://element-cn.eleme.io/#/zh-CN/component/table">Element Table</a><br/>
-      2. 示例：以下示例源代码见<a
-      href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue"
-      style="color: #409eff">https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue</a>
+      2. 示例：以下示例源代码见
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue"
+         style="color: #409eff" target="_blank">
+        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue
+      </a>
     </el-card>
     <el-card style="margin-top: 20px;">
       <el-form :inline="true" :model="formInline" ref="formInline" :rules="rules">

@@ -2,9 +2,11 @@
   <div>
     <el-card>
       1. 实现：请参考<a href="https://v-charts.js.org/#/" style="color: #409eff">v-charts</a><br/>
-      2. 示例：以下示例源代码见<a
-      href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue"
-      style="color: #409eff">https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue</a>
+      2. 示例：以下示例源代码见
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue"
+         style="color: #409eff" target="_blank">
+        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue
+      </a>
     </el-card>
     <br/>
     <el-card>

@@ -2,9 +2,11 @@
   <div>
     <el-card>
       1. 实现：请参考<a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a><br/>
-      2. 示例：以下示例源代码见<a
-      href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue"
-      style="color: #409eff">https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue</a>
+      2. 示例：以下示例源代码见
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue"
+         style="color: #409eff" target="_blank">
+        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue
+      </a>
     </el-card>
     <br/>
     <el-card>
