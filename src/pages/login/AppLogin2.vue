@@ -84,7 +84,9 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.fromUrl = from.fullPath
+      if (from.fullPath !== '/register' && !from.meta.errorPage){
+        vm.fromUrl = from.fullPath
+      }
     })
   }
 }
