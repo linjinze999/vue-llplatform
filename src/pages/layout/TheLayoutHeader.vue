@@ -7,8 +7,8 @@
       </div>
     </router-link>
     <div class="content">
-      <i class="fa fa-outdent toggle" @click="navOpenToggle" title="显示/隐藏菜单" v-show="openNav"></i>
-      <i class="fa fa-indent toggle" @click="navOpenToggle" title="显示/隐藏菜单" v-show="!openNav"></i>
+      <i class="fa fa-outdent toggle" @click="navOpenToggle" :title="$t('header.toggleNav')" v-show="openNav"></i>
+      <i class="fa fa-indent toggle" @click="navOpenToggle" :title="$t('header.toggleNav')" v-show="!openNav"></i>
     </div>
     <div class="right">
       <div class="right-item">
@@ -22,16 +22,16 @@
       </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <router-link to="/user/password">修改密码</router-link>
+              <router-link to="/user/password">{{$t("header.modifyPass")}}</router-link>
             </el-dropdown-item>
             <el-dropdown-item>
-              <router-link to="/user/theme">主题设置</router-link>
+              <router-link to="/user/theme">{{$t("header.modifyTheme")}}</router-link>
             </el-dropdown-item>
             <el-dropdown-item>
-              <router-link to="/user/language">语言设置</router-link>
+              <router-link to="/user/language">{{$t("header.modifyLanguage")}}</router-link>
             </el-dropdown-item>
             <el-dropdown-item divided>
-              <router-link to="/login">退出登录</router-link>
+              <router-link to="/login">{{$t("header.logout")}}</router-link>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>

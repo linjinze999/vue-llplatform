@@ -21,11 +21,11 @@ const staticRouter = [
     redirect: '/index'
   }, {
     path: '/login',
-    name: '登录',
+    name: 'login.login',
     component: AppLogin
   }, {
     path: '/register',
-    name: '注册',
+    name: 'login.register',
     component: AppRegister
   }, {
     path: '/',
@@ -35,7 +35,7 @@ const staticRouter = [
       {
         path: '/index',
         alias: '/home',
-        name: '首页',
+        name: 'menu.home',
         icon: 'el-icon-menu',
         component: FuncHome
       }
@@ -47,7 +47,7 @@ const staticRouter = [
     children: [
       {
         path: '/table',
-        name: '表格',
+        name: 'menu.table',
         icon: 'el-icon-search',
         component: FuncTable
       }
@@ -56,16 +56,16 @@ const staticRouter = [
     path: '/',
     component: TheLayout,
     menu: true,
-    name: '表单',
+    name: 'menu.form',
     icon: 'el-icon-tickets',
     children: [
       {
         path: '/forms/base',
-        name: '基本表单',
+        name: 'menu.formBase',
         component: FuncFormsBase
       }, {
         path: '/forms/edit',
-        name: '富文本编辑器',
+        name: 'menu.richText',
         component: FuncFormsEdit
       }
     ]
@@ -76,7 +76,7 @@ const staticRouter = [
     children: [
       {
         path: '/charts',
-        name: '图表',
+        name: 'menu.chart',
         icon: 'el-icon-picture',
         component: FuncCharts
       }
@@ -85,7 +85,7 @@ const staticRouter = [
     path: '/',
     component: TheLayout,
     menu: true,
-    name: '错误',
+    name: 'menu.error',
     icon: 'el-icon-error',
     children: [
       {
@@ -105,7 +105,7 @@ const staticRouter = [
     children: [
       {
         path: '/drag',
-        name: '拖曳',
+        name: 'menu.drag',
         icon: 'el-icon-rank',
         component: FuncDrag
       }
@@ -114,16 +114,16 @@ const staticRouter = [
     path: '/',
     component: TheLayout,
     menu: true,
-    name: '个人设置',
+    name: 'menu.settings',
     icon: 'el-icon-setting',
     children: [
       {
         path: '/user/password',
-        name: '修改密码',
+        name: 'menu.modifyPass',
         component: FuncUserPassword
       }, {
         path: '/user/theme',
-        name: '主题设置',
+        name: 'menu.modifyTheme',
         component: FuncUserTheme
       }, {
         path: '/user/language',
@@ -138,19 +138,19 @@ const staticRouter = [
     children: [
       {
         path: '/about',
-        name: '关于本项目',
+        name: 'menu.about',
         icon: 'el-icon-star-off',
         component: FuncAbout
       }
     ]
   }, {
     path: '/error/401',
-    name: '错误401',
+    name: 'error.401',
     meta: {errorPage: true},
     component: AppError401
   }, {
     path: '*',
-    name: '错误404',
+    name: 'error.404',
     meta: {errorPage: true},
     component: AppError404
   }

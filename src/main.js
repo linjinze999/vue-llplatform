@@ -10,22 +10,37 @@ import 'font-awesome/scss/font-awesome.scss'
 import VueScroll from 'vuescroll'
 import 'vuescroll/dist/vuescroll.css'
 import './assets/css/common.scss'
+import VueI18n from 'vue-i18n'
+import myEnLocale from './assets/lang/en'
+import myZhLocale from './assets/lang/zh-cn'
+import enLocale from 'element-ui/lib/locale/lang/en'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 
-Mock.mockData()
 Vue.config.productionTip = false
-Vue.use(ElementUI)
-Vue.use(VueScroll, {
-  ops: {
-    bar: {
-      background: '#C0C4CC'
-    }
-  }
+/* mockjs */
+Mock.mockData()
+/* vue-i18n */
+Vue.use(VueI18n)
+const messages = {
+  en: Object.assign(myEnLocale, enLocale),
+  'zh-cn': Object.assign(myZhLocale, zhLocale)
+}
+const i18n = new VueI18n({
+  locale: 'zh-cn',
+  messages
 })
+/* element-ui */
+Vue.use(ElementUI, {
+  i18n: (key, value) => i18n.t(key, value)
+})
+/* vuescroll */
+Vue.use(VueScroll, {ops: {bar: {background: '#C0C4CC'}}})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  i18n,
   components: {App},
   template: '<App/>'
 })

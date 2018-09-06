@@ -156,28 +156,28 @@
 
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px"
                class="demo-ruleForm login-container" status-icon>
-        <h3 class="title">系统登录</h3>
+        <h3 class="title">{{$t("login.login")}}</h3>
         <el-form-item prop="account">
-          <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="账号"
+          <el-input type="text" v-model="ruleForm.account" auto-complete="off" :placeholder="$t('login.account')"
                     id="loginEmail"></el-input>
         </el-form-item>
         <el-form-item prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="密码"
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" :placeholder="$t('login.password')"
                     id="loginPassword"></el-input>
           <label id="showPasswordToggle">
-            <el-checkbox v-model="checked" id="showPasswordCheck">显示密码</el-checkbox>
+            <el-checkbox v-model="checked" id="showPasswordCheck">{{$t("login.showPass")}}</el-checkbox>
           </label>
-          <router-link to="/" style="float: right; color: #bbbbbb">忘记密码？</router-link>
+          <router-link to="/" style="float: right; color: #bbbbbb">{{$t("login.forgetPass")}}</router-link>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">
-            登录
+            {{$t("login.login")}}
           </el-button>
         </el-form-item>
         <el-form-item style="width:100%;">
           <router-link to="/register">
             <el-button style="width:100%;">
-              注册
+              {{$t("login.register")}}
             </el-button>
           </router-link>
         </el-form-item>
@@ -203,10 +203,10 @@ export default {
       },
       rules: {
         account: [
-          {required: true, message: '请输入账号', trigger: 'blur'}
+          {required: true, message: this.$t('login.inputAccount'), trigger: 'blur'}
         ],
         checkPass: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          {required: true, message: this.$t('login.inputPass'), trigger: 'blur'}
         ]
       },
       checked: false
@@ -641,7 +641,7 @@ export default {
           requestLogin(loginParams).then(data => {
             this.logining = false
             this.$message({
-              message: '登录成功！',
+              message: this.$t('login.loginSuccess'),
               type: 'success'
             })
             this.$router.push(this.fromUrl)
@@ -658,7 +658,7 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      if (from.fullPath !== '/register' && !from.meta.errorPage){
+      if (from.fullPath !== '/register' && !from.meta.errorPage) {
         vm.fromUrl = from.fullPath
       }
     })

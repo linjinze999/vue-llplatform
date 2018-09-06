@@ -156,28 +156,28 @@
 
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px"
                class="demo-ruleForm login-container" status-icon>
-        <h3 class="title">注册</h3>
+        <h3 class="title">{{$t("login.register")}}</h3>
         <el-form-item prop="account">
-          <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="账号"
+          <el-input type="text" v-model="ruleForm.account" auto-complete="off" :placeholder="$t('login.account')"
                     id="loginEmail"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="password" v-model="ruleForm.password" auto-complete="off" placeholder="密码"
+          <el-input type="password" v-model="ruleForm.password" auto-complete="off" :placeholder="$t('login.password')"
                     id="loginPassword"></el-input>
         </el-form-item>
         <el-form-item prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="重复密码"
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" :placeholder="$t('login.checkPass')"
                     id="loginCheckPass"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">
-            注册
+            {{$t("login.register")}}
           </el-button>
         </el-form-item>
         <el-form-item style="width:100%;">
           <router-link to="/login">
             <el-button style="width:100%;">
-              登录
+              {{$t("login.login")}}
             </el-button>
           </router-link>
         </el-form-item>
@@ -195,7 +195,7 @@ export default {
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error(this.$t('login.inputPass')))
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass')
@@ -205,9 +205,9 @@ export default {
     }
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'))
+        callback(new Error(this.$t('login.inputCheckPass')))
       } else if (value !== this.ruleForm.password) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error(this.$t('login.errorCheckPass')))
       } else {
         callback()
       }
@@ -221,7 +221,7 @@ export default {
       },
       rules: {
         account: [
-          {required: true, message: '请输入账号', trigger: 'blur'}
+          {required: true, message: this.$t('login.inputAccount'), trigger: 'blur'}
         ],
         password: [
           {validator: validatePass, trigger: 'blur'}
@@ -577,7 +577,7 @@ export default {
           requestRegister(registerParams).then(data => {
             this.logining = false
             this.$message({
-              message: '注册成功！',
+              message:this.$t('login.registerSuccess'),
               type: 'success'
             })
             this.$router.push({path: '/login'})
