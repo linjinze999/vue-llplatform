@@ -12,6 +12,7 @@ import FuncDrag from '@/pages/functions/drag/FuncDrag'
 import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
 import FuncUserLanguage from '@/pages/functions/user/FuncUserLanguage'
 import FuncUserTheme from '@/pages/functions/user/FuncUserTheme'
+import FuncAbout from '@/pages/functions/about/FuncAbout'
 
 /* 静态页面路由 */
 const staticRouter = [
@@ -85,7 +86,7 @@ const staticRouter = [
     component: TheLayout,
     menu: true,
     name: '错误',
-    icon: 'el-icon-picture',
+    icon: 'el-icon-error',
     children: [
       {
         path: '/err/401',
@@ -128,6 +129,18 @@ const staticRouter = [
         path: '/user/language',
         name: '语言设置',
         component: FuncUserLanguage
+      }
+    ]
+  }, {
+    path: '/',
+    component: TheLayout,
+    menu: true,
+    children: [
+      {
+        path: '/about',
+        name: '关于本项目',
+        icon: 'el-icon-star-off',
+        component: FuncAbout
       }
     ]
   }, {

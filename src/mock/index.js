@@ -37,7 +37,8 @@ export default {
           {path: '/drag'},
           {path: '/user/language'},
           {path: '/user/theme'},
-          {path: '/user/password'}
+          {path: '/user/password'},
+          {path: '/about'}
         ]
       },
       'error': {
