@@ -48,7 +48,7 @@ export default {
     modifyTheme: '主题设置',
     modifyLanguage: '语言设置',
     logout: '退出登录',
-    langZh: '中文',
+    langZh: '简体中文',
     langEn: 'English'
   },
   charts: {

@@ -47,7 +47,7 @@ export default {
     modifyPass: 'Set Password',
     modifyTheme: 'Set Theme',
     logout: 'Logout',
-    langZh: '中文',
+    langZh: '简体中文',
     langEn: 'English'
   },
   charts: {
