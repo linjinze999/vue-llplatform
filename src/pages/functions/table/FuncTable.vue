@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-card>
-      1. 实现：请参考<a style="color: #409eff"
-                  href="http://element-cn.eleme.io/#/zh-CN/component/table">Element Table</a><br/>
-      2. 示例：以下示例源代码见
+      {{$t('else.learn')}}
+      <a style="color: #409eff" href="http://element-cn.eleme.io/#/zh-CN/component/table">Element Table</a><br/>
+      {{$t('else.example')}}
       <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue"
          style="color: #409eff" target="_blank">
         https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue

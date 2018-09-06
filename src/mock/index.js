@@ -35,7 +35,6 @@ export default {
           {path: '/err/401'},
           {path: '/err/404'},
           {path: '/drag'},
-          {path: '/user/language'},
           {path: '/user/theme'},
           {path: '/user/password'},
           {path: '/about'}

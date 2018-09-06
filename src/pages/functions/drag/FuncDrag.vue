@@ -1,8 +1,9 @@
 <template>
   <div>
     <el-card>
-      1. 实现：请参考<a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a><br/>
-      2. 示例：以下示例源代码见
+      {{$t('else.learn')}}
+      <a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a><br/>
+      {{$t('else.example')}}
       <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue"
          style="color: #409eff" target="_blank">
         https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue
@@ -12,7 +13,7 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="12">
-          <h3 style="text-align: center">男生</h3>
+          <h3 style="text-align: center">{{$t('drag.boy')}}</h3>
           <draggable v-model="boy" @update="datadragEnd" :options="{animation:500,group:'people'}">
             <transition-group>
               <div v-for="e in boy" :key="e.text">
@@ -22,7 +23,7 @@
           </draggable>
         </el-col>
         <el-col :span="12">
-          <h3 style="text-align: center">女生</h3>
+          <h3 style="text-align: center">{{$t('drag.girl')}}</h3>
           <draggable v-model="girl" @update="datadragEnd" :options="{animation:500,group:'people'}">
             <transition-group>
               <div v-for="e in girl" :key="e.text">

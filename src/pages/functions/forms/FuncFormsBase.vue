@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-card>
-      1. 实现：请参考<a href="http://element-cn.eleme.io/#/zh-CN/component/form"
-                  style="color: #409eff">Element Form表单</a><br/>
-      2. 示例：以下示例源代码见
+      {{$t('else.learn')}}
+      <a href="http://element-cn.eleme.io/#/zh-CN/component/form" style="color: #409eff">Element Form</a><br/>
+      {{$t('else.example')}}
       <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue"
          style="color: #409eff" target="_blank">
         https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue
@@ -12,7 +12,7 @@
     <br/>
     <el-card>
       <el-tabs v-model="activeName">
-        <el-tab-pane label="表单Form" name="first">
+        <el-tab-pane label="Form" name="first">
           <el-card shadow="hover" style="width: 700px;">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
               <el-form-item label="活动名称" prop="name">
@@ -66,7 +66,7 @@
             </el-form>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="上传Upload" name="second">
+        <el-tab-pane label="Upload" name="second">
           <el-card shadow="hover">
             <el-upload
               class="upload-demo"
@@ -91,7 +91,7 @@
             </el-upload>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="穿梭框Transfer" name="third">
+        <el-tab-pane label="Transfer" name="third">
           <el-card shadow="hover">
             <el-transfer
               filterable

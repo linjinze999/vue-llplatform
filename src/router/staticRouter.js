@@ -10,7 +10,6 @@ import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
 import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
 import FuncDrag from '@/pages/functions/drag/FuncDrag'
 import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
-import FuncUserLanguage from '@/pages/functions/user/FuncUserLanguage'
 import FuncUserTheme from '@/pages/functions/user/FuncUserTheme'
 import FuncAbout from '@/pages/functions/about/FuncAbout'
 
@@ -90,11 +89,11 @@ const staticRouter = [
     children: [
       {
         path: '/err/401',
-        name: '401',
+        name: 'error.error401',
         component: AppError401
       }, {
         path: '/err/404',
-        name: '404',
+        name: 'error.error404',
         component: AppError404
       }
     ]
@@ -125,10 +124,6 @@ const staticRouter = [
         path: '/user/theme',
         name: 'menu.modifyTheme',
         component: FuncUserTheme
-      }, {
-        path: '/user/language',
-        name: '语言设置',
-        component: FuncUserLanguage
       }
     ]
   }, {

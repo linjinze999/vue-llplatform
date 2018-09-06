@@ -25,8 +25,9 @@ const messages = {
   en: Object.assign(myEnLocale, enLocale),
   'zh-cn': Object.assign(myZhLocale, zhLocale)
 }
+const lang = localStorage.getItem('user-language') || 'zh-cn'
 const i18n = new VueI18n({
-  locale: 'zh-cn',
+  locale: lang,
   messages
 })
 /* element-ui */

@@ -4,15 +4,15 @@
       <img src="@/assets/img/about/my-logo.png" width="100px" height="100px"/>
     </div>
     <div>
-      <h4>作者</h4>
-      <p>林锦泽</p>
+      <h4>{{$t('about.author')}}</h4>
+      <p>{{$t('about.authorName')}}</p>
     </div>
     <div>
-      <h4>邮箱</h4>
+      <h4>{{$t('about.mail')}}</h4>
       <p>linjinze999@163.com</p>
     </div>
     <div>
-      <h4>源码地址</h4>
+      <h4>{{$t('about.code')}}</h4>
       <p>
         <a style="color: #409eff" href="https://github.com/linjinze999/vue-llplatform" target="_blank">
           https://github.com/linjinze999/vue-llplatform
@@ -20,7 +20,7 @@
       </p>
     </div>
     <div>
-      <h4>教程步骤</h4>
+      <h4>{{$t('about.study')}}</h4>
       <p>
         <a style="color: #409eff" href="https://linjinze999.github.io/vue-llplatform/" target="_blank">
           https://linjinze999.github.io/vue-llplatform/
@@ -28,7 +28,7 @@
       </p>
     </div>
     <div>
-      <h4>预览地址</h4>
+      <h4>{{$t('about.preview')}}</h4>
       <p>
         <a style="color: #409eff" href="https://linjinze999.github.io/preview/vue-llplatform/#/login"
            target="_blank">

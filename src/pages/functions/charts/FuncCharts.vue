@@ -1,8 +1,9 @@
 <template>
   <div>
     <el-card>
-      1. 实现：请参考<a href="https://v-charts.js.org/#/" style="color: #409eff">v-charts</a><br/>
-      2. 示例：以下示例源代码见
+      {{$t('else.learn')}}
+      <a href="https://v-charts.js.org/#/" style="color: #409eff">v-charts</a><br/>
+      {{$t('else.example')}}
       <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue"
          style="color: #409eff" target="_blank">
         https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue
@@ -11,17 +12,17 @@
     <br/>
     <el-card>
       <el-tabs v-model="activeName">
-        <el-tab-pane label="折线图" name="first" :lazy="true">
+        <el-tab-pane :label="$t('charts.line')" name="first" :lazy="true">
           <el-card shadow="hover">
             <ve-line :data="chartData" :settings="chartSettings"></ve-line>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="柱状图" name="second" :lazy="true">
+        <el-tab-pane :label="$t('charts.bar')" name="second" :lazy="true">
           <el-card shadow="hover">
             <ve-histogram :data="chartData2" :settings="chartSettings2"></ve-histogram>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="仪表盘" name="third" :lazy="true">
+        <el-tab-pane :label="$t('charts.gauge')" name="third" :lazy="true">
           <el-card shadow="hover">
             <ve-gauge
               :data="chartData3"

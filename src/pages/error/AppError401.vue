@@ -321,11 +321,11 @@
       </g>
     </svg>
     <div class="content">
-      <h3>401错误</h3>
+      <h3>{{$t("error.error401")}}</h3>
       <p>
-        对不起，您没有访问该页面的权限。
+        {{$t("error.message401")}}
         <router-link to="/index">
-          <el-button size="small" round plain>返回首页</el-button>
+          <el-button size="small" round plain>{{$t("error.goHome")}}</el-button>
         </router-link>
       </p>
     </div>

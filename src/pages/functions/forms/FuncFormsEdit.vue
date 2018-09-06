@@ -1,8 +1,10 @@
 <template>
   <div>
     <el-card>
-      1. 实现：请参考<a style="color: #409eff" href="https://www.awesomes.cn/repo/surmon-china/vue-quill-editor">vue-quill-editor</a><br/>
-      2. 示例：以下示例源代码见
+      {{$t('else.learn')}}
+      <a style="color: #409eff"
+         href="https://www.awesomes.cn/repo/surmon-china/vue-quill-editor">vue-quill-editor</a><br/>
+      {{$t('else.example')}}
       <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue"
          style="color: #409eff" target="_blank">
         https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue

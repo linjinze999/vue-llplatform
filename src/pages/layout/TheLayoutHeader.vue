@@ -16,22 +16,34 @@
         <el-badge :value="1" class="item"></el-badge>
       </div>
       <div class="right-item">
+        <el-dropdown trigger="hover" @command="changeLanguage">
+      <span class="user-info">
+        {{ $t('header.languageSelect') }}<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="zh-cn" :disabled="this.lang==='zh-cn'">
+              {{$t('header.langZh')}}
+            </el-dropdown-item>
+            <el-dropdown-item command="en" :disabled="this.lang==='en'">
+              {{$t('header.langEn')}}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+      <div class="right-item">
         <el-dropdown trigger="hover">
       <span class="user-info">
         {{ user_name }}<i class="fa fa-user-o" style="margin-left: 10px"></i>
       </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <router-link to="/user/password">{{$t("header.modifyPass")}}</router-link>
+              <router-link to="/user/password">{{$t('header.modifyPass')}}</router-link>
             </el-dropdown-item>
             <el-dropdown-item>
-              <router-link to="/user/theme">{{$t("header.modifyTheme")}}</router-link>
-            </el-dropdown-item>
-            <el-dropdown-item>
-              <router-link to="/user/language">{{$t("header.modifyLanguage")}}</router-link>
+              <router-link to="/user/theme">{{$t('header.modifyTheme')}}</router-link>
             </el-dropdown-item>
             <el-dropdown-item divided>
-              <router-link to="/login">{{$t("header.logout")}}</router-link>
+              <router-link to="/login">{{$t('header.logout')}}</router-link>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -47,13 +59,19 @@ export default {
   data () {
     const user_info = JSON.parse(sessionStorage.getItem('user-info'))
     const user_name = user_info['name']
+    const lang = localStorage.getItem('user-language') || 'zh-cn'
     return {
-      user_name: user_name
+      user_name: user_name,
+      lang: lang
     }
   },
   methods: {
     navOpenToggle () {
       this.$emit('toggle-open')
+    },
+    changeLanguage (language) {
+      localStorage.setItem('user-language', language)
+      window.location.reload()
     }
   }
 }
@@ -97,10 +115,10 @@ export default {
     float: right;
     .right-item {
       display: inline-block;
-      cursor: pointer;
       padding: 0 10px;
       min-width: 60px;
       text-align: center;
+      cursor: pointer;
     }
     .right-item:hover {
       background-color: rgba(255, 255, 255, 0.3);

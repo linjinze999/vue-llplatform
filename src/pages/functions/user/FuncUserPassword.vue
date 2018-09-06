@@ -3,19 +3,22 @@
     <div class="login-box">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px"
                class="demo-ruleForm login-container" status-icon>
-        <h3 class="title">修改密码</h3>
+        <h3 class="title">{{$t('login.modifyPass')}}</h3>
         <el-form-item prop="oldPass">
-          <el-input type="password" v-model="ruleForm.oldPass" auto-complete="off" placeholder="旧密码"></el-input>
+          <el-input type="password" v-model="ruleForm.oldPass" auto-complete="off"
+                    :placeholder="$t('login.oldPass')"></el-input>
         </el-form-item>
         <el-form-item prop="newPass">
-          <el-input type="password" v-model="ruleForm.newPass" auto-complete="off" placeholder="新密码"></el-input>
+          <el-input type="password" v-model="ruleForm.newPass" auto-complete="off"
+                    :placeholder="$t('login.newPass')"></el-input>
         </el-form-item>
         <el-form-item prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="重复密码"></el-input>
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"
+                    :placeholder="$t('login.checkPass')"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
           <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="loading">
-            确认
+            {{$t('common.ok')}}
           </el-button>
         </el-form-item>
       </el-form>
@@ -31,7 +34,7 @@ export default {
   data () {
     let validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error(this.$t('login.inputPass')))
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass')
@@ -41,9 +44,9 @@ export default {
     }
     let validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'))
+        callback(new Error(this.$t('login.inputCheckPass')))
       } else if (value !== this.ruleForm.newPass) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error(this.$t('login.errorCheckPass')))
       } else {
         callback()
       }
@@ -57,7 +60,7 @@ export default {
       },
       rules: {
         oldPass: [
-          {required: true, message: '请输入旧密码', trigger: 'blur'}
+          {required: true, message: this.$t('login.inputOldPass'), trigger: 'blur'}
         ],
         newPass: [
           {validator: validatePass, trigger: 'blur'}
@@ -72,9 +75,9 @@ export default {
     handleSubmit (ev) {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.$confirm('确认修改密码?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm(this.$t('login.changePassMessage'), this.$t('login.tip'), {
+            confirmButtonText: this.$t('common.ok'),
+            cancelButtonText: this.$t('common.cancel'),
             type: 'warning'
           }).then(() => {
             this.loading = true
@@ -86,7 +89,7 @@ export default {
             requestChangePassword(changePasswordParams).then(data => {
               this.loading = false
               this.$message({
-                message: '修改成功！',
+                message: this.$t('login.changeSuccess'),
                 type: 'success'
               })
             }).catch(err => {
@@ -96,7 +99,7 @@ export default {
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '已取消！'
+              message: this.$t('login.cancel')
             })
           })
         } else {
