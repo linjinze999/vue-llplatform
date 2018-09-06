@@ -1,7 +1,11 @@
 <template>
   <div>
     <el-card>
-      请参考<a href="http://element-cn.eleme.io/#/zh-CN/component/form" style="color: #409eff">Element Form表单</a>。
+      1. 实现：请参考<a href="http://element-cn.eleme.io/#/zh-CN/component/form"
+                  style="color: #409eff">Element Form表单</a><br/>
+      2. 示例：以下示例源代码见<a
+      href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue"
+      style="color: #409eff">https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue</a>
     </el-card>
     <br/>
     <el-card>

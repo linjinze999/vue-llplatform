@@ -1,12 +1,15 @@
 <template>
   <div>
     <el-card>
-      请参考<a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a>。
+      1. 实现：请参考<a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a><br/>
+      2. 示例：以下示例源代码见<a
+      href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue"
+      style="color: #409eff">https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue</a>
     </el-card>
     <br/>
     <el-card>
       <el-row :gutter="20">
-        <el-col span="12">
+        <el-col :span="12">
           <h3 style="text-align: center">男生</h3>
           <draggable v-model="boy" @update="datadragEnd" :options="{animation:500,group:'people'}">
             <transition-group>
