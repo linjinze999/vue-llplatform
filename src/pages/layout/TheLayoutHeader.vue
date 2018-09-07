@@ -15,11 +15,12 @@
         <i class="fa fa-envelope-o fa-fw"></i>
         <el-badge :value="1" class="item"></el-badge>
       </div>
-      <div class="right-item">
-        <el-dropdown trigger="hover" @command="changeLanguage">
-      <span class="user-info">
-        {{ $t('header.languageSelect') }}<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
+      <div class="right-item" @click="clickLangue">
+        <el-dropdown trigger="click" @command="changeLanguage" id="langDropDown">
+      <p class="user-info">
+        {{ $t('header.languageSelect') }}
+        <i class="el-icon-arrow-down el-icon--right drop-icon" id="langDropIcon"></i>
+      </p>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="zh-cn" :disabled="this.lang==='zh-cn'">
               {{$t('header.langZh')}}
@@ -31,10 +32,10 @@
         </el-dropdown>
       </div>
       <div class="right-item">
-        <el-dropdown trigger="hover">
-      <span class="user-info">
+        <el-dropdown trigger="click">
+      <p class="user-info">
         {{ user_name }}<i class="fa fa-user-o" style="margin-left: 10px"></i>
-      </span>
+      </p>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <router-link to="/user/password">{{$t('header.modifyPass')}}</router-link>
@@ -62,6 +63,7 @@ export default {
     const lang = localStorage.getItem('user-language') || 'zh-cn'
     return {
       user_name: user_name,
+      langDrop: false,
       lang: lang
     }
   },
@@ -73,6 +75,15 @@ export default {
       localStorage.setItem('user-language', language)
       this.$i18n.locale = language
       this.lang = language
+    },
+    clickLangue () {
+      let langDropIcon = document.getElementById('langDropIcon')
+      if (this.langDrop) {
+        langDropIcon.style.transform = 'rotate(0deg)'
+      } else {
+        langDropIcon.style.transform = 'rotate(-180deg)'
+      }
+      this.langDrop = !this.langDrop
     }
   }
 }
@@ -83,6 +94,7 @@ export default {
   line-height: 60px;
   background-color: #409EFF;
   color: #ffffff;
+  user-select: none;
   div {
     display: inline-block;
   }
@@ -120,6 +132,9 @@ export default {
       min-width: 60px;
       text-align: center;
       cursor: pointer;
+      .drop-icon {
+        transition: transform 0.2s;
+      }
     }
     .right-item:hover {
       background-color: rgba(255, 255, 255, 0.3);
