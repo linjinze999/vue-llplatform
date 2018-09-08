@@ -49,7 +49,9 @@ export default {
     modifyLanguage: '语言设置',
     logout: '退出登录',
     langZh: '简体中文',
-    langEn: 'English'
+    langEn: 'English',
+    themeChange: '自定义主题',
+    themeSuccess: '换肤成功！'
   },
   charts: {
     line: '折线图',

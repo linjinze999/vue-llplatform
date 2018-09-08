@@ -15,12 +15,16 @@
         <i class="fa fa-envelope-o fa-fw"></i>
         <el-badge :value="1" class="item"></el-badge>
       </div>
+      <div class="right-item">
+        {{ $t("header.themeChange") }}
+        <theme-picker></theme-picker>
+      </div>
       <div class="right-item" @click="clickLangue">
         <el-dropdown trigger="click" @command="changeLanguage" id="langDropDown">
-      <p class="user-info">
-        {{ $t('header.languageSelect') }}
-        <i class="el-icon-arrow-down el-icon--right drop-icon" id="langDropIcon"></i>
-      </p>
+          <p class="user-info">
+            {{ $t('header.languageSelect') }}
+            <i class="el-icon-arrow-down el-icon--right drop-icon" id="langDropIcon"></i>
+          </p>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="zh-cn" :disabled="this.lang==='zh-cn'">
               {{$t('header.langZh')}}
@@ -33,9 +37,9 @@
       </div>
       <div class="right-item">
         <el-dropdown trigger="click">
-      <p class="user-info">
-        {{ user_name }}<i class="fa fa-user-o" style="margin-left: 10px"></i>
-      </p>
+          <p class="user-info">
+            {{ user_name }}<i class="fa fa-user-o" style="margin-left: 10px"></i>
+          </p>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <router-link to="/user/password">{{$t('header.modifyPass')}}</router-link>
@@ -54,9 +58,14 @@
 </template>
 
 <script>
+import ThemePicker from '@/components/ThemePicker'
+
 export default {
   name: 'TheLayoutHeader',
   props: ['openNav'],
+  components: {
+    ThemePicker
+  },
   data () {
     const user_info = JSON.parse(sessionStorage.getItem('user-info'))
     const user_name = user_info['name']
@@ -131,6 +140,7 @@ export default {
       padding: 0 10px;
       min-width: 60px;
       text-align: center;
+      font-size: 14px;
       cursor: pointer;
       .drop-icon {
         transition: transform 0.2s;

@@ -48,7 +48,9 @@ export default {
     modifyTheme: 'Set Theme',
     logout: 'Logout',
     langZh: '简体中文',
-    langEn: 'English'
+    langEn: 'English',
+    themeChange: 'Theme',
+    themeSuccess: 'Change theme success!'
   },
   charts: {
     line: 'Line',
