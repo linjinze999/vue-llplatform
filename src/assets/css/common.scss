@@ -9,6 +9,11 @@ a {
   color: inherit;
 }
 
+/* [theme] support theme change */
+.theme-bg-blue{
+  background-color: #409eff;
+}
+
 /* [vue-scroll] show when hover */
 .__vuescroll:hover {
   > .__rail-is-vertical {

@@ -1,5 +1,5 @@
 <template>
-  <el-header class="header">
+  <el-header class="header theme-bg-blue">
     <router-link to="/index">
       <div class="logo" :class="{'logo-hide': !openNav}">
         <img src="../../assets/logo.png" class="image"/>
@@ -100,9 +100,8 @@ export default {
 
 <style scoped lang="scss">
 .header {
-  line-height: 60px;
-  background-color: #409EFF;
   color: #ffffff;
+  line-height: 60px;
   user-select: none;
   div {
     display: inline-block;
