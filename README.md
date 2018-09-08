@@ -1,14 +1,42 @@
 # vue-llplatform
 
+## 简介
 > vue-llplatform，基于[vue](https://cn.vuejs.org/)、[element](http://element-cn.eleme.io/#/zh-CN)搭建的后台管理平台。
 > 考虑到后台管理一般是在电脑端查看，因此本项目没有实现移动端的适配。
-
 
 教学说明：[https://linjinze999.github.io/vue-llplatform/](https://linjinze999.github.io/vue-llplatform/)
 
 源码地址：[https://github.com/linjinze999/vue-llplatform](https://github.com/linjinze999/vue-llplatform)
 
 在线预览：[https://linjinze999.github.io/preview/vue-llplatform/#/login](https://linjinze999.github.io/preview/vue-llplatform/#/login)
+
+## 功能
+```
+- 登录 / 注销
+
+- 权限验证
+  - 自动登录
+  - 页面权限
+  - 指令权限
+
+- 全局功能
+  - 国际化多语言
+  - 多种动态换肤
+  - 三级侧边栏
+  - 本地mock数据
+  - 收缩侧边栏
+  - 请求错误自动处理
+  - 请求支持sessionStorage、localStorage
+
+- 功能页面
+  - 表格table
+  - 表单form
+  - 富文本编辑器
+  - 图表
+  - 拖曳
+  - 错误页面
+
+```
 
 ## Build Setup
 
