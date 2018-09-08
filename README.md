@@ -10,6 +10,13 @@
 
 在线预览：[https://linjinze999.github.io/preview/vue-llplatform/#/login](https://linjinze999.github.io/preview/vue-llplatform/#/login)
 
+## 准备
+你需要在本地安装[node]()。本项目技术栈基于[ES6](http://es6.ruanyifeng.com/)、[vue](https://cn.vuejs.org/index.html)、[vue-router](https://router.vuejs.org/zh-cn/)、[axios](https://github.com/axios/axios)和[element-ui](http://element-cn.eleme.io/#/zh-CN/)，所有的请求数据都使用[Mock.js](http://mockjs.com/)模拟，提前了解和学习这些知识会对使用本项目有很大的帮助。
+
+同时配套一个系列的教程文章，如何从零构建后一个完整的后台项目，建议大家先看完这些文章再来实践本项目：[https://linjinze999.github.io/vue-llplatform/](https://linjinze999.github.io/vue-llplatform/)
+
+![vue-llplatform](https://i.imgur.com/CSK6Ag8.png)
+
 ## 功能
 ```
 - 登录
@@ -40,7 +47,7 @@
 
 ```
 
-## Build Setup
+## 构建步骤
 
 ``` bash
 # install dependencies
