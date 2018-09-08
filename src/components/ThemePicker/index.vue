@@ -126,7 +126,7 @@ export default {
     }
   },
   mounted () {
-    const lastTheme = localStorage.getItem('user-theme') || '#409EFF'
+    const lastTheme = localStorage.getItem('user-theme') || ORIGINAL_THEME
     this.theme = lastTheme
   }
 }
