@@ -48,6 +48,7 @@ export default {
     modifyTheme: '主题设置',
     modifyLanguage: '语言设置',
     logout: '退出登录',
+    logoutSuccess: '注销成功！',
     langZh: '简体中文',
     langEn: 'English',
     themeChange: '自定义主题',

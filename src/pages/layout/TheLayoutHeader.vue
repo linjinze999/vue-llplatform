@@ -16,7 +16,7 @@
         <el-badge :value="1" class="item"></el-badge>
       </div>
       <div class="right-item">
-        {{ $t("header.themeChange") }}
+        {{ $t('header.themeChange') }}
         <theme-picker></theme-picker>
       </div>
       <div class="right-item" @click="clickLangue">
@@ -47,8 +47,8 @@
             <el-dropdown-item>
               <router-link to="/user/theme">{{$t('header.modifyTheme')}}</router-link>
             </el-dropdown-item>
-            <el-dropdown-item divided>
-              <router-link to="/login">{{$t('header.logout')}}</router-link>
+            <el-dropdown-item divided @click.native="logout()">
+              {{$t('header.logout')}}
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -59,7 +59,9 @@
 
 <script>
 import ThemePicker from '@/components/ThemePicker'
+import {requestLogout} from '@/api/user'
 
+const user_info = JSON.parse(sessionStorage.getItem('user-info'))
 export default {
   name: 'TheLayoutHeader',
   props: ['openNav'],
@@ -67,7 +69,6 @@ export default {
     ThemePicker
   },
   data () {
-    const user_info = JSON.parse(sessionStorage.getItem('user-info'))
     const user_name = user_info['name']
     const lang = localStorage.getItem('user-language') || 'zh-cn'
     return {
@@ -79,6 +80,15 @@ export default {
   methods: {
     navOpenToggle () {
       this.$emit('toggle-open')
+    },
+    logout () {
+      requestLogout({'userId': user_info['id']}).then(data => {
+        this.$message({
+          message: this.$t('header.logoutSuccess'),
+          type: 'success'
+        })
+        this.$router.push('/login')
+      })
     },
     changeLanguage (language) {
       localStorage.setItem('user-language', language)
