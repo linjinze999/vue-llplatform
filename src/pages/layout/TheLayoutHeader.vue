@@ -44,9 +44,6 @@
             <el-dropdown-item>
               <router-link to="/user/password">{{$t('header.modifyPass')}}</router-link>
             </el-dropdown-item>
-            <el-dropdown-item>
-              <router-link to="/user/theme">{{$t('header.modifyTheme')}}</router-link>
-            </el-dropdown-item>
             <el-dropdown-item divided @click.native="logout()">
               {{$t('header.logout')}}
             </el-dropdown-item>

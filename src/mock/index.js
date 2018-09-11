@@ -41,7 +41,7 @@ export default {
           {path: '/err/401'},
           {path: '/err/404'},
           {path: '/drag'},
-          {path: '/user/theme'},
+          {path: '/user/permissions'},
           {path: '/user/password'},
           {path: '/about'}
         ]
@@ -67,6 +67,64 @@ export default {
             'address|1': [Mock.mock('@county(true)'), Mock.mock('@county(true)'), Mock.mock('@county(true)')]
           }
         ]
+      }
+    })
+    Mock.mock('/api/user/permissions', {
+      'success': true,
+      'result': {
+        'permissions': {
+          users: [
+            {
+              id: 1,
+              name: '张三',
+              role_ids: [1]
+            }, {
+              id: 1,
+              name: '李四',
+              role_ids: [2]
+            }
+          ],
+          roles: [
+            {
+              id: 1,
+              name: '管理员',
+              page_ids: [1, 2],
+              directive_ids: [1, 2]
+            }, {
+              id: 2,
+              name: '普通用户',
+              page_ids: [1, 2],
+              directive_ids: [1]
+            }, {
+              id: 3,
+              name: '登录用户',
+              pages: [1, 2],
+              directive_ids: []
+            }
+          ],
+          pages: [
+            {
+              id: 1,
+              name: 'Tables',
+              path: '/tables'
+            }, {
+              id: 2,
+              name: 'Charts',
+              path: '/charts'
+            }
+          ],
+          directive: [
+            {
+              id: 1,
+              name: 'modify',
+              page_id: 1
+            }, {
+              id: 2,
+              name: 'delete',
+              page_id: 1
+            }
+          ]
+        }
       }
     })
   }

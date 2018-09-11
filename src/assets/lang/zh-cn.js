@@ -38,7 +38,7 @@ export default {
     drag: '拖曳',
     settings: '个人设置',
     modifyPass: '修改密码',
-    modifyTheme: '主题设置',
+    permissions: '用户权限',
     about: '关于项目'
   },
   header: {
@@ -62,6 +62,13 @@ export default {
   drag: {
     boy: '男生',
     girl: '女生'
+  },
+  permissions: {
+    instruction: '模拟设置用户权限页面',
+    user: '用户',
+    role: '角色',
+    page: '页面',
+    db: '数据库示例'
   },
   error: {
     'error401': '错误401',

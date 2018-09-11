@@ -38,7 +38,7 @@ export default {
     drag: 'Drag',
     settings: 'Settings',
     modifyPass: 'Change Password',
-    modifyTheme: 'Set Theme',
+    permissions: 'Permissions',
     about: 'About'
   },
   header: {

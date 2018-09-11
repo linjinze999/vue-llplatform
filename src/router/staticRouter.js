@@ -10,7 +10,7 @@ import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
 import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
 import FuncDrag from '@/pages/functions/drag/FuncDrag'
 import FuncUserPassword from '@/pages/functions/user/FuncUserPassword'
-import FuncUserTheme from '@/pages/functions/user/FuncUserTheme'
+import FuncUserPermissions from '@/pages/functions/user/FuncUserPermissions'
 import FuncAbout from '@/pages/functions/about/FuncAbout'
 
 /* 静态页面路由 */
@@ -121,9 +121,9 @@ const staticRouter = [
         name: 'menu.modifyPass',
         component: FuncUserPassword
       }, {
-        path: '/user/theme',
-        name: 'menu.modifyTheme',
-        component: FuncUserTheme
+        path: '/user/permissions',
+        name: 'menu.permissions',
+        component: FuncUserPermissions
       }
     ]
   }, {
