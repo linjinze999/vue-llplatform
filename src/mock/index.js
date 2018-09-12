@@ -77,11 +77,11 @@ export default {
             {
               id: 1,
               name: '张三',
-              role_ids: [1]
+              role_ids: [1, 3]
             }, {
               id: 1,
               name: '李四',
-              role_ids: [2]
+              role_ids: [2, 3]
             }
           ],
           roles: [
@@ -98,18 +98,18 @@ export default {
             }, {
               id: 3,
               name: '登录用户',
-              pages: [1, 2],
+              page_ids: [1, 2],
               directive_ids: []
             }
           ],
           pages: [
             {
               id: 1,
-              name: 'Tables',
+              name: '表格',
               path: '/tables'
             }, {
               id: 2,
-              name: 'Charts',
+              name: '图表',
               path: '/charts'
             }
           ],
