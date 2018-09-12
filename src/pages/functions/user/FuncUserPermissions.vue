@@ -8,7 +8,49 @@
       <el-tabs v-model="activeName">
         <el-tab-pane :label="$t('permissions.user')" name="first" :lazy="true">
           <el-card shadow="hover">
-            用户
+            <el-table
+              :data="users.table.slice((users.currentPage-1)*users.pageSize,users.currentPage*users.pageSize)"
+              style="width: 100%">
+              <el-table-column label="ID">
+                <template slot-scope="scope">
+                  <i class="el-icon-time"></i>
+                  <span style="margin-left: 10px">{{ scope.row.id }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="姓名" width="180">
+                <template slot-scope="scope">
+                  <span>{{ scope.row.name }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="角色" width="280">
+                <template slot-scope="scope">
+                  <span>{{ scope.row.roles.join(",") }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    @click="userHandleEdit(scope.$index, scope.row)">编辑
+                  </el-button>
+                  <el-button
+                    size="mini"
+                    type="danger"
+                    @click="userHandleDelete(scope.$index, scope.row)">删除
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-pagination
+              @size-change="userHandleSizeChange"
+              @current-change="userHandleCurrentChange"
+              background
+              :current-page="users.currentPage"
+              :page-sizes="[10, 20, 30, 40]"
+              :page-size="users.pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="users.pageTotal">
+            </el-pagination>
           </el-card>
         </el-tab-pane>
         <el-tab-pane :label="$t('permissions.role')" name="second" :lazy="true">
@@ -39,15 +81,31 @@ export default {
   data () {
     return {
       activeName: 'first',
-      showData: {
-        users: [],
-        roles: [],
-        pages: []
+      users: {
+        table: [],
+        currentPage: 1,
+        pageSize: 10,
+        pageTotal: 0,
+        modifyDialog: false
+      },
+      roles: {
+        table: [],
+        currentPage: 1,
+        pageSize: 10,
+        pageTotal: 0,
+        modifyDialog: false
+      },
+      pages: {
+        table: [],
+        currentPage: 1,
+        pageSize: 10,
+        pageTotal: 0,
+        modifyDialog: false
       },
       modifyData: {
-        users: {},
         roles: {},
-        pages: {}
+        pages: {},
+        directive: {}
       },
       dbData: {
         users: [],
@@ -68,31 +126,67 @@ export default {
         }
         directiveJson[directive.page_id].push({id: directive.id, name: directive.name})
       })
+      console.log(directiveJson)
       dbData.pages.forEach(page => {
         pagesJson[page.id] = {
           id: page.id,
           name: page.name,
           path: page.path,
-          directive:directiveJson[page.id] || []
+          directive: directiveJson[page.id] || []
         }
+        let directives = []
+        pagesJson[page.id].directive.forEach(directive => {
+          directives.push(directive.name)
+        })
+        this.pages.table.push({
+          id: page.id,
+          name: page.name,
+          path: page.path,
+          directive: directives
+        })
       })
       dbData.roles.forEach(role => {
         rolesJson[role.id] = {
           id: role.id,
           name: role.name,
           pages: role.page_ids.reduce((pages, next_id) => {
-            pages.push(pagesJson[next_id] || {id: -1, name: 'Error', path: '/error/404', directive:[]})
+            console.log(pages)
+            pages.push(pagesJson[next_id] || {id: -1, name: 'Error', path: '/error/404', directive: []})
           }),
           directive: role.directive_ids.reduce((directive, next_id) => {
             directive.push(directiveJson[next_id] || {id: -1, name: 'Error', path: '/error/404'})
           })
         }
+        this.roles.table.push(role)
       })
+      dbData.users.forEach(user => {
+        let roles = []
+        user.role_ids.forEach(role_id => {
+          roles.push(rolesJson[role_id].name)
+        })
+        this.users.table.push({
+          id: user.id,
+          name: user.name,
+          role: roles
+        })
+      })
+    },
+    userHandleEdit (index, row) {
+      console.log(1)
+    },
+    userHandleDelete (index, row) {
+      console.log(2)
+    },
+    userHandleSizeChange (size) {
+      this.users.pagesize = size
+    },
+    userHandleCurrentChange (currentPage) {
+      this.users.currentPage = currentPage
     }
   },
   mounted () {
     requestPermissionsQuery().then(data => {
-
+      this.dbDataToWebData(data.permissions)
     })
   }
 }
