@@ -58,7 +58,6 @@
 import ThemePicker from '@/components/ThemePicker'
 import {requestLogout} from '@/api/user'
 
-const user_info = JSON.parse(sessionStorage.getItem('user-info'))
 export default {
   name: 'TheLayoutHeader',
   props: ['openNav'],
@@ -66,6 +65,7 @@ export default {
     ThemePicker
   },
   data () {
+    const user_info = JSON.parse(sessionStorage.getItem('user-info'))
     const user_name = user_info['name']
     const lang = localStorage.getItem('user-language') || 'zh-cn'
     return {
@@ -79,6 +79,7 @@ export default {
       this.$emit('toggle-open')
     },
     logout () {
+      const user_info = JSON.parse(sessionStorage.getItem('user-info'))
       requestLogout({'userId': user_info['id']}).then(data => {
         this.$message({
           message: this.$t('header.logoutSuccess'),
