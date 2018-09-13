@@ -79,9 +79,13 @@ export default {
               name: '张三',
               role_ids: [1, 3]
             }, {
-              id: 1,
+              id: 2,
               name: '李四',
               role_ids: [2, 3]
+            }, {
+              id: 3,
+              name: '王五',
+              role_ids: [3]
             }
           ],
           roles: [
@@ -98,7 +102,7 @@ export default {
             }, {
               id: 3,
               name: '登录用户',
-              page_ids: [1, 2],
+              page_ids: [1],
               directive_ids: []
             }
           ],
