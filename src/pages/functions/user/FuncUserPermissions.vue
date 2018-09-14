@@ -12,62 +12,68 @@
           <el-card shadow="hover">
             <el-form :inline="true" :model="users.query">
               <el-form-item label="ID">
-                <el-input v-model="users.query.id" placeholder="ID"></el-input>
+                <el-input v-model="users.query.id" placeholder="ID" clearable></el-input>
               </el-form-item>
               <el-form-item label="姓名">
-                <el-input v-model="users.query.name" placeholder="姓名"></el-input>
+                <el-input v-model="users.query.name" placeholder="姓名" clearable></el-input>
               </el-form-item>
               <el-form-item label="角色">
-                <el-select v-model="users.query.role" placeholder="角色" multiple>
-                  <el-option label="区域一" value="shanghai"></el-option>
-                  <el-option label="区域二" value="beijing"></el-option>
-                  <el-option label="区域3" value="dfas"></el-option>
-                  <el-option label="区域4" value="dsfas"></el-option>
+                <el-select v-model="users.query.role" placeholder="角色" multiple filterable>
+                  <el-option
+                    v-for="_role in users.query.roleOption" :key="_role"
+                    :label="_role" :value="_role"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
+                <el-button type="primary" @click="userTableFilter" icon="el-icon-search">查询</el-button>
               </el-form-item>
             </el-form>
           </el-card>
           <br/>
           <!-- Users *** Table -->
           <el-card shadow="hover">
-            <el-table
-              :data="users.table.slice((users.currentPage-1)*users.pageSize,users.currentPage*users.pageSize)"
-              style="width: 100%">
-              <el-table-column label="ID">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.id }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="姓名">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.name }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="角色">
-                <template slot-scope="scope">
-                  <el-tag style="margin-right: 5px;" v-for="role in scope.row.roles" :key="role">{{role}}</el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="userHandleEdit(scope.$index, scope.row)">编辑</el-button>
-                  <el-button size="mini" type="danger" @click="userHandleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-pagination
-              @size-change="userHandleSizeChange"
-              @current-change="userHandleCurrentChange"
-              background
-              :current-page="users.currentPage"
-              :page-sizes="[10, 20, 30, 40]"
-              :page-size="users.pageSize"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="users.pageTotal">
-            </el-pagination>
+            <div slot="header" style="text-align: center">
+              <b>用户列表</b>
+              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+            </div>
+            <el-card shadow="hover">
+              <el-table
+                :data="users.table.slice((users.currentPage-1)*users.pageSize,users.currentPage*users.pageSize)"
+                style="width: 100%">
+                <el-table-column label="ID">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.id }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="姓名">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.name }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="角色">
+                  <template slot-scope="scope">
+                    <el-tag style="margin-right: 5px;" v-for="role in scope.row.roles" :key="role">{{role}}</el-tag>
+                  </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <el-button size="mini" @click="userHandleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="mini" type="danger" @click="userHandleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="userHandleSizeChange"
+                @current-change="userHandleCurrentChange"
+                background
+                :current-page="users.currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="users.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="users.pageTotal">
+              </el-pagination>
+            </el-card>
           </el-card>
         </el-tab-pane>
         <!-- Roles -->
@@ -76,71 +82,95 @@
           <el-card shadow="hover">
             <el-form :inline="true" :model="roles.query">
               <el-form-item label="ID">
-                <el-input v-model="roles.query.id" placeholder="ID"></el-input>
+                <el-input v-model="roles.query.id" placeholder="ID" clearable></el-input>
               </el-form-item>
-              <el-form-item label="名称">
-                <el-input v-model="roles.query.name" placeholder="姓名"></el-input>
+              <el-form-item label="角色">
+                <el-input v-model="roles.query.name" placeholder="角色" clearable></el-input>
               </el-form-item>
-              <el-form-item label="权限">
-                <el-input v-model="roles.query.perm" placeholder="权限"></el-input>
+              <el-form-item label="页面">
+                <el-select v-model="roles.query.page" placeholder="页面" multiple filterable>
+                  <el-option
+                    v-for="_page in roles.query.pageOption" :key="_page"
+                    :label="_page" :value="_page"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="地址">
+                <el-select v-model="roles.query.path" placeholder="地址" multiple filterable>
+                  <el-option
+                    v-for="_path in roles.query.pathOption" :key="_path"
+                    :label="_path" :value="_path"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="指令">
+                <el-select v-model="roles.query.directive" placeholder="指令" multiple filterable>
+                  <el-option
+                    v-for="_directive in roles.query.dirOption" :key="_directive"
+                    :label="_directive" :value="_directive"></el-option>
+                </el-select>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
+                <el-button type="primary" @click="roleTableFilter" icon="el-icon-search">查询</el-button>
               </el-form-item>
             </el-form>
           </el-card>
           <br/>
           <!-- Roles *** Table -->
           <el-card shadow="hover">
-            <el-table
-              :data="roles.table.slice((roles.currentPage-1)*roles.pageSize,roles.currentPage*roles.pageSize)"
-              style="width: 100%">
-              <el-table-column label="ID">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.id }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="名称">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.name }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="权限">
-                <template slot-scope="scope">
-                  <el-tag class="my-role-permission"
-                          v-for="permission in scope.row.permission"
-                          :key="permission">
-                    <b>页面名称</b>: {{permission.name}}.
-                    <b>地址URI</b>: {{permission.path}}.
-                    <b>指令权限</b>: <span v-for="directive in permission.directive" :key="directive.id">
-                      {{directive.name}};</span>
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    @click="roleHandleEdit(scope.$index, scope.row)">编辑
-                  </el-button>
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="roleHandleDelete(scope.$index, scope.row)">删除
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-pagination
-              @size-change="roleHandleSizeChange"
-              @current-change="roleHandleCurrentChange"
-              background
-              :current-page="roles.currentPage"
-              :page-sizes="[10, 20, 30, 40]"
-              :page-size="roles.pageSize"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="roles.pageTotal">
-            </el-pagination>
+            <div slot="header" style="text-align: center">
+              <b>角色列表</b>
+              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+            </div>
+            <el-card shadow="hover">
+              <el-table
+                :data="roles.table.slice((roles.currentPage-1)*roles.pageSize,roles.currentPage*roles.pageSize)"
+                style="width: 100%">
+                <el-table-column label="ID">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.id }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="名称">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.name }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="权限" width="500">
+                  <template slot-scope="scope">
+                    <el-tag class="my-role-permission"
+                            v-for="_permission in scope.row.permission"
+                            :key="_permission">
+                      <b>页面名称</b>: {{_permission.name}}.
+                      <b>地址URI</b>: {{_permission.path}}.
+                      <b>指令权限</b>: <span v-for="_directive in _permission.directive" :key="_directive.id">
+                      {{_directive.name}};</span>
+                    </el-tag>
+                  </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      @click="roleHandleEdit(scope.$index, scope.row)">编辑
+                    </el-button>
+                    <el-button
+                      size="mini"
+                      type="danger"
+                      @click="roleHandleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="roleHandleSizeChange"
+                @current-change="roleHandleCurrentChange"
+                background
+                :current-page="roles.currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="roles.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="roles.pageTotal">
+              </el-pagination>
+            </el-card>
           </el-card>
         </el-tab-pane>
         <!-- Pages -->
@@ -161,65 +191,71 @@
                 <el-input v-model="pages.query.directive" placeholder="指令"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="onSubmit">查询</el-button>
+                <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
               </el-form-item>
             </el-form>
           </el-card>
           <br/>
           <!-- Pages *** Table -->
           <el-card shadow="hover">
-            <el-table
-              :data="pages.table.slice((pages.currentPage-1)*pages.pageSize,pages.currentPage*pages.pageSize)"
-              style="width: 100%">
-              <el-table-column label="ID">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.id }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="名称">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.name }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="路径">
-                <template slot-scope="scope">
-                  <span>{{ scope.row.path }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column label="指令权限">
-                <template slot-scope="scope">
-                  <el-tag
-                    style="margin-right: 5px;"
-                    v-for="directive in scope.row.directive"
-                    :key="directive">
-                    {{directive}}
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    @click="pageHandleEdit(scope.$index, scope.row)">编辑
-                  </el-button>
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="pageHandleDelete(scope.$index, scope.row)">删除
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-pagination
-              @size-change="pageHandleSizeChange"
-              @current-change="pageHandleCurrentChange"
-              background
-              :current-page="pages.currentPage"
-              :page-sizes="[10, 20, 30, 40]"
-              :page-size="pages.pageSize"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="pages.pageTotal">
-            </el-pagination>
+            <div slot="header" style="text-align: center">
+              <b>页面列表</b>
+              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+            </div>
+            <el-card shadow="hover">
+              <el-table
+                :data="pages.table.slice((pages.currentPage-1)*pages.pageSize,pages.currentPage*pages.pageSize)"
+                style="width: 100%">
+                <el-table-column label="ID">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.id }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="名称">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.name }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="路径">
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.path }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column label="指令权限">
+                  <template slot-scope="scope">
+                    <el-tag
+                      style="margin-right: 5px;"
+                      v-for="directive in scope.row.directive"
+                      :key="directive">
+                      {{directive}}
+                    </el-tag>
+                  </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <el-button
+                      size="mini"
+                      @click="pageHandleEdit(scope.$index, scope.row)">编辑
+                    </el-button>
+                    <el-button
+                      size="mini"
+                      type="danger"
+                      @click="pageHandleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="pageHandleSizeChange"
+                @current-change="pageHandleCurrentChange"
+                background
+                :current-page="pages.currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pages.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="pages.pageTotal">
+              </el-pagination>
+            </el-card>
           </el-card>
         </el-tab-pane>
         <!-- Dadabase -->
@@ -392,9 +428,11 @@ export default {
         query: {
           id: '',
           name: '',
-          role: []
+          role: [],
+          roleOption: []
         },
         table: [],
+        tableAll: [],
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
@@ -404,9 +442,15 @@ export default {
         query: {
           id: '',
           name: '',
-          perm: ''
+          page: '',
+          pageOption: [],
+          path: '',
+          pathOption: [],
+          directive: '',
+          dirOption: []
         },
         table: [],
+        tableAll: [],
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
@@ -444,13 +488,22 @@ export default {
       let rolesJson = {}
       let pagesJson = {}
       let directiveJson = {}
+      this.roles.query.dirOption = []
       dbData.directive.forEach(directive => {
+        if (!this.roles.query.dirOption.includes(directive.name)) {
+          this.roles.query.dirOption.push(directive.name)
+        }
         if (!directiveJson.hasOwnProperty(directive.page_id)) {
           directiveJson[directive.page_id] = []
         }
         directiveJson[directive.page_id].push({id: directive.id, name: directive.name})
       })
+
+      this.roles.query.pageOption = []
+      this.roles.query.pathOption = []
       dbData.pages.forEach(page => {
+        this.roles.query.pageOption.push(page.name)
+        this.roles.query.pathOption.push(page.path)
         pagesJson[page.id] = {
           id: page.id,
           name: page.name,
@@ -469,7 +522,9 @@ export default {
         })
         this.pages.pageTotal += 1
       })
+      this.users.query.roleOption = []
       dbData.roles.forEach(role => {
+        this.users.query.roleOption.push(role.name)
         role.page_ids = role.page_ids || []
         role.directive_ids = role.directive_ids || []
         rolesJson[role.id] = {
@@ -484,26 +539,49 @@ export default {
             return directive
           }, [])
         }
-        this.roles.table.push({
+        this.roles.tableAll.push({
           id: role.id,
           name: role.name,
           permission: role.page_ids.reduce((pages_arr, page_id) => {
-            pages_arr.push(pagesJson[page_id] || {id: -1, name: 'Error', path: '/error/404', directive: []})
+            pages_arr.push({
+              id: pagesJson[page_id].id,
+              name: pagesJson[page_id].name,
+              path: pagesJson[page_id].path,
+              directive: pagesJson[page_id].directive.filter(dir => role.directive_ids.includes(dir.id))
+            })
             return pages_arr
           }, [])
         })
         this.roles.pageTotal += 1
       })
+      this.roleTableFilter()
       dbData.users.forEach(user => {
-        let roles = []
-        user.role_ids.forEach(role_id => {
-          roles.push(rolesJson[role_id].name)
-        })
-        this.users.table.push({
+        this.users.tableAll.push({
           id: user.id,
           name: user.name,
-          roles: roles
+          roles: user.role_ids.reduce((roles, role_id) => {
+            roles.push(rolesJson[role_id].name)
+            return roles
+          }, [])
         })
+      })
+      this.userTableFilter()
+    },
+    userTableFilter () {
+      this.users.table = []
+      this.users.pageTotal = 0
+      this.users.tableAll.forEach(user => {
+        if (this.users.query.id && user.id.toString() !== this.users.query.id) {
+          return
+        }
+        if (user.name.indexOf(this.users.query.name) === -1) {
+          return
+        }
+        if (this.users.query.role.length !== 0 &&
+          this.users.query.role.filter(role => user.roles.includes(role)).length === 0) {
+          return
+        }
+        this.users.table.push(user)
         this.users.pageTotal += 1
       })
     },
@@ -518,6 +596,38 @@ export default {
     },
     userHandleCurrentChange (currentPage) {
       this.users.currentPage = currentPage
+    },
+    roleTableFilter () {
+      this.roles.table = []
+      this.roles.pageTotal = 0
+      this.roles.tableAll.forEach(role => {
+        if (this.roles.query.id && role.id.toString() !== this.roles.query.id) {
+          return
+        }
+        if (role.name.indexOf(this.roles.query.name) === -1) {
+          return
+        }
+        let accordPage = false
+        let accordPath = false
+        let accordDir = false
+        role.permission.forEach(per => {
+          if (this.roles.query.page.length === 0 || this.roles.query.page.includes(per.name)) {
+            accordPage = true
+          }
+          if (this.roles.query.path.length === 0 || this.roles.query.path.includes(per.path)) {
+            accordPath = true
+          }
+          console.log(per.directive)
+          if (this.roles.query.directive.length === 0 ||
+            per.directive.filter(_dir => this.roles.query.directive.includes(_dir.name)) !== 0) {
+            accordDir = true
+          }
+        })
+        if (accordPage && accordPath && accordDir) {
+          this.roles.table.push(role)
+          this.roles.pageTotal += 1
+        }
+      })
     },
     roleHandleEdit (index, row) {
       console.log(1)
@@ -542,6 +652,9 @@ export default {
     },
     pageHandleCurrentChange (currentPage) {
       this.pages.currentPage = currentPage
+    },
+    onSubmit () {
+      console.log(1)
     }
   },
   mounted () {
@@ -558,7 +671,9 @@ export default {
   margin-top: 5px;
   display: block;
   height: auto;
+  white-space: normal;
 }
+
 .my-db-instruction {
   margin-top: 20px;
   display: block;
