@@ -20,7 +20,7 @@
               <el-form-item label="角色">
                 <el-select v-model="users.query.role" placeholder="角色" multiple filterable>
                   <el-option
-                    v-for="_role in users.query.roleOption" :key="_role"
+                    v-for="_role in querySelect.roleOption" :key="_role"
                     :label="_role" :value="_role"></el-option>
                 </el-select>
               </el-form-item>
@@ -90,21 +90,21 @@
               <el-form-item label="页面">
                 <el-select v-model="roles.query.page" placeholder="页面" multiple filterable>
                   <el-option
-                    v-for="_page in roles.query.pageOption" :key="_page"
+                    v-for="_page in querySelect.pageOption" :key="_page"
                     :label="_page" :value="_page"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="地址">
                 <el-select v-model="roles.query.path" placeholder="地址" multiple filterable>
                   <el-option
-                    v-for="_path in roles.query.pathOption" :key="_path"
+                    v-for="_path in querySelect.pathOption" :key="_path"
                     :label="_path" :value="_path"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="指令">
                 <el-select v-model="roles.query.directive" placeholder="指令" multiple filterable>
                   <el-option
-                    v-for="_directive in roles.query.dirOption" :key="_directive"
+                    v-for="_directive in querySelect.dirOption" :key="_directive"
                     :label="_directive" :value="_directive"></el-option>
                 </el-select>
               </el-form-item>
@@ -138,7 +138,7 @@
                   <template slot-scope="scope">
                     <el-tag class="my-role-permission"
                             v-for="_permission in scope.row.permission"
-                            :key="_permission">
+                            :key="_permission.name">
                       <b>页面名称</b>: {{_permission.name}}.
                       <b>地址URI</b>: {{_permission.path}}.
                       <b>指令权限</b>: <span v-for="_directive in _permission.directive" :key="_directive.id">
@@ -182,16 +182,24 @@
                 <el-input v-model="pages.query.id" placeholder="ID"></el-input>
               </el-form-item>
               <el-form-item label="名称">
-                <el-input v-model="pages.query.name" placeholder="姓名"></el-input>
+                <el-input v-model="pages.query.name" placeholder="名称"></el-input>
               </el-form-item>
               <el-form-item label="路径">
-                <el-input v-model="pages.query.path" placeholder="路径"></el-input>
+                <el-select v-model="pages.query.paths" placeholder="路径" multiple filterable>
+                  <el-option
+                    v-for="_path in querySelect.pathOption" :key="_path"
+                    :label="_path" :value="_path"></el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="指令">
-                <el-input v-model="pages.query.directive" placeholder="指令"></el-input>
+                <el-select v-model="pages.query.directive" placeholder="指令" multiple filterable>
+                  <el-option
+                    v-for="_dir in querySelect.dirOption" :key="_dir"
+                    :label="_dir" :value="_dir"></el-option>
+                </el-select>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
+                <el-button type="primary" @click="pageTableFilter" icon="el-icon-search">查询</el-button>
               </el-form-item>
             </el-form>
           </el-card>
@@ -424,12 +432,17 @@ export default {
   data () {
     return {
       activeName: 'first',
+      querySelect: {
+        roleOption: [],
+        pageOption: [],
+        pathOption: [],
+        dirOption: []
+      },
       users: {
         query: {
           id: '',
           name: '',
-          role: [],
-          roleOption: []
+          role: []
         },
         table: [],
         tableAll: [],
@@ -443,11 +456,8 @@ export default {
           id: '',
           name: '',
           page: '',
-          pageOption: [],
           path: '',
-          pathOption: [],
-          directive: '',
-          dirOption: []
+          directive: ''
         },
         table: [],
         tableAll: [],
@@ -460,10 +470,11 @@ export default {
         query: {
           id: '',
           name: '',
-          path: '',
-          directive: ''
+          paths: [],
+          directive: []
         },
         table: [],
+        tableAll: [],
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
@@ -488,10 +499,10 @@ export default {
       let rolesJson = {}
       let pagesJson = {}
       let directiveJson = {}
-      this.roles.query.dirOption = []
+      this.querySelect.dirOption = []
       dbData.directive.forEach(directive => {
-        if (!this.roles.query.dirOption.includes(directive.name)) {
-          this.roles.query.dirOption.push(directive.name)
+        if (!this.querySelect.dirOption.includes(directive.name)) {
+          this.querySelect.dirOption.push(directive.name)
         }
         if (!directiveJson.hasOwnProperty(directive.page_id)) {
           directiveJson[directive.page_id] = []
@@ -499,11 +510,11 @@ export default {
         directiveJson[directive.page_id].push({id: directive.id, name: directive.name})
       })
 
-      this.roles.query.pageOption = []
-      this.roles.query.pathOption = []
+      this.querySelect.pageOption = []
+      this.querySelect.pathOption = []
       dbData.pages.forEach(page => {
-        this.roles.query.pageOption.push(page.name)
-        this.roles.query.pathOption.push(page.path)
+        this.querySelect.pageOption.push(page.name)
+        this.querySelect.pathOption.push(page.path)
         pagesJson[page.id] = {
           id: page.id,
           name: page.name,
@@ -514,17 +525,17 @@ export default {
         pagesJson[page.id].directive.forEach(directive => {
           directives.push(directive.name)
         })
-        this.pages.table.push({
+        this.pages.tableAll.push({
           id: page.id,
           name: page.name,
           path: page.path,
           directive: directives
         })
-        this.pages.pageTotal += 1
       })
-      this.users.query.roleOption = []
+      this.pageTableFilter()
+      this.querySelect.roleOption = []
       dbData.roles.forEach(role => {
-        this.users.query.roleOption.push(role.name)
+        this.querySelect.roleOption.push(role.name)
         role.page_ids = role.page_ids || []
         role.directive_ids = role.directive_ids || []
         rolesJson[role.id] = {
@@ -567,6 +578,7 @@ export default {
       })
       this.userTableFilter()
     },
+    /* Users */
     userTableFilter () {
       this.users.table = []
       this.users.pageTotal = 0
@@ -597,6 +609,7 @@ export default {
     userHandleCurrentChange (currentPage) {
       this.users.currentPage = currentPage
     },
+    /* Roles */
     roleTableFilter () {
       this.roles.table = []
       this.roles.pageTotal = 0
@@ -617,9 +630,8 @@ export default {
           if (this.roles.query.path.length === 0 || this.roles.query.path.includes(per.path)) {
             accordPath = true
           }
-          console.log(per.directive)
           if (this.roles.query.directive.length === 0 ||
-            per.directive.filter(_dir => this.roles.query.directive.includes(_dir.name)) !== 0) {
+            per.directive.filter(_dir => this.roles.query.directive.includes(_dir.name)).length !== 0) {
             accordDir = true
           }
         })
@@ -640,6 +652,28 @@ export default {
     },
     roleHandleCurrentChange (currentPage) {
       this.roles.currentPage = currentPage
+    },
+    /* Pages */
+    pageTableFilter () {
+      this.pages.table = []
+      this.pages.pageTotal = 0
+      this.pages.tableAll.forEach(page => {
+        if (this.pages.query.id && page.id.toString() !== this.pages.query.id) {
+          return
+        }
+        if (page.name.indexOf(this.pages.query.name) === -1) {
+          return
+        }
+        if (this.pages.query.paths.length !== 0 && !this.pages.query.paths.includes(page.path)) {
+          return
+        }
+        if (this.pages.query.directive.length !== 0 &&
+          this.pages.query.directive.filter(dir => page.directive.includes(dir)).length === 0) {
+          return
+        }
+        this.pages.table.push(page)
+        this.pages.pageTotal += 1
+      })
     },
     pageHandleEdit (index, row) {
       console.log(1)
