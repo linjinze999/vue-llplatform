@@ -62,6 +62,13 @@ export default {
     boy: 'Boy',
     girl: 'Girl'
   },
+  permissions: {
+    instruction: 'Simulate user permission settings page.',
+    user: 'User',
+    role: 'Role',
+    page: 'Page',
+    db: 'Database Example'
+  },
   error: {
     'error401': 'Error401',
     'error404': 'Error404',
