@@ -20,7 +20,7 @@
               <el-form-item label="角色">
                 <el-select v-model="users.query.role" placeholder="角色" multiple filterable>
                   <el-option
-                    v-for="_role in querySelect.roleOption" :key="_role"
+                    v-for="_role in selectOptions.roleOption" :key="_role"
                     :label="_role" :value="_role"></el-option>
                 </el-select>
               </el-form-item>
@@ -34,7 +34,8 @@
           <el-card shadow="hover">
             <div slot="header" style="text-align: center">
               <b>用户列表</b>
-              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+              <el-button style="float: right;" type="success" size="mini" circle
+                         icon="el-icon-plus" @click="userHandleAdd()"></el-button>
             </div>
             <el-card shadow="hover">
               <el-table
@@ -75,6 +76,28 @@
               </el-pagination>
             </el-card>
           </el-card>
+          <!-- Users *** Dialog -->
+          <el-dialog title="用户信息" :visible.sync="users.dialogShow">
+            <el-form :model="users.dialogForm" ref="userForm" :rules="users.dialogRules">
+              <el-form-item label="ID" label-width="120px" prop="id">
+                <el-input v-model="users.dialogForm.id" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="姓名" label-width="120px" prop="name">
+                <el-input v-model="users.dialogForm.name" auto-complete="off" placeholder="姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="角色" label-width="120px" prop="roles">
+                <el-select v-model="users.dialogForm.roles" placeholder="角色" multiple filterable>
+                  <el-option
+                    v-for="_role in selectOptions.roleOption" :key="_role"
+                    :label="_role" :value="_role"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+            <div slot="footer">
+              <el-button @click="users.dialogShow = false">取 消</el-button>
+              <el-button type="primary" @click="userDialogSubmit()">确 定</el-button>
+            </div>
+          </el-dialog>
         </el-tab-pane>
         <!-- Roles -->
         <el-tab-pane :label="$t('permissions.role')" name="second" :lazy="true">
@@ -90,21 +113,21 @@
               <el-form-item label="页面">
                 <el-select v-model="roles.query.page" placeholder="页面" multiple filterable>
                   <el-option
-                    v-for="_page in querySelect.pageOption" :key="_page"
+                    v-for="_page in selectOptions.pageOption" :key="_page"
                     :label="_page" :value="_page"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="地址">
                 <el-select v-model="roles.query.path" placeholder="地址" multiple filterable>
                   <el-option
-                    v-for="_path in querySelect.pathOption" :key="_path"
+                    v-for="_path in selectOptions.pathOption" :key="_path"
                     :label="_path" :value="_path"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="指令">
                 <el-select v-model="roles.query.directive" placeholder="指令" multiple filterable>
                   <el-option
-                    v-for="_directive in querySelect.dirOption" :key="_directive"
+                    v-for="_directive in selectOptions.dirOption" :key="_directive"
                     :label="_directive" :value="_directive"></el-option>
                 </el-select>
               </el-form-item>
@@ -118,7 +141,8 @@
           <el-card shadow="hover">
             <div slot="header" style="text-align: center">
               <b>角色列表</b>
-              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+              <el-button style="float: right;" type="success" size="mini" circle
+                         @click="roleHandleAdd()" icon="el-icon-plus"></el-button>
             </div>
             <el-card shadow="hover">
               <el-table
@@ -172,6 +196,35 @@
               </el-pagination>
             </el-card>
           </el-card>
+          <!-- Roles *** Dialog -->
+          <el-dialog title="角色信息" :visible.sync="roles.dialogShow">
+            <el-form :model="roles.dialogForm" ref="roleForm" :rules="roles.dialogRules">
+              <el-form-item label="ID" label-width="120px" prop="id">
+                <el-input v-model="roles.dialogForm.id" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="名称" label-width="120px" prop="name">
+                <el-input v-model="roles.dialogForm.name" auto-complete="off" placeholder="名称"></el-input>
+              </el-form-item>
+              <el-form-item label="页面" label-width="120px" prop="page">
+                <el-select v-model="roles.dialogForm.pages" placeholder="页面" multiple filterable>
+                  <el-option
+                    v-for="_page in selectOptions.pageOption" :key="_page"
+                    :label="_page" :value="_page"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label-width="120px">
+                <div v-for="_page in selectOptions.pageOption" :key="_page"
+                     v-show="roles.dialogForm.pages.includes(_page)">
+                  {{_page}}：
+                  <el-checkbox v-for="_dir in selectOptions.pageDirective[_page]" :key="_dir">{{_dir}}</el-checkbox>
+                </div>
+              </el-form-item>
+            </el-form>
+            <div slot="footer">
+              <el-button @click="roles.dialogShow = false">取 消</el-button>
+              <el-button type="primary" @click="roleDialogSubmit()">确 定</el-button>
+            </div>
+          </el-dialog>
         </el-tab-pane>
         <!-- Pages -->
         <el-tab-pane :label="$t('permissions.page')" name="third" :lazy="true">
@@ -187,14 +240,14 @@
               <el-form-item label="路径">
                 <el-select v-model="pages.query.paths" placeholder="路径" multiple filterable>
                   <el-option
-                    v-for="_path in querySelect.pathOption" :key="_path"
+                    v-for="_path in selectOptions.pathOption" :key="_path"
                     :label="_path" :value="_path"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="指令">
                 <el-select v-model="pages.query.directive" placeholder="指令" multiple filterable>
                   <el-option
-                    v-for="_dir in querySelect.dirOption" :key="_dir"
+                    v-for="_dir in selectOptions.dirOption" :key="_dir"
                     :label="_dir" :value="_dir"></el-option>
                 </el-select>
               </el-form-item>
@@ -208,7 +261,8 @@
           <el-card shadow="hover">
             <div slot="header" style="text-align: center">
               <b>页面列表</b>
-              <el-button style="float: right;" type="success" size="mini" circle icon="el-icon-plus"></el-button>
+              <el-button style="float: right;" type="success" size="mini" circle
+                         @click="pageHandleAdd()" icon="el-icon-plus"></el-button>
             </div>
             <el-card shadow="hover">
               <el-table
@@ -265,8 +319,37 @@
               </el-pagination>
             </el-card>
           </el-card>
+          <!-- Pages *** Dialog -->
+          <el-dialog title="页面信息" :visible.sync="pages.dialogShow">
+            <el-form :model="pages.dialogForm" ref="pageForm" :rules="pages.dialogRules">
+              <el-form-item label="ID" label-width="120px" prop="id">
+                <el-input v-model="pages.dialogForm.id" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="名称" label-width="120px" prop="name">
+                <el-input v-model="pages.dialogForm.name" auto-complete="off" placeholder="名称"></el-input>
+              </el-form-item>
+              <el-form-item label="路径" label-width="120px" prop="path">
+                <el-autocomplete
+                  v-model="pages.dialogForm.path"
+                  :fetch-suggestions="pagePathSuggest"
+                  placeholder="路径"
+                ></el-autocomplete>
+              </el-form-item>
+              <el-form-item label="指令" label-width="120px" prop="directive">
+                <el-select v-model="pages.dialogForm.directive" placeholder="指令" multiple filterable allow-create>
+                  <el-option
+                    v-for="_dir in selectOptions.dirOption" :key="_dir"
+                    :label="_dir" :value="_dir"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-form>
+            <div slot="footer">
+              <el-button @click="pages.dialogShow = false">取 消</el-button>
+              <el-button type="primary" @click="pageDialogSubmit()">确 定</el-button>
+            </div>
+          </el-dialog>
         </el-tab-pane>
-        <!-- Dadabase -->
+        <!-- Database -->
         <el-tab-pane :label="$t('permissions.db')" name="fourth" :lazy="true">
           <el-card shadow="hover">
             <el-card>
@@ -275,7 +358,7 @@
             </el-card>
             <br/>
             <el-row :gutter="20">
-              <!-- Dadabase *** Users -->
+              <!-- Database *** Users -->
               <el-col :sm="24" :lg="12">
                 <el-card shadow="hover">
                   <div slot="header">
@@ -308,7 +391,7 @@
                   </el-tag>
                 </el-card>
               </el-col>
-              <!-- Dadabase *** Roles -->
+              <!-- Database *** Roles -->
               <el-col :sm="24" :lg="12">
                 <el-card shadow="hover">
                   <div slot="header">
@@ -350,7 +433,7 @@
             </el-row>
             <br/>
             <el-row :gutter="20">
-              <!-- Dadabase *** Pages -->
+              <!-- Database *** Pages -->
               <el-col :sm="24" :lg="12">
                 <el-card shadow="hover">
                   <div slot="header">
@@ -383,7 +466,7 @@
                   </el-tag>
                 </el-card>
               </el-col>
-              <!-- Dadabase *** Directive -->
+              <!-- Database *** Directive -->
               <el-col :sm="24" :lg="12">
                 <el-card shadow="hover">
                   <div slot="header">
@@ -432,11 +515,12 @@ export default {
   data () {
     return {
       activeName: 'first',
-      querySelect: {
+      selectOptions: {
         roleOption: [],
         pageOption: [],
         pathOption: [],
-        dirOption: []
+        dirOption: [],
+        pageDirective: {}
       },
       users: {
         query: {
@@ -449,7 +533,16 @@ export default {
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
-        modifyDialog: false
+        dialogShow: false,
+        dialogType: 'add',
+        dialogForm: {
+          id: '',
+          name: '',
+          roles: []
+        },
+        dialogRules: {
+          name: [{required: true, message: '请输入用户名字', trigger: 'blur'}]
+        }
       },
       roles: {
         query: {
@@ -464,7 +557,16 @@ export default {
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
-        modifyDialog: false
+        dialogShow: false,
+        dialogType: 'add',
+        dialogForm: {
+          id: '',
+          name: '',
+          pages: []
+        },
+        dialogRules: {
+          name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
+        }
       },
       pages: {
         query: {
@@ -478,12 +580,18 @@ export default {
         currentPage: 1,
         pageSize: 10,
         pageTotal: 0,
-        modifyDialog: false
-      },
-      modifyData: {
-        roles: {},
-        pages: {},
-        directive: {}
+        dialogShow: false,
+        dialogType: 'add',
+        dialogForm: {
+          id: '',
+          name: '',
+          path: '',
+          directive: []
+        },
+        dialogRules: {
+          name: [{required: true, message: '请输入页面名称', trigger: 'blur'}],
+          path: [{required: true, message: '请输入页面路径', trigger: 'change'}]
+        }
       },
       dbData: {
         users: [],
@@ -499,10 +607,10 @@ export default {
       let rolesJson = {}
       let pagesJson = {}
       let directiveJson = {}
-      this.querySelect.dirOption = []
+      this.selectOptions.dirOption = []
       dbData.directive.forEach(directive => {
-        if (!this.querySelect.dirOption.includes(directive.name)) {
-          this.querySelect.dirOption.push(directive.name)
+        if (!this.selectOptions.dirOption.includes(directive.name)) {
+          this.selectOptions.dirOption.push(directive.name)
         }
         if (!directiveJson.hasOwnProperty(directive.page_id)) {
           directiveJson[directive.page_id] = []
@@ -510,11 +618,11 @@ export default {
         directiveJson[directive.page_id].push({id: directive.id, name: directive.name})
       })
 
-      this.querySelect.pageOption = []
-      this.querySelect.pathOption = []
+      this.selectOptions.pageOption = []
+      this.selectOptions.pathOption = []
       dbData.pages.forEach(page => {
-        this.querySelect.pageOption.push(page.name)
-        this.querySelect.pathOption.push(page.path)
+        this.selectOptions.pageOption.push(page.name)
+        this.selectOptions.pathOption.push(page.path)
         pagesJson[page.id] = {
           id: page.id,
           name: page.name,
@@ -525,6 +633,7 @@ export default {
         pagesJson[page.id].directive.forEach(directive => {
           directives.push(directive.name)
         })
+        this.selectOptions.pageDirective[page.name] = directives
         this.pages.tableAll.push({
           id: page.id,
           name: page.name,
@@ -533,9 +642,9 @@ export default {
         })
       })
       this.pageTableFilter()
-      this.querySelect.roleOption = []
+      this.selectOptions.roleOption = []
       dbData.roles.forEach(role => {
-        this.querySelect.roleOption.push(role.name)
+        this.selectOptions.roleOption.push(role.name)
         role.page_ids = role.page_ids || []
         role.directive_ids = role.directive_ids || []
         rolesJson[role.id] = {
@@ -597,11 +706,45 @@ export default {
         this.users.pageTotal += 1
       })
     },
+    userHandleAdd () {
+      this.users.dialogType = 'add'
+      this.users.dialogForm.id = ''
+      this.users.dialogForm.name = ''
+      this.users.dialogForm.roles = []
+      this.users.dialogShow = true
+    },
     userHandleEdit (index, row) {
-      console.log(1)
+      this.users.dialogType = 'modify'
+      this.users.dialogForm.id = this.users.table[index].id
+      this.users.dialogForm.name = this.users.table[index].name
+      this.users.dialogForm.roles = this.users.table[index].roles
+      this.users.dialogShow = true
+    },
+    userDialogSubmit () {
+      this.$refs['userForm'].validate((valid) => {
+        if (valid) {
+          if (this.users.dialogType === 'add') {
+            this.$message({
+              message: '（假消息）添加用户成功！',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: '（假消息）修改用户成功！',
+              type: 'success'
+            })
+          }
+          this.users.dialogShow = false
+        } else {
+          return false
+        }
+      })
     },
     userHandleDelete (index, row) {
-      console.log(2)
+      this.$message({
+        message: '（假消息）删除用户成功！',
+        type: 'success'
+      })
     },
     userHandleSizeChange (size) {
       this.users.pagesize = size
@@ -641,11 +784,48 @@ export default {
         }
       })
     },
+    roleHandleAdd () {
+      this.roles.dialogType = 'add'
+      this.roles.dialogForm.id = ''
+      this.roles.dialogForm.name = ''
+      this.roles.dialogForm.pages = []
+      this.roles.dialogShow = true
+    },
     roleHandleEdit (index, row) {
-      console.log(1)
+      this.roles.dialogType = 'modify'
+      this.roles.dialogForm.id = this.roles.table[index].id
+      this.roles.dialogForm.name = this.roles.table[index].name
+      this.roles.dialogForm.pages = this.roles.table[index].permission.reduce((pages, per) => {
+        pages.push(per.name)
+        return pages
+      }, [])
+      this.roles.dialogShow = true
+    },
+    roleDialogSubmit () {
+      this.$refs['roleForm'].validate((valid) => {
+        if (valid) {
+          if (this.roles.dialogType === 'add') {
+            this.$message({
+              message: '（假消息）添加角色成功！',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: '（假消息）修改角色成功！',
+              type: 'success'
+            })
+          }
+          this.roles.dialogShow = false
+        } else {
+          return false
+        }
+      })
     },
     roleHandleDelete (index, row) {
-      console.log(2)
+      this.$message({
+        message: '（假消息）删除角色成功！',
+        type: 'success'
+      })
     },
     roleHandleSizeChange (size) {
       this.roles.pagesize = size
@@ -675,11 +855,56 @@ export default {
         this.pages.pageTotal += 1
       })
     },
+    pagePathSuggest (queryString, cb) {
+      let results = this.selectOptions.pathOption.reduce((paths, _pathName) => {
+        if (_pathName.indexOf(queryString) !== -1) {
+          paths.push({value: _pathName})
+        }
+        return paths
+      }, [])
+      cb(results)
+    },
+    pageHandleAdd () {
+      this.pages.dialogType = 'add'
+      this.pages.dialogForm.id = ''
+      this.pages.dialogForm.name = ''
+      this.pages.dialogForm.path = ''
+      this.pages.dialogForm.directive = []
+      this.pages.dialogShow = true
+    },
     pageHandleEdit (index, row) {
-      console.log(1)
+      this.pages.dialogType = 'modify'
+      this.pages.dialogForm.id = this.pages.table[index].id
+      this.pages.dialogForm.name = this.pages.table[index].name
+      this.pages.dialogForm.path = this.pages.table[index].path
+      this.pages.dialogForm.directive = this.pages.table[index].directive
+      this.pages.dialogShow = true
+    },
+    pageDialogSubmit () {
+      this.$refs['pageForm'].validate((valid) => {
+        if (valid) {
+          if (this.pages.dialogType === 'add') {
+            this.$message({
+              message: '（假消息）添加页面成功！',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: '（假消息）修改页面成功！',
+              type: 'success'
+            })
+          }
+          this.pages.dialogShow = false
+        } else {
+          return false
+        }
+      })
     },
     pageHandleDelete (index, row) {
-      console.log(2)
+      this.$message({
+        message: '（假消息）删除页面成功！',
+        type: 'success'
+      })
     },
     pageHandleSizeChange (size) {
       this.pages.pagesize = size
