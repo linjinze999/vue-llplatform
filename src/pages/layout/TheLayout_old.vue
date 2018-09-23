@@ -5,7 +5,7 @@
     </el-col>
     <el-col :span="24" class="page-main">
       <the-sidebar :open-nav="openNav"></the-sidebar>
-      <section class="page-content" :class="{'page-content-hide-aside': !openNav || minScreen}">
+      <section class="page-content" :class="{'page-content-hide-aside': !openNav}">
         <vue-scroll>
           <the-main></the-main>
           <the-footer></the-footer>
@@ -24,10 +24,8 @@ import TheLayoutMain from './TheLayoutMain'
 export default {
   name: 'TheLayout',
   data () {
-    let min_screen = window.innerWidth < 768
     return {
-      openNav: !min_screen,
-      minScreen: min_screen
+      openNav: true
     }
   },
   methods: {

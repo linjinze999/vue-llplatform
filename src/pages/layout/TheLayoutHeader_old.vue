@@ -1,7 +1,7 @@
 <template>
   <el-header class="header theme-bg-blue">
     <router-link to="/index">
-      <div class="logo" :class="{'logo-hide': !openNav && !minScreen}">
+      <div class="logo" :class="{'logo-hide': !openNav}">
         <img src="../../assets/logo.png" class="image"/>
         <span class="text">LLPlatform</span>
       </div>
@@ -10,7 +10,7 @@
       <i class="fa fa-outdent toggle" @click="navOpenToggle" :title="$t('header.toggleNav')" v-show="openNav"></i>
       <i class="fa fa-indent toggle" @click="navOpenToggle" :title="$t('header.toggleNav')" v-show="!openNav"></i>
     </div>
-    <div class="right" v-if="!minScreen">
+    <div class="right">
       <div class="right-item">
         <i class="fa fa-envelope-o fa-fw"></i>
         <el-badge :value="1" class="item"></el-badge>
@@ -51,41 +51,6 @@
         </el-dropdown>
       </div>
     </div>
-    <div v-if="minScreen" class="right">
-      <el-dropdown trigger="click" :hide-on-click="false">
-        <p class="user-info">
-          <i class="fa fa-user-o"></i>
-        </p>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>
-            {{ user_name }}
-          </el-dropdown-item>
-          <el-dropdown-item divided>
-            {{ $t('header.themeChange') }}
-            <theme-picker></theme-picker>
-          </el-dropdown-item>
-          <el-dropdown-item>
-            <el-dropdown trigger="click" @command="changeLanguage" placement="left">
-              <p class="user-info">
-                {{ $t('header.languageSelect') }}
-                <i class="el-icon-arrow-down el-icon--right drop-icon"></i>
-              </p>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="zh-cn" :disabled="this.lang==='zh-cn'">
-                  {{$t('header.langZh')}}
-                </el-dropdown-item>
-                <el-dropdown-item command="en" :disabled="this.lang==='en'">
-                  {{$t('header.langEn')}}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </el-dropdown-item>
-          <el-dropdown-item divided @click.native="logout()">
-            {{$t('header.logout')}}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
   </el-header>
 </template>
 
@@ -103,12 +68,10 @@ export default {
     const user_info = JSON.parse(sessionStorage.getItem('user-info'))
     const user_name = user_info['name']
     const lang = localStorage.getItem('user-language') || 'zh-cn'
-    let min_screen = window.innerWidth < 768
     return {
       user_name: user_name,
       langDrop: false,
-      lang: lang,
-      minScreen: min_screen
+      lang: lang
     }
   },
   methods: {
@@ -195,18 +158,6 @@ export default {
     }
     .user-info {
       color: #ffffff;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    .logo {
-      border: none;
-    }
-    .content {
-      float: left;
-      margin-left: -20px;
     }
   }
 }

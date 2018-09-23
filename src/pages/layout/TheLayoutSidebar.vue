@@ -63,6 +63,8 @@ export default {
   top: 0;
   bottom: 0;
   border-right: 1px solid #e6e6e6;
+  background-color: #ffffff;
+  z-index: 99;
   .sidebar-menu {
     border: none;
     height: 100%;

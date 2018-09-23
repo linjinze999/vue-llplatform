@@ -742,7 +742,7 @@ export default {
     },
     userHandleDelete (index, row) {
       this.$message({
-        message: '（假消息）删除用户成功！',
+        message: '（假消息）删除git用户成功！',
         type: 'success'
       })
     },
