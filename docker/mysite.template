@@ -1,0 +1,23 @@
+server {
+  listen              80;
+  server_name  localhost;
+
+  location / {
+      root /usr/share/nginx/html;
+      index  ${BASE_PATH}index.html ${BASE_PATH}index.htm;
+  }
+
+  location ${BASE_PATH}api/ {
+      rewrite  ^${BASE_PATH}api/(.*)$ /$1 break;
+      #api请求指向后台接口
+      proxy_pass   ${BACK_END_URL};
+  }
+
+  location ${BASE_PATH} {
+      alias /usr/share/nginx/html/dist/;
+      index  ${BASE_PATH}index.html;
+      #uri重定向至index.html
+      try_files $uri $uri/ ${BASE_PATH}index.html;
+  }
+}
+
