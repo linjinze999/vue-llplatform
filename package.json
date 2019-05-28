@@ -1,0 +1,30 @@
+{
+  "name": "vue-llplatform",
+  "version": "1.0.0",
+  "description": "Manager system base on Vue and Element",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "vuepress": "^1.0.0-alpha.48"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev vuepress",
+    "docs:dev2": "vuepress dev vuepress --host 192.168.116.136",
+    "docs:build": "vuepress build vuepress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linjinze999/vue-llplatform.git"
+  },
+  "keywords": [
+    "system",
+    "vue",
+    "element"
+  ],
+  "author": "linjinze999",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/linjinze999/vue-llplatform/issues"
+  },
+  "homepage": "https://github.com/linjinze999/vue-llplatform#readme"
+}
