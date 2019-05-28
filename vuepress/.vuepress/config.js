@@ -21,6 +21,9 @@ module.exports = {
     ['script', {src: '/assets/js/article.js'}],
     ['link', {rel: 'stylesheet', href: '/assets/css/common.css'}]
   ],
+  markdown: {
+    lineNumbers: true
+  },
   themeConfig: {
     repo: 'linjinze999/vue-llplatform',
     docsRepo: 'linjinze999/vue-llplatform',
@@ -59,6 +62,7 @@ module.exports = {
                   collapsable: false,
                   children: [
                     'project/start',
+                    'project/config',
                     'project/request',
                     'project/login',
                     'project/permission',
@@ -68,6 +72,13 @@ module.exports = {
                     'project/theme',
                     'project/build',
                     'project/store',
+                  ]
+                },
+                {
+                  title: '优化',
+                  collapsable: false,
+                  children: [
+                    'project/import',
                   ]
                 }
               ]
