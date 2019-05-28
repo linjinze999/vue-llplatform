@@ -38,12 +38,14 @@
 ### 描述
 主页面用来包含各个布局的组件（顶部栏、菜单、主体、底部栏），你也可以选择将所有组件内容写到本页面，但如果内容较多，建议还是拆分为多个组件会比较好管理。
 
-为了实现菜单栏可以折叠收起的效果，在主页面统一维护了一个`openNav`的变量，表示是否展开菜单。该值会传递给其他组件，涉及到vue的父子组件通信，具体可以参考[vue Prop](https://cn.vuejs.org/v2/guide/components-props.html)和[vue 自定义事件](https://cn.vuejs.org/v2/guide/components-custom-events.html)。
+为了实现菜单栏可以折叠收起的效果，在主页面统一维护了一个`openNav`的变量，表示是否展开菜单。
+该值会传递给其他组件，涉及到vue的父子组件通信，具体可以参考[vue Prop](https://cn.vuejs.org/v2/guide/components-props.html)
+和[vue 自定义事件](https://cn.vuejs.org/v2/guide/components-custom-events.html)。（建议使用vuex来管理这个状态会更好一些）
 
-页面高度和浏览器高度一致，**菜单栏**或者**主体+底部栏**超出高度时，使用自定义滚动条内部滚动。其中**菜单栏**自己会实现；此处为`main`和`footer`添加`<vue-scroll>`标签使用自定义滚动条。
+页面高度和浏览器高度一致，**菜单栏**或者**主体+底部栏**超出高度时显示滚动条。
 
 ### 实现
-创建`src/pages/layout/TheLayout.vue`：
+创建`src/views/layout/TheLayout.vue`：
 ``` vue
 <template>
   <el-row class="page">
@@ -96,35 +98,40 @@ export default {
   top: 0;
   height: 100%;
   width: 100%;
+
   .page-main {
     display: flex;
     position: absolute;
     top: 60px;
     bottom: 0;
+
     .page-content {
       position: absolute;
       left: 240px;
       right: 0;
       height: 100%;
     }
+
     .page-content-hide-aside {
       left: 65px;
     }
   }
 }
 </style>
+
 ```
 
 ## 顶部栏
 ### 描述
 我们将顶部栏分为三部分：**左边Logo**，**中间主体**，**右边用户**。
 
-**主体**提供触发菜单栏展开收起的按钮，收起菜单的同时，**左边Logo**的文字也会隐藏起来，令Logo宽度和左侧折叠的菜单宽度一致。**右边用户**，当鼠标悬浮时可以操作退出登录（利用[Element 下拉菜单组件](http://element-cn.eleme.io/#/zh-CN/component/dropdown)）
+**主体**提供触发菜单栏展开收起的按钮，收起菜单的同时，**左边Logo**的文字也会隐藏起来，令Logo宽度和左侧折叠的菜单宽度一致。
+**右边用户**，当鼠标悬浮时可以操作退出登录（利用[Element 下拉菜单组件](http://element-cn.eleme.io/#/zh-CN/component/dropdown)）
 
 <img src="/assets/img/vue-llplatform/layout-header.png" />
 
 ### 实现
-需要操作父组件的`openNav`；用户名字从`sessionStorage`中获取（登录后有存储用户信息）。创建`src/pages/layout/TheLayoutHeader.vue`：
+需要操作父组件的`openNav`；用户名字从`vuex`中获取。创建`src/views/layout/TheLayoutHeader.vue`：
 
 ``` vue
 <template>
@@ -140,7 +147,7 @@ export default {
     </div>
     <el-dropdown trigger="hover" class="user">
       <span class="user-info">
-        {{ user_name }}<i class="fa fa-user-circle-o fa-2x" style="margin-left: 10px"></i>
+        {{ user.name }}<i class="fa fa-user-circle-o fa-2x" style="margin-left: 10px"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>我的账号</el-dropdown-item>
@@ -156,16 +163,12 @@ export default {
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'TheLayoutHeader',
   props: ['openNav'],
-  data () {
-    const user_info = JSON.parse(sessionStorage.getItem('user-info'))
-    const user_name = user_info['name']
-    return {
-      user_name: user_name
-    }
-  },
+  computed: mapState(['user']),
   methods: {
     navOpenToggle () {
       this.$emit('toggle-open')
@@ -179,9 +182,11 @@ export default {
   line-height: 60px;
   background-color: #409EFF;
   color: #ffffff;
+
   div {
     display: inline-block;
   }
+
   .logo {
     width: 240px;
     border-right: 1px solid #C0C4CC;
@@ -189,30 +194,38 @@ export default {
     text-align: center;
     font-size: 25px;
     cursor: pointer;
+
     .image {
       width: 40px;
       height: 40px;
       vertical-align: middle;
     }
   }
+
   .logo-hide {
     width: 65px;
+
     .text {
       display: none;
     }
   }
+
   .content {
     padding: 0 20px;
+
     .toggle {
       font-size: 14px;
       cursor: pointer;
     }
   }
+
   .user {
     float: right;
     cursor: pointer;
+
     .user-info {
       color: #ffffff;
+
       i {
         vertical-align: middle;
       }
@@ -220,6 +233,7 @@ export default {
   }
 }
 </style>
+
 ```
 
 ## 菜单栏
@@ -265,7 +279,7 @@ export default {
 5. 添加`<vue-scroll>`，当菜单过长时，使用自定义滚动条。
 
 ### 实现
-1. 创建`src/pages/layout/TheLayoutSidebar.vue`：
+1. 创建`src/views/layout/TheLayoutSidebar.vue`：
 ``` vue
 <template>
   <aside class="sidebar" :class="{'sidebar-hide': !openNav}">
@@ -476,7 +490,7 @@ export default {
 2. 背景颜色置浅灰色（让用户一眼区分空白处和内容）；
 
 ### 实现
-创建`src/pages/layout/TheLayoutMain.vue`：
+创建`src/views/layout/TheLayoutMain.vue`：
 ``` vue
 <template>
   <el-main :style="mainStyle" class="page-sub-main">
@@ -490,10 +504,10 @@ export default {
 export default {
   name: 'TheLayoutMain',
   data () {
-    const win_height = window.innerHeight - 100 + 'px'
+    const winHeight = window.innerHeight - 100 + 'px'
     return {
       mainStyle: {
-        minHeight: win_height
+        minHeight: winHeight
       }
     }
   }
@@ -506,14 +520,15 @@ export default {
   color: #666666;
 }
 </style>
+
 ```
 
 ## 底部栏
-创建`src/pages/layout/TheLayoutFooter.vue`：
+创建`src/views/layout/TheLayoutFooter.vue`：
 ``` vue
 <template>
   <footer class="footer">
-    Copyright © linjinze999@163.com
+    MIT Licensed | Copyright © 2019-present linjinze999
   </footer>
 </template>
 
@@ -531,6 +546,7 @@ export default {
   border-top: 1px solid #e6e6e6;
 }
 </style>
+
 ```
 
 ## 效果预览
