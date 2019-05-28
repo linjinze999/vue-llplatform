@@ -60,6 +60,16 @@ npm install crypto-js -S
 ```
 2. 创建统一样式文件 `src/assets/css/common.scss`：
 ``` scss
+html, body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* Chrome 滚动条优化 */
 * {
   &::-webkit-scrollbar { /*滚动条整体样式*/
@@ -201,10 +211,10 @@ new Vue({
 }).$mount('#app')
 
 ```
-- `.env`文件：全局环境变量，此处设置了全局根路径（多数项目为`/`路径，部分项目包含子路径）
+- `.env`文件：全局环境变量，此处设置了全局根路径（多数项目为`/`路径，部分项目包含子路径，如`/preview/`）
 ```
 # 项目根路径
-VUE_APP_BASE_PATH=/preview/
+VUE_APP_BASE_PATH=/
 
 ```
 - `vue.config.js`文件：vue-cli配置文件，此处设置了一些路径别名和利用`VUE_APP_BASE_PATH`环境变量设置系统路径

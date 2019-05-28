@@ -12,7 +12,7 @@
 ``` js
 import axios from 'axios'
 import qs from 'qs'
-import store from '../store/index';
+import store from '../store/index'
 import { MessageBox } from 'element-ui'
 
 /*
@@ -72,10 +72,6 @@ export const request = (url, params = {}, config = {}, autoErrorRes = true, auto
     }
   }
   return axiosCustom(args).then((res) => {
-    // 未登录
-    if (res.data.type === 'login') {
-      window.location.href = res.data.url || '/'
-    }
     // 自动处理返回格式错误
     if (autoErrorData && res.data.hasOwnProperty('code') && res.data.code !== 1) {
       console.error(res.data)

@@ -1,3 +1,13 @@
+html, body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* Chrome 滚动条优化 */
 * {
   &::-webkit-scrollbar { /*滚动条整体样式*/

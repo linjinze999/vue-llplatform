@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
-import store from '../store/index';
-import { MessageBox } from 'element-ui'
+import store from '../store/index'
+import { MessageBox, Message } from 'element-ui'
 
 /*
  * 一、request：
@@ -42,6 +42,11 @@ const axiosCustom = axios.create({
   withCredentials: true
 })
 
+axiosCustom.interceptors.request.use(function (config) {
+  config.headers.token = localStorage.getItem('user-token')
+  return config
+})
+
 /* 普通请求 */
 export const request = (url, params = {}, config = {}, autoErrorRes = true, autoErrorData = true, autoCancel = true) => {
   if (autoCancel) {
@@ -62,7 +67,8 @@ export const request = (url, params = {}, config = {}, autoErrorRes = true, auto
   return axiosCustom(args).then((res) => {
     // 未登录
     if (res.data.type === 'login') {
-      window.location.href = res.data.url || '/'
+      Message({ message: '登录失效，请重新登录', type: 'error' })
+      window.location.href = res.data.url || '/#/login'
     }
     // 自动处理返回格式错误
     if (autoErrorData && res.data.hasOwnProperty('code') && res.data.code !== 1) {

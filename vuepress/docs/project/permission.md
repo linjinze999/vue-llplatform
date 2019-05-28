@@ -30,110 +30,117 @@
 
 现在用的比较多的是[jwt ](https://www.jianshu.com/p/576dbf44b2ae)，即登录时后台返回一个token，以后前端每次调用接口都带上此token，服务器获得请求后比较token从而进行权限控制。
 
-我们可以修改一下底层的网络请求封装`src/utils/request.js`，拦截`axios`请求，在`header`中加入`token`。若后台校验token失效，则可以约定返回**指定的错误码**，如`{success: false, error: {code: 100000}}`，那么我们需要对响应进行处理（转向登录页面）：
-``` js {2,,42-45,59-67}
+我们可以修改一下底层的网络请求封装`src/utils/request.js`，拦截`axios`请求，在`header`中加入`token`。
+若后台校验token失效，则可以约定返回**指定的错误码**，如`{type: 'login', url: '/#/login'}`，那么我们需要对响应进行处理（转向登录页面）：
+``` js {4,,45-48,68-72}
 import axios from 'axios'
-import {MessageBox, Message} from 'element-ui'
+import qs from 'qs'
+import store from '../store/index'
+import { MessageBox, Message } from 'element-ui'
 
 /*
  * 一、request：
  *    1. 说明：封装对后台的请求，可以选择自动处理一些异常。
  *    2. 参数：
- *        - url：            后台地址，必填，String，如："/user/add"
- *        - params：         请求参数，必填，Object，如：{"name":"xxx"}
- *        - config：         axios参数，选填，Object，默认值：{}
- *        - auto_error_res： 是否自动处理响应错误，选填，Boolean，默认值：true
- *        - auto_error_data：是否自动处理后台错误，选填，Boolean，默认值：true
+ *        - url：          后台地址，必填，String，如："/user/add"
+ *        - params：       请求参数，选填，Object，，默认值：{}
+ *        - config：       axios参数，选填，Object，默认值：{}
+ *        - autoErrorRes： 是否自动处理响应错误，选填，Boolean，默认值：true
+ *        - autoErrorData：是否自动处理后台错误，选填，Boolean，默认值：true
+ *        - autoCancel：   离开路由时是否自动取消请求，选填，Boolean，默认值：true
  *    3. 返回：
- *        - 成功：Promise.resolve(请求成功后的结果：response.data.result)
+ *        - 成功：Promise.resolve(请求成功后的结果：response.data)
  *        - 失败：
  *            - 请求异常：Promise.reject(http响应错误)
- *            - 请求失败：Promise.reject(请求失败后的结果：response.data.error)
+ *            - 请求失败：Promise.reject(请求失败后的结果：response.data)
  *    4. 约定后台返回数据格式：
  *        response.data = {
- *          "success": true/false,         //请求成功或失败
- *          "result": {},                  //请求成功后的结果
- *          "error":{
- *            "code": 100001,              //请求失败错误码
- *            "message": "用户名字重复"    //请求失败描述
- *          }
+ *          "code": 1,                    // 成功/失败标识，1=成功，-1=失败
+ *          "data": {},                   // 成功时可选参数，请求的响应数据
+ *          "errorMessage": "用户名字重复"  // 失败时必需参数，错误提示
  *        }
  *
  * 二、sessionRequest：
- *    1. 说明：利用sessionStorage缓存请求，可以选择out_time，其他同request。
+ *    1. 说明：利用sessionStorage缓存请求，可以选择outTime，其他同request。
  *    2. 参数：
- *        - out_time：距离上次请求多少秒后需要重新请求，选填，Integer，小于0表示不重新请求，默认值：-1
+ *        - outTime：距离上次请求多少秒后需要重新请求，选填，Integer，小于0表示不重新请求，默认值：-1
  *
  * 三、localRequest：
- *    1. 说明：利用localStorage缓存请求，可以选择out_time，其他同request。
+ *    1. 说明：利用localStorage缓存请求，可以选择outTime，其他同request。
  *    2. 参数：
- *        - out_time：距离上次请求多少秒后需要重新请求，选填，Integer，小于0表示不重新请求，默认值：604800（一周）
+ *        - outTime：距离上次请求多少秒后需要重新请求，选填，Integer，小于0表示不重新请求，默认值：604800（一周）
  *
  **/
 
-/* 为每个请求设置默认baseURL，并添加token */
-axios.defaults.baseURL = ''
-axios.interceptors.request.use(function (config) {
-  config.headers.Authorization = localStorage.getItem('user-token')
+const axiosCustom = axios.create({
+  baseURL: process.env.BASE_URL,
+  withCredentials: true
+})
+
+axiosCustom.interceptors.request.use(function (config) {
+  config.headers.token = localStorage.getItem('user-token')
   return config
 })
 
 /* 普通请求 */
-export const request = (url, params, config = {}, auto_error_res = true, auto_error_data = true) => {
+export const request = (url, params = {}, config = {}, autoErrorRes = true, autoErrorData = true, autoCancel = true) => {
+  if (autoCancel) {
+    config = Object.assign({ cancelToken: store.state.source.token }, config)
+  }
   const args = Object.assign({
     'method': 'post',
     'url': url,
     'data': params
   }, config)
-  return axios(args).then((res) => {
-    /* 后台返回指定错误 */
-    if (!res.data.success) {
-      res.data.error = res.data.error || {}
-      console.error(res.data.error)
-      /* token失效 */
-      if (res.data.error.code === 100000) {
-        Message({
-          message: '登录失效，请重新登录',
-          type: 'error'
-        })
-        window.location.href = '/#/login'
-        return Promise.reject(res.data.error)
-      }
-      /* 其他错误 */
-      if (auto_error_data) {
-        const err_msg = res.data.error.message || '未知的服务器错误，请联系管理员！'
-        const err_cod = res.data.error.code || -1
-        MessageBox.alert(err_msg, '请求失败：' + err_cod, {confirmButtonText: '确定'})
-      }
-      return Promise.reject(res.data.error)
+  // 处理url传参
+  if (!['put', 'post', 'patch'].includes(args.method.toLowerCase())) {
+    args['params'] = args['params'] || args['data']
+    args['paramsSerializer'] = args['paramsSerializer'] || function (params) {
+      return qs.stringify(params, { arrayFormat: 'indices' })
     }
-    return res.data.result
+  }
+  return axiosCustom(args).then((res) => {
+    // 未登录
+    if (res.data.type === 'login') {
+      Message({ message: '登录失效，请重新登录', type: 'error' })
+      window.location.href = res.data.url || '/#/login'
+    }
+    // 自动处理返回格式错误
+    if (autoErrorData && res.data.hasOwnProperty('code') && res.data.code !== 1) {
+      console.error(res.data)
+      const errMsg = res.data.errorMessage || '未知的服务器错误，请联系管理员！'
+      const errCod = res.data.code
+      MessageBox.alert(errMsg, '请求异常：' + errCod, { confirmButtonText: '确定' })
+      return Promise.reject(res.data)
+    }
+    return res.data
   }, (error) => {
-    /* 网络请求异常 */
+    // 自动处理网络请求错误
     console.error(error)
-    if (auto_error_res) {
-      const err_status = error.response.status || -100
-      MessageBox.alert('网络请求异常，请联系管理员！', '请求异常：' + err_status, {confirmButtonText: '确定'})
+    error.response = error.response || {}
+    const errStatus = error.response.status || -100
+    if (autoErrorRes && error.message) {
+      MessageBox.alert('网络请求异常，请联系管理员！', '请求异常：' + errStatus, { confirmButtonText: '确定' })
     }
     return Promise.reject(error)
   })
 }
 
 /* 使用sessionStorage缓存的请求 */
-export const sessionRequest = (url, params, out_time = -1, config = {}, auto_error_res = true, auto_error_data = true) => {
-  const item_key = url + '#' + JSON.stringify(params)
-  let item_val = sessionStorage.getItem(item_key)
-  const now_time = new Date().getTime()
-  if (item_val) {
-    item_val = JSON.parse(item_val)
-    const over_time = now_time - item_val.last_time
-    if (out_time < 0 || over_time < out_time * 1000) {
-      return Promise.resolve(item_val.data)
+export const sessionRequest = (url, params = {}, config = {}, outTime = -1, autoErrorRes = true, autoErrorData = true, autoCancel = true) => {
+  const itemKey = url + '#' + JSON.stringify(params) + JSON.stringify(config)
+  let itemVal = sessionStorage.getItem(itemKey)
+  const nowTime = new Date().getTime()
+  if (itemVal) {
+    itemVal = JSON.parse(itemVal)
+    const overTime = nowTime - itemVal.lastTime
+    if (outTime < 0 || overTime < outTime * 1000) {
+      return Promise.resolve(itemVal.data)
     }
   }
-  return request(url, params, config, auto_error_res, auto_error_data).then(data => {
-    sessionStorage.setItem(item_key, JSON.stringify({
-      'last_time': now_time,
+  return request(url, params, config, autoErrorRes, autoErrorData, autoCancel).then(data => {
+    sessionStorage.setItem(itemKey, JSON.stringify({
+      'lastTime': nowTime,
       'data': data
     }))
     return data
@@ -141,20 +148,20 @@ export const sessionRequest = (url, params, out_time = -1, config = {}, auto_err
 }
 
 /* 使用localStorage缓存的请求 */
-export const localRequest = (url, params, out_time = 604800, config = {}, auto_error_res = true, auto_error_data = true) => {
-  const item_key = url + '#' + JSON.stringify(params)
-  let item_val = localStorage.getItem(item_key)
-  const now_time = new Date().getTime()
-  if (item_val) {
-    item_val = JSON.parse(item_val)
-    const over_time = now_time - item_val.last_time
-    if (out_time < 0 || over_time < out_time * 1000) {
-      return Promise.resolve(item_val.data)
+export const localRequest = (url, params = {}, config = {}, outTime = 604800, autoErrorRes = true, autoErrorData = true, autoCancel = true) => {
+  const itemKey = url + '#' + JSON.stringify(params) + JSON.stringify(config)
+  let itemVal = localStorage.getItem(itemKey)
+  const nowTime = new Date().getTime()
+  if (itemVal) {
+    itemVal = JSON.parse(itemVal)
+    const overTime = nowTime - itemVal.lastTime
+    if (outTime < 0 || overTime < outTime * 1000) {
+      return Promise.resolve(itemVal.data)
     }
   }
-  return request(url, params, config, auto_error_res, auto_error_data).then(data => {
-    localStorage.setItem(item_key, JSON.stringify({
-      'last_time': now_time,
+  return request(url, params, config, autoErrorRes, autoErrorData, autoCancel).then(data => {
+    localStorage.setItem(itemKey, JSON.stringify({
+      'lastTime': nowTime,
       'data': data
     }))
     return data
@@ -165,13 +172,13 @@ export const localRequest = (url, params, out_time = 604800, config = {}, auto_e
 此处使用`localStorage`存储token（使用`localStorage`下次登录仍可使用此token，达到下次自动登录的效果；你也可以使用`sessionStorage`，但下次需要重新登录），因此登录时需要存储一下token，假设约定后台返回格式如下：
 ``` js
 {
-  success: true,
-  result: {token: 'xxxxxxxxxxxxxxxx'}
+  code: 1,
+  token: 'xxxxxxxxxxxxxxxx'
 }
 ```
 修改`src/api/user.js`：
 ``` js {4-7}
-import {request} from '../utils/request'
+import { request } from '../utils/request'
 
 export const requestLogin = params => {
   return request('/api/user/login', params).then(data => {
@@ -179,74 +186,82 @@ export const requestLogin = params => {
     return data
   })
 }
+
+export const requestRegister = params => {
+  return request('/api/user/register', params)
+}
+
 ```
 
 ## 页面权限控制
-上文提到本项目采用**后台记录权限表**的策略，思路大体为：登录成功后，前端继续请求获取权限表并存储（考虑到现在后端常常使用微服务，因此把token的获取和权限表的获取拆开，而不是登录后一起返回）。
+上文提到本项目采用**后台记录权限表**的策略，思路大体为：登录成功后，前端继续请求获取权限表并存储
+（考虑到现在后端常常使用微服务，因此把token的获取和权限表的获取拆开，而不是登录后一起返回）。
 
-当用户要访问某页面时，判断一下该页面是否在权限表中，若不在，则跳转至401（用户无权限）页面。
+当用户要访问某页面时，判断一下该页面是否在权限表中，若不在，则跳转至403（用户无权限）页面。
 
-**备注**：记录权限表时，还要将数据级的权限数据放置到路由表中，以便页面能够根据此权限数据进行渲染。此处会利用到Vue Router的[路由元信息](https://router.vuejs.org/zh/guide/advanced/meta.html)。
+**备注**：记录权限表时，还要将数据级的权限数据放置到路由表中，以便页面能够根据此权限数据进行渲染。
+此处会利用到Vue Router的[路由元信息](https://router.vuejs.org/zh/guide/advanced/meta.html)。
 
 ### 实现
-约定后台返回权限表格式，修改`src/mock/index.js`如下：
-``` js {8,21-30}
+1. 约定后台返回权限表格式，修改`src/mock/index.js`如下：
+``` js {10,20-35}
 import Mock from 'mockjs'
 
 export default {
   mockData () {
-    Mock.mock('/api/user/login', {
-      'success': true,
-      'result': {
-        'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
-      }
-    })
-    Mock.mock('/api/user/register', {
-      'success': true,
-      'result': {}
-    })
-    Mock.mock('/api/user/info', {
-      'success': true,
+    const BASE_PATH = process.env.BASE_URL.endsWith('/')
+      ? process.env.BASE_URL.substr(0, process.env.BASE_URL.length - 1)
+      : process.env.BASE_URL
+    Mock.mock(BASE_PATH + '/api/user/login', {
+      'code': 1,
+      'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj',
       'result': {
         'id': '100001',
         'name': '林锦泽',
-        'roles': ['admin'],
-        'permissions': [
-          {
-            // 一个路径一个对象，路径名为完整路径名
-            path: '/index'
-          }, {
-            path: '/user/show',
-            // permission存储数据级权限控制
-            permission: ['modify', 'delete']
-          }
-        ]
-      },
-      'error': {
-        'code': 100000,
-        'message': '无效的token'
+        'roles': ['admin']
       }
+    })
+    Mock.mock(BASE_PATH + '/api/user/register', {
+      'code': 1
+    })
+    Mock.mock('/api/user/info', {
+      'code': 1,
+      'id': '100001',
+      'name': '林锦泽',
+      'roles': ['admin'],
+      'permissions': [
+        {
+          // 一个路径一个对象，路径名为完整路径名
+          path: '/index'
+        }, {
+          path: '/user/show',
+          // permission存储数据级权限控制
+          permission: ['modify', 'delete']
+        }
+      ]
     })
   }
 }
+
 ```
 
-编写导航钩子，载入权限表（从sessionStorage获取，若没有则发起请求获取），判断页面权限，并将数据级权限数据保存至router.meta。修改`src/router/index.js`
+2. 编写导航钩子，载入权限表（从vuex获取，若没有则发起请求获取），判断页面权限，并将数据级权限数据保存至router.meta。修改`src/router/index.js`
 ``` js {3,5,13-65}
 import Vue from 'vue'
+import axios from 'axios'
 import Router from 'vue-router'
 import whiteList from './whiteList'
 import staticRouter from './staticRouter'
-import {requestUserInfo} from '@/api/user'
 
 Vue.use(Router)
 
 const router = new Router({
+  base: process.env.BASE_URL,
   routes: staticRouter
 })
 
 /* 利用router.meta保存数据级权限 */
-const router_init = (permissions) => {
+const routerInit = (permissions) => {
   permissions.forEach(function (v) {
     let routeItem = router.match(v.path)
     if (routeItem) {
@@ -256,66 +271,115 @@ const router_init = (permissions) => {
 }
 
 /* 检测用户是否有权限访问页面 */
-const page_permission = (permissions, to_path, next) => {
-  let allow_page = false
+const pagePermission = (permissions, to, next) => {
+  let allowPage = false
   permissions.forEach(function (v) {
-    if (v.path === to_path) {
-      allow_page = true
+    if (v.path === to.path) {
+      allowPage = true
     }
   })
-  allow_page ? next() : next({path: '/error/401'})
+  allowPage ? next() : next({ path: '/error/403' })
 }
 
 /* 权限控制 */
 router.beforeEach((to, from, next) => {
-  /* 忽略错误页面的权限判断 */
-  if (to.meta.errorPage) {
-    return next()
-  }
+  /* 取消旧请求 */
+  const CancelToken = axios.CancelToken
+  router.app.$options.store.state.source.cancel && router.app.$options.store.state.source.cancel()
+  router.app.$options.store.commit('updateSource', { source: CancelToken.source() })
   /* 进入登录页面将注销用户信息 */
   if (to.path === '/login') {
-    sessionStorage.removeItem('user-info')
+    router.app.$options.store.commit('deleteUser')
     localStorage.removeItem('user-token')
   }
   /* 免登录页面 */
   if (whiteList.indexOf(to.fullPath) >= 0) {
     return next()
   }
-  let user_info = JSON.parse(sessionStorage.getItem('user-info'))
+  let permissions = router.app.$options.store.state.user.permissions
   /* 上次会话结束，重新获取用户信息 */
-  if (!user_info) {
-    requestUserInfo({}).then(user_info => {
-      const permissions = user_info.permissions || []
-      router_init(permissions)
-      page_permission(permissions, to.path, next)
+  if (!permissions.length) {
+    /* 获取用户信息和权限 */
+    router.app.$options.store.dispatch('requestUserInfo').then(() => {
+      permissions = router.app.$options.store.state.user.permissions || []
+      routerInit(permissions)
+      pagePermission(permissions, to, next)
     }).catch((err) => {
       /* 获取用户信息异常 */
       console.error(err)
+      return next({ path: '/error/500' })
     })
   } else {
     /* 已登录时判断页面权限 */
-    const permissions = user_info.permissions || []
-    page_permission(permissions, to.path, next)
+    pagePermission(permissions, to, next)
   }
 })
 
 export default router
+
 ```
 
 以上代码引入一个白名单机制，即指定页面不需要权限即可访问，创建以上代码引用的`src/router/whiteList.js`文件：
 ``` js
 /* 免登录白名单页面 */
 const whiteList = [
+  '/error403',
+  '/error404',
+  '/error500',
   '/login',
   '/register'
 ]
 
 export default whiteList
+
 ```
 
-另外需要修改接口函数，分离**登录**与**获取用户信息**接口，并在请求**获取用户信息**成功后，将信息存入`sessionStorage`，以便后续能快速获取用户名和权限表。修改`src/api/user.js`：
-``` js {14-18}
-import {request} from '../utils/request'
+3. 修改`src/store/index.js`，添加 user 用于存储用户信息
+```javascript {3,9-12,19-26,32-36}
+import Vue from 'vue'
+import Vuex from 'vuex'
+import { requestUserInfo } from '@/api/user'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    user: {
+      name: '',
+      permissions: []
+    },
+    source: {
+      token: null,
+      cancel: null
+    }
+  },
+  mutations: {
+    setUser (state, { user }) {
+      state.user.name = user.name
+      state.user.permissions = user.permissions
+    },
+    deleteUser (state) {
+      state.user.name = ''
+      state.user.permissions = []
+    },
+    updateSource (state, { source }) {
+      state.source = source
+    }
+  },
+  actions: {
+    requestUserInfo ({ commit }) {
+      return requestUserInfo().then(user => {
+        commit('setUser', { user })
+      })
+    }
+  }
+})
+
+```
+
+4. 另外需要修改接口函数，分离**登录**与**获取用户信息**接口。修改`src/api/user.js`：
+``` js {14-16}
+import { request } from '../utils/request'
 
 export const requestLogin = params => {
   return request('/api/user/login', params).then(data => {
@@ -329,15 +393,14 @@ export const requestRegister = params => {
 }
 
 export const requestUserInfo = params => {
-  return request('/api/user/info', params).then((data) => {
-    sessionStorage.setItem('user-info', JSON.stringify(data))
-    return data
-  })
+  return request('/api/user/info', params)
 }
+
 ```
 
 ::: tip 提示
-以上方法限制了用户访问的URL。但页面权限还会涉及菜单的显示，可以通过读取sessionStorage中用户的权限列表，利用`v-if`只显示有权限的菜单。后续讲述菜单栏时会进行说明。
+以上方法限制了用户访问的URL。但页面权限还会涉及菜单的显示，可以通过读取用户的权限列表，对比所有菜单，过滤出用户拥有权限的页面。
+后续讲述菜单栏时会进行说明。
 :::
 
 ## 数据权限控制
@@ -347,25 +410,26 @@ export const requestUserInfo = params => {
 ```
 
 ## 错误页面
-当用户输入未知的URL时，我们希望系统能跳转至指定的404页面。另外基于我们的权限控制设置，用户在没有权限访问页面时也需要跳转至指定页面。创建以下两个错误页面：
-1. 401用户无权限页面：`pages/error/AppError401.vue`
+当用户输入未知的URL时，我们希望系统能跳转至指定的404页面。另外基于我们的权限控制设置，用户在没有权限访问页面时也需要跳转至指定页面。创建以下3个错误页面：
+1. 403用户无权限页面：`src/views/error/AppError403.vue`
 ``` vue
 <template>
-  <div>401用户无权限</div>
+  <div>403用户无权限</div>
 </template>
 
 <script>
 export default {
-  name: 'AppError401'
+  name: 'AppError403'
 }
 </script>
 
 <style scoped>
 
 </style>
+
 ```
 
-2. 404找不到资源页面：`pages/error/AppError404.vue`
+2. 404找不到资源页面：`src/views/error/AppError404.vue`
 ``` vue
 <template>
   <div>404找不到资源</div>
@@ -377,19 +441,32 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>
+
+```
+
+3. 500服务器错误：`src/views/error/AppError500.vue`
+``` vue
+<template>
+  <div>500服务器错误</div>
+</template>
+
+<script>
+export default {
+  name: 'AppError500'
+}
+</script>
+
+<style scoped lang="scss">
+
+</style>
+
 ```
 
 修改路由配置`src/router/staticRouter.js`：
-``` js {4,5,24-34}
-import AppLogin from '@/pages/login/AppLogin'
-import AppRegister from '@/pages/login/AppRegister'
-import HelloWorld from '@/components/HelloWorld'
-import AppError401 from '@/pages/error/AppError401'
-import AppError404 from '@/pages/error/AppError404'
-
+``` js {18-30}
 /* 静态页面路由 */
 const staticRouter = [
   {
@@ -398,34 +475,33 @@ const staticRouter = [
   }, {
     path: '/login',
     name: '登录',
-    component: AppLogin
+    component: () => import('@/views/login/AppLogin')
   }, {
     path: '/register',
     name: '注册',
-    component: AppRegister
+    component: () => import('@/views/login/AppRegister')
   }, {
     path: '/index',
     name: '首页',
-    component: HelloWorld
+    component: () => import('@/components/HelloWorld')
   }, {
-    path: '/error/401',
-    name: '错误401',
-    meta: {errorPage: true},
-    component: AppError401
+    path: '/error/403',
+    name: '错误403',
+    component: () => import('@/views/error/AppError403')
+  }, {
+    path: '/error/500',
+    name: '错误500',
+    component: () => import('@/views/error/AppError500')
   }, {
     path: '*',
     name: '错误404',
-    meta: {errorPage: true},
-    component: AppError404
+    component: () => import('@/views/error/AppError404')
   }
 ]
 
 export default staticRouter
 
 ```
-::: tip 提示
-我们在上方编写导航钩子时，忽略了`to.meta.errorPage`页面的权限检测，因此错误页面都要加上此值。
-:::
 
 ## 流程示意图
 页面权限流程控制大体如下：

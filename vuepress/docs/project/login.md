@@ -4,7 +4,7 @@
 ## 后台接口
 修改`src/api/user.js`文件，提供登录与注册接口：
 ``` js
-import {request} from '../utils/request'
+import { request } from '../utils/request'
 
 export const requestLogin = params => {
   return request('/api/user/login', params)
@@ -13,6 +13,7 @@ export const requestLogin = params => {
 export const requestRegister = params => {
   return request('/api/user/register', params)
 }
+
 ```
 
 ## 模拟数据
@@ -22,18 +23,23 @@ import Mock from 'mockjs'
 
 export default {
   mockData () {
-    Mock.mock('/api/user/login', {
-      'success': true,
+    const BASE_PATH = process.env.BASE_URL.endsWith('/')
+      ? process.env.BASE_URL.substr(0, process.env.BASE_URL.length - 1)
+      : process.env.BASE_URL
+    Mock.mock(BASE_PATH + '/api/user/login', {
+      'code': 1,
       'result': {
-        'name': '林锦泽'
+        'id': '100001',
+        'name': '林锦泽',
+        'roles': ['admin']
       }
     })
-    Mock.mock('/api/user/register', {
-      'success': true,
-      'result': {}
+    Mock.mock(BASE_PATH + '/api/user/register', {
+      'code': 1
     })
   }
 }
+
 ```
 
 ## 编写页面
@@ -67,7 +73,7 @@ export default {
 
 
 ### 代码实现
-1. 创建`src/pages/login/AppLogin.vue`文件，编写登录页面：
+1. 创建`src/views/login/AppLogin.vue`文件，编写登录页面：
 ``` vue
 <template>
   <div class='page'>
@@ -106,7 +112,7 @@ export default {
 
 <script>
 import sha256 from 'crypto-js/sha256'
-import {requestLogin} from '@/api/user'
+import { requestLogin } from '@/api/user'
 
 export default {
   name: 'app-login',
@@ -120,10 +126,10 @@ export default {
       },
       rules: {
         account: [
-          {required: true, message: '请输入账号', trigger: 'blur'}
+          { required: true, message: '请输入账号', trigger: 'blur' }
         ],
         checkPass: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       },
       checked: false
@@ -134,7 +140,7 @@ export default {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.logining = true
-          const loginParams = {username: this.ruleForm.account, password: sha256(this.ruleForm.checkPass)}
+          const loginParams = { username: this.ruleForm.account, password: sha256(this.ruleForm.checkPass) }
           requestLogin(loginParams).then(data => {
             this.logining = false
             this.$message({
@@ -199,11 +205,11 @@ export default {
   border-radius: .5em;
   font-family: 'Source Sans Pro', sans-serif;
 }
-
 </style>
+
 ```
 
-2. 创建`src/pages/login/AppRegister.vue`文件，编写注册页面
+2. 创建`src/views/login/AppRegister.vue`文件，编写注册页面
 ``` vue
 <template>
   <div class='page'>
@@ -361,46 +367,58 @@ export default {
   border-radius: 50%;
   pointer-events: none;
 }
-
 </style>
+
 ```
 
 3. 取消`src/App.vue`自带的一些配置：
-``` vue {3,19,21}
+``` vue {3-8,14-35}
 <template>
   <div id="app">
-    <!-- 删除此行：<img src="./assets/logo.png"> -->
+    <!-- 删除以下行
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    -->
     <router-view/>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
+<style lang="scss">
+#app {
+  height: 100%;
 }
-</script>
-
-<style>
+/* 删除以下行
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* 删除此行：text-align: center; */
+  text-align: center;
   color: #2c3e50;
-  /* 删除此行：margin-top: 60px; */
 }
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+*/
 </style>
+
 ```
 
 ## 路由管理
-以上我们编写完了页面，但却没有告诉系统什么时候去显示这些页面。这时候我们就需要一个[路由管理器](https://router.vuejs.org/zh/)，来帮我们自动调用这些页面。比如当URL是`/login`时，自动调用`src/pages/login/AppLogin.vue`页面并显示。
+以上我们编写完了页面，但却没有告诉系统什么时候去显示这些页面。
+这时候我们就需要一个[路由管理器](https://router.vuejs.org/zh/)，来帮我们自动调用这些页面。
+比如当URL是`/login`时，自动调用`src/pages/login/AppLogin.vue`页面并显示。
 
 1. 创建一张静态路由表`src/router/staticRouter.js`：
 ``` js
-import AppLogin from '@/pages/login/AppLogin'
-import AppRegister from '@/pages/login/AppRegister'
-import HelloWorld from '@/components/HelloWorld'
-
 /* 静态页面路由 */
 const staticRouter = [
   {
@@ -409,22 +427,24 @@ const staticRouter = [
   }, {
     path: '/login',
     name: '登录',
-    component: AppLogin
+    component: () => import('@/views/login/AppLogin')
   }, {
     path: '/register',
     name: '注册',
-    component: AppRegister
+    component: () => import('@/views/login/AppRegister')
   }, {
     path: '/index',
     name: '首页',
-    component: HelloWorld
+    component: () => import('@/components/HelloWorld')
   }
 ]
 
 export default staticRouter
+
 ```
 ::: warning 警告
-当页面较多时，要使用[路由懒加载](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)，否则页面初始化时一次性加载太多组件会让页面初始化速度变得很慢。
+当页面较多时，要使用[路由懒加载](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)，
+否则页面初始化时一次性加载太多组件会让页面初始化速度变得很慢。本示例的导入方式便是懒加载的方式。
 :::
 
 2. 修改`src/router/index.js`，导入路由表（这边将路由表单独拿出来配置，避免后续修改路由逻辑时，路由表夹杂其中，混淆不清）：
@@ -436,10 +456,12 @@ import staticRouter from './staticRouter'
 Vue.use(Router)
 
 const router = new Router({
+  base: process.env.BASE_URL,
   routes: staticRouter
 })
 
 export default router
+
 ```
 
 3. 此时你已经配置好了路由，本地浏览器输入对应URL即可看到相关页面：
@@ -455,6 +477,10 @@ export default router
 ## 附录
 推荐一个网址，可以找到许多纯由html + css + js编写的有趣的特效页面：[https://codepen.io/](https://codepen.io/)，你可以把它引入到你的页面中。
 
-如我基于[yeti login](https://codepen.io/dsenneff/pen/2c3e5bc86b372d5424b00edaf4990173)，修改了登录页面（具体代码[见此](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/main/AppLogin.vue)）：
+如我基于[yeti login](https://codepen.io/dsenneff/pen/2c3e5bc86b372d5424b00edaf4990173)，
+修改了登录页面（具体代码[见此](https://github.com/linjinze999/vue-llplatform/tree/vue-cli3/llplatform/src/views/login/AppLogin.vue)）：
+::: warning 注意
+需执行`npm install gsap -S`。且最终代码已国际化。
+:::
 
 <img src="/assets/img/vue-llplatform/login-login2.gif" />
