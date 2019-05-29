@@ -49,16 +49,14 @@
 ``` vue
 <template>
   <el-row class="page">
-    <el-col :span="24">
+    <el-col :span="24" style="position: absolute;">
       <the-header :open-nav="openNav" @toggle-open="toggleOpen"></the-header>
     </el-col>
     <el-col :span="24" class="page-main">
       <the-sidebar :open-nav="openNav"></the-sidebar>
       <section class="page-content" :class="{'page-content-hide-aside': !openNav}">
-        <vue-scroll>
-          <the-main></the-main>
-          <the-footer></the-footer>
-        </vue-scroll>
+        <the-main></the-main>
+        <the-footer></the-footer>
       </section>
     </el-col>
   </el-row>
@@ -100,20 +98,19 @@ export default {
   width: 100%;
 
   .page-main {
-    display: flex;
-    position: absolute;
-    top: 60px;
-    bottom: 0;
+    box-sizing: border-box;
+    padding-top: 60px;
+    height: 100%;
 
     .page-content {
-      position: absolute;
-      left: 240px;
-      right: 0;
+      overflow: auto;
+      margin-left: 240px;
       height: 100%;
+      background-color: #EBEEF5;
     }
 
     .page-content-hide-aside {
-      left: 65px;
+      margin-left: 65px;
     }
   }
 }
@@ -252,130 +249,130 @@ export default {
 1. 我们通过遍历`router`页面表来显示菜单目录，因此要约定`src/router/staticRouter.js`的书写规范。
 ``` js
 {
-    path: '/',
-    component: TheLayout,
-    menu: true,              //菜单目录要添加此值，login等非菜单目录不需要
-    children: [              //一级菜单，children[0]即是链接，要指明名字、图标、组件
-      {
-        path: '/index',
-        name: '首页',
-        icon: 'el-icon-menu',
-        component: FuncHome
-      }
-    ]
-  }, {
-    path: '/',
-    component: TheLayout,
-    menu: true
-    name: '表单',              //多级菜单，在父path指明上级目录的名字和图标
-    icon: 'el-icon-tickets',
-    children: [
-      {
-        path: '/forms/base',
-        name: '基本表单',
-        component: FuncFormsBase
-      }, {
-        path: '/forms/edit',
-        name: '富文本编辑器',
-        component: FuncFormsEdit
-      }
-    ]
+  menu: true,                         // [menu: true]说明此项下children是菜单目录配置，其他非菜单页面（如error）等不需要此值
+  path: '/',                          // 嵌套路由路径为根路径
+  component: TheLayout,               // 嵌套路由组件为布局组件
+  name: 'layout',
+  children: [
+    {
+      path: '/index',                 // 一级菜单直接配置，新增title字段作为目录名（必需），icon作为图标类（非必需）
+      name: 'index',
+      title: '首页',
+      icon: 'el-icon-s-home',
+      component: PageHome
+    }, {
+      path: '/level1',                // 包含子菜单的配置组件使用一个空组件，子页面写入children；同理children可以一直嵌套下去
+      name: 'level1',
+      title: '一级目录',
+      icon: 'el-icon-s-operation',
+      component: TheLayoutEmpty,
+      children:[
+        {
+          path: '/level1/level2',     // 子页面正常写
+          name: 'level2',
+          title: '子页面',
+          component: PageLevel2
+        }, {
+          path: '/level1/level2/:id',
+          name: 'level4Detail',
+          title: '子页面详情',
+          component: PageLevel2Detail,
+          noMenu: true,              // 非目录页面指定[noMenu: true]，并使用[meta.menuPath]说明侧边栏要高亮选中哪个菜单
+          meta: {
+            menuPath: '/level1/level2'
+          }
+        }
+      ]
+    }
+  ]
 }
 ```
 2. 支持展开/收起（绑定父组件的`openNav`）。本项目利用了[Element 导航菜单](http://element-cn.eleme.io/#/zh-CN/component/menu)实现，该组件本身支持通过`collapse`属性控制展开/收起。
-3. 权限控制：有些页面用户是没有权限看到的。本项目读取存储在`sessionStorage`中的权限表，判断用户是否有权限看到某个页面，然后再进行显示。你可以通过设置某目录为不可点击状态来限制权限（`<el-menu-item disabled>`），或者干脆不要显示这个目录（`v-if`），在页面比较多的时候建议采用后者。本项目采用后者。
-4. 本项目支持三级菜单。
-5. 添加`<vue-scroll>`，当菜单过长时，使用自定义滚动条。
+3. 权限控制：有些页面用户是没有权限看到的。本项目将结合`staticRouter.js`中的菜单目录和存储在vuex中的用户权限列表`user.permissions`，过滤出用户有权限看到的页面，然后再进行显示。
+你也可以显示所有目录，再设置无权限目录为不可点击状态来限制权限（`<el-menu-item disabled>`）。但在页面比较多的时候建议和本项目一样不要显示所有目录。
+4. 本项目支持无限菜单。
 
 ### 实现
 1. 创建`src/views/layout/TheLayoutSidebar.vue`：
 ``` vue
 <template>
   <aside class="sidebar" :class="{'sidebar-hide': !openNav}">
-    <vue-scroll>
-      <el-menu :default-active="$route.path" class="sidebar-menu" :collapse="!openNav"
-               @select="menuSelect" :collapse-transition="false">
-        <template v-for="(level1, index1) in $router.options.routes" v-if="level1.menu">
-          <!-- 一级菜单 -->
-          <el-menu-item v-if="level1.children.length === 1 && permissions.includes(level1.children[0].path)"
-                        :index="level1.children[0].path" :key="index1">
-            <i :class="level1.children[0].icon"></i><span slot="title">{{level1.children[0].name}}</span>
-          </el-menu-item>
-          <el-submenu :index="index1+''" v-if="level1.children.length > 1" :key="index1+''">
-            <template slot="title"><i :class="level1.icon"></i><span slot="title">{{level1.name}}</span></template>
-            <template v-for="(level2, index2) in level1.children">
-              <!-- 二级菜单 -->
-              <el-menu-item v-if="!level2.children && permissions.includes(level2.path)"
-                            :index="level2.path" :key="index1+'-'+index2">
-                {{level2.name}}
-              </el-menu-item>
-              <el-submenu :index="index1+'-'+index2" v-if="level2.children" :key="index1+'-'+index2">
-                <!-- 三级菜单 -->
-                <template slot="title"><i :class="level2.icon"></i>{{level2.name}}</template>
-                <el-menu-item v-for="(level3, index3) in level2.children" :index="level3.path"
-                              :key="index1+'-'+index2+'-'+index3" v-if="permissions.includes(level3.path)">
-                  {{level3.name}}
-                </el-menu-item>
-              </el-submenu>
-            </template>
-          </el-submenu>
-        </template>
-      </el-menu>
-    </vue-scroll>
+    <el-menu :default-active="selectMenu" class="sidebar-menu" :collapse="!openNav"
+             :collapse-transition="false" :router="true">
+      <template v-for="menu in user.accessMenu">
+        <el-menu-item v-if="!menu.children" :key="menu.name" :index="menu.path">
+          <i :class="menu.icon" v-if="menu.icon"></i>
+          <span slot="title">{{menu.title}}</span>
+        </el-menu-item>
+        <the-submenu :key="menu.name" :subMenu="menu" v-else></the-submenu>
+      </template>
+    </el-menu>
   </aside>
 </template>
 
 <script>
+import TheLayoutSubSidebar from './TheLayoutSubSidebar'
+import { mapState } from 'vuex'
+
 export default {
   name: 'TheLayoutSidebar',
   props: ['openNav'],
-  data () {
-    let user_info = JSON.parse(sessionStorage.getItem('user-info')).permissions || []
-    let permissions = []
-    user_info.forEach(p => {
-      permissions.push(p.path)
-    })
-    return {
-      permissions
-    }
+  components: {
+    'the-submenu': TheLayoutSubSidebar
   },
-  methods: {
-    menuSelect (index) {
-      this.$router.push(index)
-    }
+  computed: {
+    selectMenu () {
+      return this.$route.meta.menuPath || this.$route.path
+    },
+    ...mapState(['user'])
   }
 }
 </script>
 
 <style scoped lang="scss">
 .sidebar {
+  float: left;
   width: 240px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  height: 100%;
   border-right: 1px solid #e6e6e6;
+  overflow: auto;
+
   .sidebar-menu {
     border: none;
     height: 100%;
   }
 }
+
 .sidebar-hide {
   width: 65px;
 }
 </style>
+
 ```
 
-2. 修改`src/router/staticRouter.js`：
-``` js {6-8,23-53}
-import TheLayout from '@/pages/layout/TheLayout'
-import AppLogin from '@/pages/login/AppLogin'
-import AppRegister from '@/pages/login/AppRegister'
-import AppError401 from '@/pages/error/AppError401'
-import AppError404 from '@/pages/error/AppError404'
-import FuncHome from '@/pages/functions/home/FuncHome'
-import FuncFormsBase from '@/pages/functions/forms/FuncFormsBase'
-import FuncFormsEdit from '@/pages/functions/forms/FuncFormsEdit'
+2. 创建`src/views/layout/TheLayoutSubSidebar.vue`：利用[函数式组件](https://cn.vuejs.org/v2/guide/render-function.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6)
+达到递归调用的目的，以便支持无限菜单
+``` vue
+<template functional>
+  <el-submenu v-on="listeners" :key="data.key" :index="data.key">
+    <template slot="title">
+      <i :class="data.attrs.subMenu.icon" v-if="data.attrs.subMenu.icon"></i>
+      <span slot="title">{{data.attrs.subMenu.title}}</span>
+    </template>
+    <template v-for="item in data.attrs.subMenu.children">
+      <el-menu-item v-if="!item.children" :key="item.name" :index="item.path">
+        <a-icon :type="item.icon" v-if="item.icon"/>
+        <span>{{item.title}}</span>
+      </el-menu-item>
+      <the-submenu v-else :subMenu="item" :key="item.name"></the-submenu>
+    </template>
+  </el-submenu>
+</template>
 
+```
+
+3. 修改`src/router/staticRouter.js`：
+``` js {15-66}
 /* 静态页面路由 */
 const staticRouter = [
   {
@@ -383,114 +380,245 @@ const staticRouter = [
     redirect: '/index'
   }, {
     path: '/login',
-    name: '登录',
-    component: AppLogin
+    name: 'login',
+    component: () => import('@/views/login/AppLogin')
   }, {
     path: '/register',
-    name: '注册',
-    component: AppRegister
+    name: 'register',
+    component: () => import('@/views/login/AppRegister')
   }, {
     path: '/',
-    component: TheLayout,
     menu: true,
+    name: 'layout',
+    component: () => import('@/views/layout/TheLayout'),
     children: [
       {
         path: '/index',
-        alias: '/home',
-        name: '首页',
-        icon: 'el-icon-menu',
-        component: FuncHome
-      }
-    ]
-  }, {
-    path: '/',
-    component: TheLayout,
-    menu: true,
-    name: '表单',
-    icon: 'el-icon-tickets',
-    children: [
-      {
-        path: '/forms/base',
-        name: '基本表单',
-        component: FuncFormsBase
+        name: 'index',
+        title: '首页',
+        icon: 'el-icon-s-home',
+        component: () => import('@/views/pages/PageHome')
       }, {
-        path: '/forms/edit',
-        name: '富文本编辑器',
-        component: FuncFormsEdit
+        path: '/level1',
+        name: 'level1',
+        title: '一级目录',
+        icon: 'el-icon-s-operation',
+        component: () => import('@/views/layout/TheLayoutEmpty'),
+        children: [
+          {
+            path: '/level1/level2',
+            name: 'level2',
+            title: '二级目录',
+            component: () => import('@/views/layout/TheLayoutEmpty'),
+            children: [
+              {
+                path: '/level1/level2/level3',
+                name: 'level3',
+                title: '三级目录',
+                component: () => import('@/views/layout/TheLayoutEmpty'),
+                children: [
+                  {
+                    path: '/level1/level2/level3/level4',
+                    name: 'level4',
+                    title: '四级目录',
+                    component: () => import('@/views/pages/PageLevel4')
+                  }, {
+                    path: '/level1/level2/level3/level4/:id',
+                    name: 'level4Detail',
+                    title: '四级目录详情',
+                    component: () => import('@/views/pages/PageLevel4Detail'),
+                    noMenu: true,
+                    meta: {
+                      menuPath: '/level1/level2/level3/level4'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   }, {
-    path: '/error/401',
-    name: '错误401',
-    component: AppError401
+    path: '/error/403',
+    name: 'error403',
+    component: () => import('@/views/error/AppError403')
+  }, {
+    path: '/error/500',
+    name: 'error500',
+    component: () => import('@/views/error/AppError500')
   }, {
     path: '*',
-    name: '错误404',
-    component: AppError404
+    name: 'error404',
+    component: () => import('@/views/error/AppError404')
   }
 ]
 
 export default staticRouter
-```
 
-3. 创建被引入的`src/pages/functions/home/FuncHome.vue`、`src/pages/functions/forms/FuncFormsBase.vue`、`src/pages/functions/forms/FuncFormsEdit.vue`三个不同的页面，显示不同的内容：
-``` vue {2,7}
+```
+::: warning 备注
+此时在系统初始化时生成的3个示例页面已无用，可删除：`src/components/HelloWorld.vue`、`src/views/Home.vue`、`src/views/About.vue`
+:::
+
+4. 创建要使用的三个页面：
+- `src/views/pages/PageHome.vue`页面：
+``` vue
 <template>
-  <div>首页/基础表单/富文本编辑器</div>
+  <div>
+    首页
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'FuncHome'
+  name: 'PageHome'
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
 </style>
+
+```
+- `src/views/pages/PageLevel4.vue`页面：
+``` vue
+<template>
+  <div>
+    <router-link to="/level1/level2/level3/level4/101">点击进入详情</router-link>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PageLevel4'
+}
+</script>
+
+<style scoped lang="scss">
+
+</style>
+
+```
+- `src/views/pages/PageLevel4Detail.vue`页面：
+``` vue
+<template>
+  <div>
+    详情页id：{{ id }}
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PageLevel4Detail',
+  data () {
+    return {
+      id: this.$route.params.id
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+
+</style>
+
 ```
 
-4. 修改模拟权限返回数据`src/mock/index.js`：
-``` js {23-31}
+5. 修改模拟权限返回数据`src/mock/index.js`：
+``` js {25-36}
 import Mock from 'mockjs'
 
 export default {
   mockData () {
-    Mock.mock('/api/user/login', {
-      'success': true,
-      'result': {
-        'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
-      }
-    })
-    Mock.mock('/api/user/register', {
-      'success': true,
-      'result': {
-        'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj'
-      }
-    })
-    Mock.mock('/api/user/info', {
-      'success': true,
+    const BASE_PATH = process.env.BASE_URL.endsWith('/')
+      ? process.env.BASE_URL.substr(0, process.env.BASE_URL.length - 1)
+      : process.env.BASE_URL
+    Mock.mock(BASE_PATH + '/api/user/login', {
+      'code': 1,
+      'token': 'fdsjfhjkdshfkldsajfjasdfbjsdkfhsdajfj',
       'result': {
         'id': '100001',
         'name': '林锦泽',
-        'roles': ['admin'],
-        'permissions': [
-          {
-            path: '/index'
-          }, {
-            path: '/forms/base'
-          }, {
-            path: '/forms/edit'
-          }
-        ]
-      },
-      'error': {
-        'code': 100000,
-        'message': '无效的token'
+        'roles': ['admin']
       }
+    })
+    Mock.mock(BASE_PATH + '/api/user/register', {
+      'code': 1
+    })
+    Mock.mock(BASE_PATH + '/api/user/info', {
+      'code': 1,
+      'id': '100001',
+      'name': '林锦泽',
+      'roles': ['admin'],
+      'permissions': [
+        {
+          // 一个路径一个对象，路径名为完整路径名
+          name: 'index'
+        }, {
+          name: 'level4'
+        }, {
+          name: 'level4Detail',
+          // permission存储数据级权限控制
+          permission: ['modify', 'delete']
+        }
+      ]
     })
   }
 }
+
 ```
+
+6. 另外需要修改接口函数，根据**静态路由表**和**用户权限列表**过滤出需要显示的菜单。修改`src/api/user.js`：
+``` js {2,16-44}
+import { request } from '../utils/request'
+import staticRouter from '@/router/staticRouter'
+
+export const requestLogin = params => {
+  return request('/api/user/login', params).then(data => {
+    localStorage.setItem('user-token', JSON.stringify(data.token))
+    return data
+  })
+}
+
+export const requestRegister = params => {
+  return request('/api/user/register', params)
+}
+
+export const requestUserInfo = params => {
+  return request('/api/user/info', params).then(res => {
+    // 过滤菜单
+    const filterUserMenu = function (menus, accessMenu) {
+      menus.forEach(function (m) {
+        if (m.noMenu) {
+          return
+        }
+        if (m.children) {
+          let subMenu = []
+          filterUserMenu(m.children, subMenu)
+          if (subMenu.length > 0) {
+            let _aMenu = Object.assign({}, m)
+            _aMenu.children = subMenu
+            accessMenu.push(_aMenu)
+          }
+        } else {
+          res.permissions.some(p => p.name === m.name) && accessMenu.push(m)
+        }
+      })
+    }
+    let accessMenu = []
+    let menus = []
+    staticRouter.forEach(r => {
+      menus = r.menu ? menus.concat(r.children) : menus
+    })
+    filterUserMenu(menus, accessMenu)
+    res.accessMenu = accessMenu
+    return res
+  })
+}
+
+```
+
 
 ## 主体
 ### 描述
@@ -502,31 +630,31 @@ export default {
 创建`src/views/layout/TheLayoutMain.vue`：
 ``` vue
 <template>
-  <el-main :style="mainStyle" class="page-sub-main">
+  <el-main class="page-sub-main">
     <transition name="fade" mode="out-in">
-      <router-view></router-view>
+      <router-view class="main-body"></router-view>
     </transition>
   </el-main>
 </template>
 
 <script>
 export default {
-  name: 'TheLayoutMain',
-  data () {
-    const winHeight = window.innerHeight - 100 + 'px'
-    return {
-      mainStyle: {
-        minHeight: winHeight
-      }
-    }
-  }
+  name: 'TheLayoutMain'
 }
 </script>
 
 <style scoped>
 .page-sub-main {
-  background-color: #EBEEF5;
   color: #666666;
+  min-height: 100%;
+  overflow: visible;
+  min-width: fit-content;
+}
+
+.main-body {
+  background-color: #ffffff;
+  padding: 20px;
+  min-height: 100%;
 }
 </style>
 
@@ -553,6 +681,7 @@ export default {
   line-height: 40px;
   text-align: center;
   border-top: 1px solid #e6e6e6;
+  background-color: #ffffff;
 }
 </style>
 

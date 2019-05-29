@@ -31,7 +31,7 @@
 现在用的比较多的是[jwt ](https://www.jianshu.com/p/576dbf44b2ae)，即登录时后台返回一个token，以后前端每次调用接口都带上此token，服务器获得请求后比较token从而进行权限控制。
 
 我们可以修改一下底层的网络请求封装`src/utils/request.js`，拦截`axios`请求，在`header`中加入`token`。
-若后台校验token失效，则可以约定返回**指定的错误码**，如`{type: 'login', url: '/#/login'}`，那么我们需要对响应进行处理（转向登录页面）：
+若后台校验token失效，则可以约定返回**指定的错误结果**，如`{type: 'login', url: '/#/login'}`，那么我们需要对响应进行处理（转向登录页面）：
 ``` js {4,,45-48,68-72}
 import axios from 'axios'
 import qs from 'qs'
@@ -231,10 +231,10 @@ export default {
       'roles': ['admin'],
       'permissions': [
         {
-          // 一个路径一个对象，路径名为完整路径名
-          path: '/index'
+          // 一个页面权限一个对象，name为静态路由表里面的name
+          name: '/index'
         }, {
-          path: '/user/show',
+          name: '/user/show',
           // permission存储数据级权限控制
           permission: ['modify', 'delete']
         }
@@ -246,7 +246,7 @@ export default {
 ```
 
 2. 编写导航钩子，载入权限表（从vuex获取，若没有则发起请求获取），判断页面权限，并将数据级权限数据保存至router.meta。修改`src/router/index.js`
-``` js {3,5,13-65}
+``` js {2,4,13-65}
 import Vue from 'vue'
 import axios from 'axios'
 import Router from 'vue-router'
@@ -263,7 +263,7 @@ const router = new Router({
 /* 利用router.meta保存数据级权限 */
 const routerInit = (permissions) => {
   permissions.forEach(function (v) {
-    let routeItem = router.match(v.path)
+    let routeItem = router.match(v.name)
     if (routeItem) {
       routeItem.meta.permission = v.permission ? v.permission : []
     }
@@ -272,11 +272,8 @@ const routerInit = (permissions) => {
 
 /* 检测用户是否有权限访问页面 */
 const pagePermission = (permissions, to, next) => {
-  let allowPage = false
-  permissions.forEach(function (v) {
-    if (v.path === to.path) {
-      allowPage = true
-    }
+  const allowPage = permissions.some(function (v) {
+    return v.name === to.name
   })
   allowPage ? next() : next({ path: '/error/403' })
 }
@@ -323,9 +320,9 @@ export default router
 ``` js
 /* 免登录白名单页面 */
 const whiteList = [
-  '/error403',
-  '/error404',
-  '/error500',
+  '/error/403',
+  '/error/404',
+  '/error/500',
   '/login',
   '/register'
 ]
@@ -335,7 +332,7 @@ export default whiteList
 ```
 
 3. 修改`src/store/index.js`，添加 user 用于存储用户信息
-```javascript {3,9-12,19-26,32-36}
+```javascript {3,9-13,20-29,35-39}
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { requestUserInfo } from '@/api/user'
@@ -346,7 +343,8 @@ export default new Vuex.Store({
   state: {
     user: {
       name: '',
-      permissions: []
+      permissions: [],
+      accessMenu: []
     },
     source: {
       token: null,
@@ -357,10 +355,12 @@ export default new Vuex.Store({
     setUser (state, { user }) {
       state.user.name = user.name
       state.user.permissions = user.permissions
+      state.user.accessMenu = user.accessMenu
     },
     deleteUser (state) {
       state.user.name = ''
       state.user.permissions = []
+      state.user.accessMenu = []
     },
     updateSource (state, { source }) {
       state.source = source

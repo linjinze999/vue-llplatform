@@ -24,7 +24,7 @@ export default {
       'roles': ['admin'],
       'permissions': [
         {
-          // 一个路径一个对象，路径名为完整路径名
+          // 一个页面权限一个对象，name为静态路由表里面的name
           name: 'index'
         }, {
           name: 'level4'
