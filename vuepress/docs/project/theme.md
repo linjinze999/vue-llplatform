@@ -237,7 +237,7 @@ Element官方实现了一个demo：[在线主题生成工具](https://elementui.
 
 ### （三）实现
 
-1. 创建`ThemePicker`组件（创建`src/components/ThemePicker/index.vue`文件）：
+1. 创建`ThemePicker`组件（创建`src/components/ThemePicker.vue`文件）：
 ``` vue
 <template>
   <el-color-picker
@@ -389,7 +389,7 @@ export default {
 以上源码基于[vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)的[ThemePicker组件](https://github.com/PanJiaChen/vue-element-admin/blob/master/src/components/ThemePicker/index.vue)作了相应修改：支持记住用户上次使用的主题；添加显示推荐颜色；修改颜色选择器的背景颜色。
 :::
 
-2. 在指定地方（`src/pages/layout/TheLayoutHeader.vue`）添加`ThemePicker`组件，提供主题切换功能：
+2. 在指定地方（`src/views/layout/TheLayoutHeader.vue`）添加`ThemePicker`组件，提供主题切换功能：
 ``` vue {4,9,14}
 <template>
   <div>

@@ -1,25 +1,33 @@
 # 构建发布
 本章节介绍如何构建发布系统。
 
+## 开发
+开发时使用的接口数据有两种方式：
+1. 本地mock：注释`.env.development`的`VUE_APP_BACK_END_URL`值
+2. 某一测试后台返回值：设置`.env.development`的`VUE_APP_BACK_END_URL`值为后台的url
+（你可以拷贝`.env.development`为`.env.development.local`，然后修改`.env.development.local`值，因为该文件优先级高于`.env.development`，且不会被git跟踪）
+
 ## 构建
 运行`npm run build`命令构建项目：
 ``` bash 
 npm run build
 
-> ...
-> Build complete.
+> vue-cli-service build
+⠙  Building for production...
 
-> Tip: built files are meant to be served over an HTTP server.
-> Opening index.html over file:// won't work.
+> ...
+
+>  DONE  Build complete. The dist directory is ready to be deployed.
+   INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
 ```
-运行结束后将在项目的`dist`目录下生成`index.html`文件和`static`文件夹，这就是我们项目构建的结果。
+运行结束后在项目的目录下会生成`dist`文件夹，这就是我们项目构建的结果。
 ::: warning 备注
-从最后的提示可以看到，直接打开`index.html`文件是不行的。因为默认配置中，资源的访问路径是`/`根目录，
+直接打开`dist/index.html`文件是无法正常访问页面的。因为默认配置中，资源的访问路径是`/`根目录，
 因此直接打开`index.html`会导致加载不到`static`资源文件。当你使用http服务的时候就不会有这个问题。
 
-你可以修改`config/index.js`中`build.assetsPublicPath`的`'/'`为`'./'`来解决这个问题。
-（这个方式可能导致你的`font-awesome`图标资源路径错误，解决办法见[issue 179](https://github.com/vuejs/vue-cli/issues/179)，
-如将`build/webpack.prod.conf.js`第22行的`extract: true`改为`false`）
+当你想在本地直接打开网页的时候，你可以修改`vue.config.js`中的`publicPath`为`'./'`来解决这个问题（或者直接修改`.env`配置文件的环境变量`VUE_APP_BASE_PATH=./`）。
+
+**注意**：Vue Router的`history`模式不支持系统路径被配置为相对路径，只有`hash`模式才可以。（[publicpath说明](https://cli.vuejs.org/zh/config/#publicpath)）
 :::
 
 ## 部署
