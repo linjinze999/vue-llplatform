@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     user: {
       name: '',
-      permissions: []
+      permissions: [],
+      accessMenu: []
     },
     source: {
       token: null,
@@ -19,10 +20,12 @@ export default new Vuex.Store({
     setUser (state, { user }) {
       state.user.name = user.name
       state.user.permissions = user.permissions
+      state.user.accessMenu = user.accessMenu
     },
     deleteUser (state) {
       state.user.name = ''
       state.user.permissions = []
+      state.user.accessMenu = []
     },
     updateSource (state, { source }) {
       state.source = source

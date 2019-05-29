@@ -1,8 +1,8 @@
 /* 免登录白名单页面 */
 const whiteList = [
-  '/error403',
-  '/error404',
-  '/error500',
+  '/error/403',
+  '/error/404',
+  '/error/500',
   '/login',
   '/register'
 ]

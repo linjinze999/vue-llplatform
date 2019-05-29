@@ -14,7 +14,7 @@ const router = new Router({
 /* 利用router.meta保存数据级权限 */
 const routerInit = (permissions) => {
   permissions.forEach(function (v) {
-    let routeItem = router.match(v.path)
+    let routeItem = router.match(v.name)
     if (routeItem) {
       routeItem.meta.permission = v.permission ? v.permission : []
     }
@@ -23,11 +23,8 @@ const routerInit = (permissions) => {
 
 /* 检测用户是否有权限访问页面 */
 const pagePermission = (permissions, to, next) => {
-  let allowPage = false
-  permissions.forEach(function (v) {
-    if (v.path === to.path) {
-      allowPage = true
-    }
+  const allowPage = permissions.some(function (v) {
+    return v.name === to.name
   })
   allowPage ? next() : next({ path: '/error/403' })
 }

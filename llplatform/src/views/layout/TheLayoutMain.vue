@@ -1,28 +1,28 @@
 <template>
-  <el-main :style="mainStyle" class="page-sub-main">
+  <el-main class="page-sub-main">
     <transition name="fade" mode="out-in">
-      <router-view></router-view>
+      <router-view class="main-body"></router-view>
     </transition>
   </el-main>
 </template>
 
 <script>
 export default {
-  name: 'TheLayoutMain',
-  data () {
-    const winHeight = window.innerHeight - 100 + 'px'
-    return {
-      mainStyle: {
-        minHeight: winHeight
-      }
-    }
-  }
+  name: 'TheLayoutMain'
 }
 </script>
 
 <style scoped>
 .page-sub-main {
-  background-color: #EBEEF5;
   color: #666666;
+  min-height: 100%;
+  overflow: visible;
+  min-width: fit-content;
+}
+
+.main-body {
+  background-color: #ffffff;
+  padding: 20px;
+  min-height: 100%;
 }
 </style>

@@ -1,15 +1,13 @@
 <template>
   <el-row class="page">
-    <el-col :span="24">
+    <el-col :span="24" style="position: absolute;">
       <the-header :open-nav="openNav" @toggle-open="toggleOpen"></the-header>
     </el-col>
     <el-col :span="24" class="page-main">
       <the-sidebar :open-nav="openNav"></the-sidebar>
       <section class="page-content" :class="{'page-content-hide-aside': !openNav}">
-        <vue-scroll>
-          <the-main></the-main>
-          <the-footer></the-footer>
-        </vue-scroll>
+        <the-main></the-main>
+        <the-footer></the-footer>
       </section>
     </el-col>
   </el-row>
@@ -51,20 +49,19 @@ export default {
   width: 100%;
 
   .page-main {
-    display: flex;
-    position: absolute;
-    top: 60px;
-    bottom: 0;
+    box-sizing: border-box;
+    padding-top: 60px;
+    height: 100%;
 
     .page-content {
-      position: absolute;
-      left: 240px;
-      right: 0;
+      overflow: auto;
+      margin-left: 240px;
       height: 100%;
+      background-color: #EBEEF5;
     }
 
     .page-content-hide-aside {
-      left: 65px;
+      margin-left: 65px;
     }
   }
 }

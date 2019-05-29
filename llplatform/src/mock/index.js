@@ -25,9 +25,11 @@ export default {
       'permissions': [
         {
           // 一个路径一个对象，路径名为完整路径名
-          path: '/index'
+          name: 'index'
         }, {
-          path: '/user/show',
+          name: 'level4'
+        }, {
+          name: 'level4Detail',
           // permission存储数据级权限控制
           permission: ['modify', 'delete']
         }
