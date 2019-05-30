@@ -43,11 +43,11 @@ module.exports = {
           },
           {
             text: '源码',
-            link: 'https://github.com/linjinze999/vue-llplatform/tree/master/llplatform',
+            link: 'https://github.com/linjinze999/vue-llplatform/tree/vue-cli3/llplatform',
           },
           {
             text: '在线预览',
-            link: '/preview/',
+            link: 'https://github.com/linjinze999/vue-llplatform/preview/',
           }
         ],
         sidebar: {

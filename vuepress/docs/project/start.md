@@ -34,8 +34,8 @@ vue ui
   - Vuex：√
   - CSS Pre-processors：√
   - Linter / Formatter：√
-  - Unit Testing：√
-  - E2E Testing：√
+  - Unit Testing：×
+  - E2E Testing：×
   - 使用配置文件：√
 4. 配置
   - Use history mode for router：×
@@ -44,8 +44,6 @@ vue ui
   - Pick additional lint features：
     - Lint on save：√
     - Lint and fix on commit：×
-  - Pick a unit testing solution：`Jest`
-  - Pick a E2E testing solution：`Nightwatch(Selenium-based)`
 ::: tip 提示
 各技术选型可以参考这篇文章：[Vue技术框架](https://linjinze999.github.io/learning/vue/technology.html)
 :::

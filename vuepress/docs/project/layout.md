@@ -293,6 +293,23 @@ export default {
 4. 本项目支持无限菜单。
 
 ### 实现
+创建一个空组件`src/views/layout/TheLayoutEmpty.vue`：
+``` vue
+<template>
+  <router-view></router-view>
+</template>
+
+<script>
+export default {
+  name: 'TheLayoutEmpty'
+}
+</script>
+
+<style scoped>
+
+</style>
+
+```
 1. 创建`src/views/layout/TheLayoutSidebar.vue`：
 ``` vue
 <template>
@@ -553,7 +570,7 @@ export default {
       'roles': ['admin'],
       'permissions': [
         {
-          // 一个路径一个对象，路径名为完整路径名
+          // 一个页面一个对象，以name确定（对应静态路由表里面的name）
           name: 'index'
         }, {
           name: 'level4'

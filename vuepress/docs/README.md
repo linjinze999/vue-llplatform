@@ -18,6 +18,7 @@ vue-llplatform，基于[vue](https://cn.vuejs.org/)、[element](http://element-c
 ## 准备
 本项目技术栈基于[ES6](http://es6.ruanyifeng.com/)、
 [vue](https://cn.vuejs.org/index.html)、[vue-router](https://router.vuejs.org/zh-cn/)、
+[vuex](https://vuex.vuejs.org/zh/)、
 [axios](https://github.com/axios/axios)和[element-ui](http://element-cn.eleme.io/#/zh-CN/)，
 所有的请求数据都使用[Mock.js](http://mockjs.com/)模拟，提前了解和学习这些知识会对使用本项目有很大的帮助。
 

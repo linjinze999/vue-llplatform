@@ -14,7 +14,7 @@ server {
   }
 
   location ${BASE_PATH} {
-      alias /usr/share/nginx/html/dist/;
+      alias /usr/share/nginx/html${BASE_PATH};
       index  ${BASE_PATH}index.html;
       #uri重定向至index.html
       try_files $uri $uri/ ${BASE_PATH}index.html;
