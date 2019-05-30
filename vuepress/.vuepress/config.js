@@ -71,25 +71,20 @@ module.exports = {
                     'project/language',
                     'project/theme',
                     'project/build',
-                    'project/store',
                   ]
                 },
                 {
-                  title: '优化',
+                  title: '进阶',
                   collapsable: false,
                   children: [
+                    'project/store',
                     'project/import',
+                    'project/performance',
                   ]
                 }
               ]
             },
-            {
-              title: '容器',
-              collapsable: true,
-              children: [
-                'docker/start'
-              ]
-            }
+            'docker/start'
           ],
 
         }

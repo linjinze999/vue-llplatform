@@ -20,48 +20,71 @@ const staticRouter = [
       {
         path: '/index',
         name: 'index',
-        title: '首页',
+        title: 'menu.home',
         icon: 'el-icon-s-home',
         component: () => import('@/views/pages/PageHome')
       }, {
-        path: '/level1',
-        name: 'level1',
-        title: '一级目录',
-        icon: 'el-icon-s-operation',
+        path: '/table',
+        name: 'table',
+        title: 'menu.table',
+        icon: 'el-icon-search',
+        component: () => import('@/views/pages/PageTable')
+      }, {
+        path: '/forms',
+        name: 'forms',
+        title: 'menu.form',
+        icon: 'el-icon-tickets',
         component: () => import('@/views/layout/TheLayoutEmpty'),
         children: [
           {
-            path: '/level1/level2',
-            name: 'level2',
-            title: '二级目录',
-            component: () => import('@/views/layout/TheLayoutEmpty'),
-            children: [
-              {
-                path: '/level1/level2/level3',
-                name: 'level3',
-                title: '三级目录',
-                component: () => import('@/views/layout/TheLayoutEmpty'),
-                children: [
-                  {
-                    path: '/level1/level2/level3/level4',
-                    name: 'level4',
-                    title: '四级目录',
-                    component: () => import('@/views/pages/PageLevel4')
-                  }, {
-                    path: '/level1/level2/level3/level4/:id',
-                    name: 'level4Detail',
-                    title: '四级目录详情',
-                    component: () => import('@/views/pages/PageLevel4Detail'),
-                    noMenu: true,
-                    meta: {
-                      menuPath: '/level1/level2/level3/level4'
-                    }
-                  }
-                ]
-              }
-            ]
+            path: '/forms/base',
+            name: 'formsBase',
+            title: 'menu.formBase',
+            component: () => import('@/views/pages/forms/PageFormsBase')
+          }, {
+            path: '/forms/edit',
+            name: 'formsEdit',
+            title: 'menu.richText',
+            component: () => import('@/views/pages/forms/PageFormsEdit')
           }
         ]
+      }, {
+        path: '/charts',
+        name: 'charts',
+        title: 'menu.chart',
+        icon: 'el-icon-picture',
+        component: () => import('@/views/pages/PageCharts')
+      }, {
+        path: '/drag',
+        name: 'drag',
+        title: 'menu.drag',
+        icon: 'el-icon-rank',
+        component: () => import('@/views/pages/PageDrag')
+      }, {
+        path: '/user',
+        name: 'user',
+        title: 'menu.settings',
+        icon: 'el-icon-setting',
+        component: () => import('@/views/layout/TheLayoutEmpty'),
+        children: [
+          {
+            path: '/user/password',
+            name: 'userPassword',
+            title: 'menu.modifyPass',
+            component: () => import('@/views/pages/user/PageUserPassword')
+          }, {
+            path: '/user/permissions',
+            name: 'userPermissions',
+            title: 'menu.permissions',
+            component: () => import('@/views/pages/user/PageUserPermissions')
+          }
+        ]
+      }, {
+        path: '/about',
+        name: 'about',
+        title: 'menu.about',
+        icon: 'el-icon-star-off',
+        component: () => import('@/views/pages/PageAbout')
       }
     ]
   }, {

@@ -36,14 +36,41 @@ npm run build
 ```
 server{
     listen 80;
-    server_name www.wxample.com;
+    server_name www.example.com;
     location / {
         alias /your/dist/path/;
+    }
+
+    location /api/ {
+        rewrite  ^/api/(.*)$ /$1 break;
+        # api请求代理到实际后台接口
+        proxy_pass   ${BACK_END_URL};
     }
 }
 ```
 ::: warning 备注
-如果你的网站涉及到子路径，如：`www.wxample.com/vue/`，请参考第一步中的备注，修改项目构建时的资源路径。
+如果你使用了Vue Router的`history`模式，还需要把所有的uri重定向到index.html页面
+（单页面应用固有问题，访问非index.html页面是找不到资源的。Uri路径形如a/b/c.html，需要重定向至index.hml页面，使用index.html自身的路由去解析加载。）
+```{14-17}
+server{
+    listen 80;
+    server_name www.example.com;
+    location / {
+        alias /your/dist/path/;
+    }
+
+    location /api/ {
+        rewrite  ^/api/(.*)$ /$1 break;
+        # api请求代理到实际后台接口
+        proxy_pass   ${BACK_END_URL};
+    }
+
+    location / {
+        # uri重定向至index.html
+        try_files $uri $uri/ index.html;
+    }
+}
+```
 :::
 
 ## 发布

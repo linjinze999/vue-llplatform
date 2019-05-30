@@ -5,9 +5,9 @@
       <template v-for="menu in user.accessMenu">
         <el-menu-item v-if="!menu.children" :key="menu.name" :index="menu.path">
           <i :class="menu.icon" v-if="menu.icon"></i>
-          <span slot="title">{{menu.title}}</span>
+          <span slot="title">{{ $t(menu.title) }}</span>
         </el-menu-item>
-        <the-submenu :key="menu.name" :subMenu="menu" v-else></the-submenu>
+        <the-submenu :key="menu.name" :subMenu="menu" v-else :i18n="i18n"></the-submenu>
       </template>
     </el-menu>
   </aside>
@@ -28,6 +28,11 @@ export default {
       return this.$route.meta.menuPath || this.$route.path
     },
     ...mapState(['user'])
+  },
+  methods: {
+    i18n: function (key) {
+      return this.$t(key)
+    }
   }
 }
 </script>
