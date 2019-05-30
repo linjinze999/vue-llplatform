@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>配置 | vue-llplatform</title>
+    <meta name="description" content="基于Vue + Element搭建一个后台管理项目">
+    <link rel="icon" href="/vue-llplatform/logo.png">
+  <link rel="manifest" href="/vue-llplatform/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/vue-llplatform/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/vue-llplatform/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <script src="/vue-llplatform/assets/js/article.js"></script>
+  <link rel="stylesheet" href="/vue-llplatform/assets/css/common.css">
+    
+    <link rel="preload" href="/vue-llplatform/assets/css/0.styles.e3a75752.css" as="style"><link rel="preload" href="/vue-llplatform/assets/js/app.522378a8.js" as="script"><link rel="preload" href="/vue-llplatform/assets/js/2.701637f4.js" as="script"><link rel="preload" href="/vue-llplatform/assets/js/10.3bffdf9d.js" as="script"><link rel="prefetch" href="/vue-llplatform/assets/js/11.d7a69a4b.js"><link rel="prefetch" href="/vue-llplatform/assets/js/12.36b9382a.js"><link rel="prefetch" href="/vue-llplatform/assets/js/13.3702cea8.js"><link rel="prefetch" href="/vue-llplatform/assets/js/14.f2c4afab.js"><link rel="prefetch" href="/vue-llplatform/assets/js/15.a419429a.js"><link rel="prefetch" href="/vue-llplatform/assets/js/16.be3a3854.js"><link rel="prefetch" href="/vue-llplatform/assets/js/17.514f4c3e.js"><link rel="prefetch" href="/vue-llplatform/assets/js/18.fd01193c.js"><link rel="prefetch" href="/vue-llplatform/assets/js/19.31ae9da3.js"><link rel="prefetch" href="/vue-llplatform/assets/js/20.fc59f1a4.js"><link rel="prefetch" href="/vue-llplatform/assets/js/21.c41279a9.js"><link rel="prefetch" href="/vue-llplatform/assets/js/22.09c3b1f5.js"><link rel="prefetch" href="/vue-llplatform/assets/js/3.c318f124.js"><link rel="prefetch" href="/vue-llplatform/assets/js/4.6769bf83.js"><link rel="prefetch" href="/vue-llplatform/assets/js/5.5d6614b0.js"><link rel="prefetch" href="/vue-llplatform/assets/js/6.a02d4cee.js"><link rel="prefetch" href="/vue-llplatform/assets/js/7.6e80b4da.js"><link rel="prefetch" href="/vue-llplatform/assets/js/8.55cc5f67.js"><link rel="prefetch" href="/vue-llplatform/assets/js/9.4670777b.js">
+    <link rel="stylesheet" href="/vue-llplatform/assets/css/0.styles.e3a75752.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-llplatform/" class="home-link router-link-active"><!----> <span class="site-name">vue-llplatform</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-llplatform/docs/" class="nav-link router-link-active">文档</a></div><div class="nav-item"><a href="https://github.com/linjinze999/vue-llplatform/tree/master/llplatform" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  源码
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="/vue-llplatform/preview/" class="nav-link">在线预览</a></div> <a href="https://github.com/linjinze999/vue-llplatform" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-llplatform/docs/" class="nav-link router-link-active">文档</a></div><div class="nav-item"><a href="https://github.com/linjinze999/vue-llplatform/tree/master/llplatform" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  源码
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="/vue-llplatform/preview/" class="nav-link">在线预览</a></div> <a href="https://github.com/linjinze999/vue-llplatform" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/vue-llplatform/docs/" class="sidebar-link">vue-llplatform</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>项目</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading open"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-llplatform/docs/project/start.html" class="sidebar-link">起步</a></li><li><a href="/vue-llplatform/docs/project/config.html" class="active sidebar-link">配置</a></li><li><a href="/vue-llplatform/docs/project/request.html" class="sidebar-link">网络请求</a></li><li><a href="/vue-llplatform/docs/project/login.html" class="sidebar-link">登录与注册</a></li><li><a href="/vue-llplatform/docs/project/permission.html" class="sidebar-link">权限控制</a></li><li><a href="/vue-llplatform/docs/project/layout.html" class="sidebar-link">页面布局</a></li><li><a href="/vue-llplatform/docs/project/pages.html" class="sidebar-link">功能页面</a></li><li><a href="/vue-llplatform/docs/project/language.html" class="sidebar-link">国际化</a></li><li><a href="/vue-llplatform/docs/project/theme.html" class="sidebar-link">主题定制</a></li><li><a href="/vue-llplatform/docs/project/build.html" class="sidebar-link">构建发布</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading"><span>进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-llplatform/docs/project/store.html" class="sidebar-link">状态管理</a></li><li><a href="/vue-llplatform/docs/project/import.html" class="sidebar-link">按需引入组件</a></li><li><a href="/vue-llplatform/docs/project/performance.html" class="sidebar-link">性能优化</a></li></ul></section></li></ul></section></li><li><a href="/vue-llplatform/docs/docker/start.html" class="sidebar-link">容器</a></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="配置"><a href="#配置" aria-hidden="true" class="header-anchor">#</a> 配置</h1> <p>本章节介绍配置初步的项目环境。</p> <h2 id="安装axios"><a href="#安装axios" aria-hidden="true" class="header-anchor">#</a> 安装axios</h2> <p>本项目使用<a href="https://github.com/axios/axios" target="_blank" rel="noopener noreferrer">axios<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>（基于 promise 的 HTTP 库）来做网络请求。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> axios hq -S
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>创建<code>src/utils/request.js</code>文件，后续我们将对request请求进行统一封装。</p> <h2 id="安装mockjs"><a href="#安装mockjs" aria-hidden="true" class="header-anchor">#</a> 安装mockjs</h2> <p>为了方便调试，本项目使用<a href="http://mockjs.com/" target="_blank" rel="noopener noreferrer">mockjs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>来拦截请求，生成模拟数据并返回给前端页面。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> mockjs -D
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>创建<code>src/mock/index.js</code>文件，用于模拟后台返回数据。</p> <h2 id="修改eslint"><a href="#修改eslint" aria-hidden="true" class="header-anchor">#</a> 修改eslint</h2> <p>项目默认使用了<a href="http://eslint.cn/docs/rules/" target="_blank" rel="noopener noreferrer">eslint<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>检测规则，有些规则可能跟我们的编程习惯不一样。
+你可以通过修改<code>.eslintrc.js</code>文件来修改检测规则。以下修改允许在正式环境进行日志打印，方便调试：</p> <div class="language-javascript line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><br><br><br><br><br><br><br><br></div><pre class="language-javascript"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  root<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  env<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    node<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'extends'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'plugin:vue/essential'</span><span class="token punctuation">,</span>
+    <span class="token string">'@vue/standard'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  rules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'no-console'</span><span class="token punctuation">:</span> <span class="token string">'off'</span><span class="token punctuation">,</span>
+    <span class="token string">'no-debugger'</span><span class="token punctuation">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'production'</span> <span class="token operator">?</span> <span class="token string">'error'</span> <span class="token punctuation">:</span> <span class="token string">'off'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  parserOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    parser<span class="token punctuation">:</span> <span class="token string">'babel-eslint'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>另外 vue eslint规则和idea冲突：如果你使用IDEA或webstorm编辑代码，会发现其内置规则与vue eslint规则有所冲突，需要我们修改一下。
+你可以直接右键<code>.eslintrc.js</code>文件，点击<code>Apply ESLint Code Style Rules</code>；也可以手动修改配置：</p> <ul><li>script、style标签缩进：IDEA会在vue文件的<code>script</code>标签里，为所有代码进行缩进，但vue eslint规则是不缩进，此时就会报错<code>expected indentation of 0 spaces but found 2</code>。可以修改IDEA或webstorm配置：File =&gt; Setting =&gt; Editor =&gt; Code Style =&gt; HTML =&gt; Other，找到 <code>Do not indent children of</code> 的选项，添加<code>script</code>和<code>style</code>标签就完美解决缩进问题。</li> <li>行末<code>;</code>符号和单引号问题：vue eslint不允许末尾有<code>;</code>，且字符串使用单引号。设置：File =&gt; Setting =&gt; Editor =&gt; Code Style =&gt; JavaScript =&gt; Punctuation，修改为<code>Don't use</code> semicolon to terminate statements <code>always</code>；Use <code>single</code> quotes <code>always</code>。</li> <li>函数后空格：vue eslint规定函数名与<code>()</code>之间需有空格。File =&gt; Setting =&gt; Editor =&gt; Code Style =&gt; JavaScript =&gt; Spaces，勾选<code>Function declaration parentheses</code>。</li> <li>缩进问题：vue eslint默认缩进两个空格。File =&gt; Setting =&gt; Editor =&gt; Code Style =&gt; CSS、HTML、JavaScript =&gt; Tabs and Indents，将三种语言的缩进设置改为：Tab size=2；Indent=2；Continuation indent=4</li> <li>不允许连续两个空行：vue eslint默认不允许有连续两个空行。File =&gt; Setting =&gt; Editor =&gt; Code Style =&gt; JavaScript =&gt; Blank Lines，设置Keep Maximum Blank Lines =&gt; In code：1。</li></ul> <h2 id="其他依赖"><a href="#其他依赖" aria-hidden="true" class="header-anchor">#</a> 其他依赖</h2> <ul><li><a href="https://github.com/brix/crypto-js" target="_blank" rel="noopener noreferrer">crypto-js<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>：加密算法，登录时使用</li> <li><code>common.scss</code>：创建一个统一的初始样式</li></ul> <p><strong>步骤如下</strong>：</p> <ol><li>安装依赖</li></ol> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> crypto-js -S
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="2"><li>创建统一样式文件 <code>src/assets/css/common.scss</code>：</li></ol> <div class="language-scss line-numbers-mode"><pre class="language-scss"><code><span class="token selector">html, body </span><span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">* </span><span class="token punctuation">{</span>
+  <span class="token property">box-sizing</span><span class="token punctuation">:</span> border-box<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Chrome 滚动条优化 */</span>
+<span class="token selector">* </span><span class="token punctuation">{</span>
+  <span class="token selector"><span class="token parent important">&amp;</span>::-webkit-scrollbar </span><span class="token punctuation">{</span> <span class="token comment">/*滚动条整体样式*/</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span> <span class="token comment">/*高宽分别对应横竖滚动条的尺寸*/</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector"><span class="token parent important">&amp;</span>::-webkit-scrollbar-thumb </span><span class="token punctuation">{</span> <span class="token comment">/*滚动条里面小方块*/</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">hsla</span><span class="token punctuation">(</span>220<span class="token punctuation">,</span> 4%<span class="token punctuation">,</span> 58%<span class="token punctuation">,</span> .3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">transition</span><span class="token punctuation">:</span> background-color .3s<span class="token punctuation">;</span>
+
+    <span class="token selector"><span class="token parent important">&amp;</span>:hover </span><span class="token punctuation">{</span>
+      <span class="token property">background</span><span class="token punctuation">:</span> #bbb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector"><span class="token parent important">&amp;</span>::-webkit-scrollbar-track </span><span class="token punctuation">{</span> <span class="token comment">/*滚动条里面轨道*/</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #EDEDED<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><h2 id="目录结构"><a href="#目录结构" aria-hidden="true" class="header-anchor">#</a> 目录结构</h2> <ol><li>创建以下目录/文件：</li></ol> <ul><li><code>src/api</code>目录：用于编写后台请求js</li> <li><code>src/assets/css</code>目录：用于存放公共css文件</li> <li><code>src/assets/img</code>目录：用于存放公共图片</li> <li><code>src/mock</code>目录：用于编写模拟后台数据</li> <li><code>src/router</code>目录：路由管理（将<code>src/router.js</code>移动为<code>src/router/index.js</code>）</li> <li><code>src/store</code>目录：状态管理（将<code>src/store.js</code>移动为<code>src/store/index.js</code>）</li> <li><code>src/utils</code>目录：用于存放公共工具文件</li> <li><code>.env</code>文件：项目全局环境变量</li> <li><code>.env.development</code>文件：项目开发环境变量</li> <li><code>.env.development.local</code>文件：项目开发环境变量（本地）</li> <li><code>.env.production</code>文件：项目生产环境变量</li> <li><code>vue.config.js</code>文件：Vue-cli配置文件</li></ul> <p>整体目录结构如下：</p> <div class="language- line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><div class="highlighted"> </div><br><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br><br><br><br><div class="highlighted"> </div><div class="highlighted"> </div><br><br><br><br><br><br><div class="highlighted"> </div><br><br></div><pre class="language-text"><code>llplatform
+|— dist                 // 构建产物
+|— node_modules         // npm依赖包
+|— public               // 第三方不打包资源
+|— src                  // 源代码
+|   |— api              // 接口处理（自行创建）
+|   |— assets           // 资源文件
+|   |— components       // 全局公用组件
+|   |— router           // 路由规则（原文件router.js，建立文件夹管理）
+|   |— store            // 状态管理（原文件store.js，建立文件夹管理）
+|   |— views            // 所有视图页面
+|   |— utils            // 公共工具（自行创建）
+|   |— App.vue          // 入口页面
+|   └─ main.js          // 入口 加载组件 初始化等
+|— tests                // 自动化测试
+|— .browserslistrc      //浏览器兼容配置
+|— .editorconfig        //编辑器风格配置
+|— .env.development     //开发环境变量配置（自行创建）
+|— .env.production      //生产环境变量配置（自行创建）
+|— .eslintrc.js         //ESLint规则配置
+|— .gitignore           //git忽略配置
+|— babel.config.js      //babel配置
+|— package.json         //npm配置
+|— package-lock.json    //npm依赖包锁定
+|— postcss.config.js    //webpack的css-loader配置
+|— vue.config.js        //vue-cli配置（自行创建）
+└─ README.md            //项目简介
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><ol start="2"><li>修改以下5个文件：</li></ol> <ul><li><code>src/router/index.js</code>文件：</li></ul> <div class="language-javascript line-numbers-mode"><div class="highlight-lines"><br><br><div class="highlighted"> </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><br><br><br><br><br><br></div><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Router <span class="token keyword">from</span> <span class="token string">'vue-router'</span>
+<span class="token keyword">import</span> Home <span class="token keyword">from</span> <span class="token string">'../views/Home.vue'</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Router<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  routes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">'home'</span><span class="token punctuation">,</span>
+      component<span class="token punctuation">:</span> Home
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> <span class="token string">'/about'</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">'about'</span><span class="token punctuation">,</span>
+      <span class="token comment">// route level code-splitting</span>
+      <span class="token comment">// this generates a separate chunk (about.[hash].js) for this route</span>
+      <span class="token comment">// which is lazy-loaded when the route is visited.</span>
+      <span class="token function-variable function">component</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="token string">'../views/About.vue'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><ul><li><code>src/store/index.js</code>文件：</li></ul> <div class="language-javascript line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><br><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br><br><br><br><br><br><br><br><br></div><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    source<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      token<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+      cancel<span class="token punctuation">:</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li><code>src/main.js</code>文件：</li></ul> <div class="language-javascript line-numbers-mode"><div class="highlight-lines"><br><br><div class="highlighted"> </div><div class="highlighted"> </div><br><br><div class="highlighted"> </div><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router/index'</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store/index'</span>
+<span class="token keyword">import</span> ElementUI <span class="token keyword">from</span> <span class="token string">'element-ui'</span>
+<span class="token keyword">import</span> <span class="token string">'element-ui/lib/theme-chalk/index.css'</span>
+<span class="token keyword">import</span> <span class="token string">'./assets/css/common.scss'</span>
+
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ElementUI<span class="token punctuation">)</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  router<span class="token punctuation">,</span>
+  store<span class="token punctuation">,</span>
+  <span class="token function-variable function">render</span><span class="token punctuation">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><ul><li><code>.env</code>文件：全局环境变量，此处设置了全局根路径（多数项目为<code>/</code>路径，部分项目包含子路径，如<code>/preview/</code>）</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code># 项目根路径
+VUE_APP_BASE_PATH=/
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul><li><code>vue.config.js</code>文件：vue-cli配置文件，此处设置了一些路径别名和利用<code>VUE_APP_BASE_PATH</code>环境变量设置系统路径</li></ul> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">function</span> <span class="token function">resolve</span> <span class="token punctuation">(</span><span class="token parameter">dir</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> dir<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">chainWebpack</span><span class="token punctuation">:</span> <span class="token parameter">config</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>resolve<span class="token punctuation">.</span>alias
+      <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'@'</span><span class="token punctuation">,</span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 设置路径别名</span>
+      <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'@pages'</span><span class="token punctuation">,</span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'src/views/pages'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 设置路径别名</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  publicPath<span class="token punctuation">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_BASE_PATH</span> <span class="token operator">||</span> <span class="token string">'/'</span> <span class="token comment">// 系统路径</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/linjinze999/vue-llplatform/edit/master/vuepress/docs/project/config.md" target="_blank" rel="noopener noreferrer">帮我改进此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2019-5-28 16:58:04</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/vue-llplatform/docs/project/start.html" class="prev">
+          起步
+        </a></span> <span class="next"><a href="/vue-llplatform/docs/project/request.html">
+          网络请求
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-llplatform/assets/js/app.522378a8.js" defer></script><script src="/vue-llplatform/assets/js/2.701637f4.js" defer></script><script src="/vue-llplatform/assets/js/10.3bffdf9d.js" defer></script>
+  </body>
+</html>

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0c739f"],{"505c":function(n,e,c){"use strict";c.r(e);var r=function(){var n=this,e=n.$createElement,c=n._self._c||e;return c("div",[n._v("404找不到资源")])},t=[],a={name:"AppError404"},u=a,o=c("2877"),p=Object(o["a"])(u,r,t,!1,null,"0127ab76",null);e["default"]=p.exports}}]);
-//# sourceMappingURL=chunk-2d0c739f.a813b529.js.map

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0e1c0d"],{"7c7b":function(e,n,c){"use strict";c.r(n);var r=function(){var e=this,n=e.$createElement,c=e._self._c||n;return c("div",[e._v("500服务器错误")])},t=[],a={name:"AppError500"},u=a,o=c("2877"),p=Object(o["a"])(u,r,t,!1,null,"1a0092b6",null);n["default"]=p.exports}}]);
-//# sourceMappingURL=chunk-2d0e1c0d.9207915e.js.map

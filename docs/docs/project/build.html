@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>构建发布 | vue-llplatform</title>
+    <meta name="description" content="基于Vue + Element搭建一个后台管理项目">
+    <link rel="icon" href="/vue-llplatform/logo.png">
+  <link rel="manifest" href="/vue-llplatform/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/vue-llplatform/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/vue-llplatform/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <script src="/vue-llplatform/assets/js/article.js"></script>
+  <link rel="stylesheet" href="/vue-llplatform/assets/css/common.css">
+    
+    <link rel="preload" href="/vue-llplatform/assets/css/0.styles.e3a75752.css" as="style"><link rel="preload" href="/vue-llplatform/assets/js/app.522378a8.js" as="script"><link rel="preload" href="/vue-llplatform/assets/js/2.701637f4.js" as="script"><link rel="preload" href="/vue-llplatform/assets/js/9.4670777b.js" as="script"><link rel="prefetch" href="/vue-llplatform/assets/js/10.3bffdf9d.js"><link rel="prefetch" href="/vue-llplatform/assets/js/11.d7a69a4b.js"><link rel="prefetch" href="/vue-llplatform/assets/js/12.36b9382a.js"><link rel="prefetch" href="/vue-llplatform/assets/js/13.3702cea8.js"><link rel="prefetch" href="/vue-llplatform/assets/js/14.f2c4afab.js"><link rel="prefetch" href="/vue-llplatform/assets/js/15.a419429a.js"><link rel="prefetch" href="/vue-llplatform/assets/js/16.be3a3854.js"><link rel="prefetch" href="/vue-llplatform/assets/js/17.514f4c3e.js"><link rel="prefetch" href="/vue-llplatform/assets/js/18.fd01193c.js"><link rel="prefetch" href="/vue-llplatform/assets/js/19.31ae9da3.js"><link rel="prefetch" href="/vue-llplatform/assets/js/20.fc59f1a4.js"><link rel="prefetch" href="/vue-llplatform/assets/js/21.c41279a9.js"><link rel="prefetch" href="/vue-llplatform/assets/js/22.09c3b1f5.js"><link rel="prefetch" href="/vue-llplatform/assets/js/3.c318f124.js"><link rel="prefetch" href="/vue-llplatform/assets/js/4.6769bf83.js"><link rel="prefetch" href="/vue-llplatform/assets/js/5.5d6614b0.js"><link rel="prefetch" href="/vue-llplatform/assets/js/6.a02d4cee.js"><link rel="prefetch" href="/vue-llplatform/assets/js/7.6e80b4da.js"><link rel="prefetch" href="/vue-llplatform/assets/js/8.55cc5f67.js">
+    <link rel="stylesheet" href="/vue-llplatform/assets/css/0.styles.e3a75752.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-llplatform/" class="home-link router-link-active"><!----> <span class="site-name">vue-llplatform</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-llplatform/docs/" class="nav-link router-link-active">文档</a></div><div class="nav-item"><a href="https://github.com/linjinze999/vue-llplatform/tree/master/llplatform" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  源码
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="/vue-llplatform/preview/" class="nav-link">在线预览</a></div> <a href="https://github.com/linjinze999/vue-llplatform" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-llplatform/docs/" class="nav-link router-link-active">文档</a></div><div class="nav-item"><a href="https://github.com/linjinze999/vue-llplatform/tree/master/llplatform" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  源码
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><div class="nav-item"><a href="/vue-llplatform/preview/" class="nav-link">在线预览</a></div> <a href="https://github.com/linjinze999/vue-llplatform" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/vue-llplatform/docs/" class="sidebar-link">vue-llplatform</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>项目</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading open"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-llplatform/docs/project/start.html" class="sidebar-link">起步</a></li><li><a href="/vue-llplatform/docs/project/config.html" class="sidebar-link">配置</a></li><li><a href="/vue-llplatform/docs/project/request.html" class="sidebar-link">网络请求</a></li><li><a href="/vue-llplatform/docs/project/login.html" class="sidebar-link">登录与注册</a></li><li><a href="/vue-llplatform/docs/project/permission.html" class="sidebar-link">权限控制</a></li><li><a href="/vue-llplatform/docs/project/layout.html" class="sidebar-link">页面布局</a></li><li><a href="/vue-llplatform/docs/project/pages.html" class="sidebar-link">功能页面</a></li><li><a href="/vue-llplatform/docs/project/language.html" class="sidebar-link">国际化</a></li><li><a href="/vue-llplatform/docs/project/theme.html" class="sidebar-link">主题定制</a></li><li><a href="/vue-llplatform/docs/project/build.html" class="active sidebar-link">构建发布</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><p class="sidebar-heading"><span>进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-llplatform/docs/project/store.html" class="sidebar-link">状态管理</a></li><li><a href="/vue-llplatform/docs/project/import.html" class="sidebar-link">按需引入组件</a></li><li><a href="/vue-llplatform/docs/project/performance.html" class="sidebar-link">性能优化</a></li></ul></section></li></ul></section></li><li><a href="/vue-llplatform/docs/docker/start.html" class="sidebar-link">容器</a></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="构建发布"><a href="#构建发布" aria-hidden="true" class="header-anchor">#</a> 构建发布</h1> <p>本章节介绍如何构建发布系统。</p> <h2 id="开发"><a href="#开发" aria-hidden="true" class="header-anchor">#</a> 开发</h2> <p>开发时使用的接口数据有两种方式：</p> <ol><li>本地mock：注释<code>.env.development</code>的<code>VUE_APP_BACK_END_URL</code>值</li> <li>某一测试后台返回值：设置<code>.env.development</code>的<code>VUE_APP_BACK_END_URL</code>值为后台的url
+（你可以拷贝<code>.env.development</code>为<code>.env.development.local</code>，然后修改<code>.env.development.local</code>值，因为该文件优先级高于<code>.env.development</code>，且不会被git跟踪）</li></ol> <h2 id="构建"><a href="#构建" aria-hidden="true" class="header-anchor">#</a> 构建</h2> <p>运行<code>npm run build</code>命令构建项目：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> run build
+
+<span class="token operator">&gt;</span> vue-cli-service build
+⠙  Building <span class="token keyword">for</span> production<span class="token punctuation">..</span>.
+
+<span class="token operator">&gt;</span> <span class="token punctuation">..</span>.
+
+<span class="token operator">&gt;</span>  DONE  Build complete. The dist directory is ready to be deployed.
+   INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>运行结束后在项目的目录下会生成<code>dist</code>文件夹，这就是我们项目构建的结果。</p> <div class="warning custom-block"><p class="custom-block-title">备注</p> <p>直接打开<code>dist/index.html</code>文件是无法正常访问页面的。因为默认配置中，资源的访问路径是<code>/</code>根目录，
+因此直接打开<code>index.html</code>会导致加载不到<code>static</code>资源文件。当你使用http服务的时候就不会有这个问题。</p> <p>当你想在本地直接打开网页的时候，你可以修改<code>vue.config.js</code>中的<code>publicPath</code>为<code>'./'</code>来解决这个问题（或者直接修改<code>.env</code>配置文件的环境变量<code>VUE_APP_BASE_PATH=./</code>）。</p> <p><strong>注意</strong>：Vue Router的<code>history</code>模式不支持系统路径被配置为相对路径，只有<code>hash</code>模式才可以。（<a href="https://cli.vuejs.org/zh/config/#publicpath" target="_blank" rel="noopener noreferrer">publicpath说明<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>）</p></div> <h2 id="部署"><a href="#部署" aria-hidden="true" class="header-anchor">#</a> 部署</h2> <ol><li>拷贝根目录下的<code>dist</code>目录到服务器的<code>/your/dist/path/</code>目录；</li> <li>使用<code>apache2</code>或<code>nginx</code>代理访问静态资源文件。以<code>nginx</code>为例：</li></ol> <div class="language- line-numbers-mode"><pre class="language-text"><code>server{
+    listen 80;
+    server_name www.example.com;
+    location / {
+        alias /your/dist/path/;
+    }
+
+    location /api/ {
+        rewrite  ^/api/(.*)$ /$1 break;
+        # api请求代理到实际后台接口
+        proxy_pass   ${BACK_END_URL};
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><div class="warning custom-block"><p class="custom-block-title">备注</p> <p>如果你使用了Vue Router的<code>history</code>模式，还需要把所有的uri重定向到index.html页面
+（单页面应用固有问题，访问非index.html页面是找不到资源的。Uri路径形如a/b/c.html，需要重定向至index.hml页面，使用index.html自身的路由去解析加载。）</p> <div class="language- line-numbers-mode"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br></div><pre class="language-text"><code>server{
+    listen 80;
+    server_name www.example.com;
+    location / {
+        alias /your/dist/path/;
+    }
+
+    location /api/ {
+        rewrite  ^/api/(.*)$ /$1 break;
+        # api请求代理到实际后台接口
+        proxy_pass   ${BACK_END_URL};
+    }
+
+    location / {
+        # uri重定向至index.html
+        try_files $uri $uri/ index.html;
+    }
+}
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div></div> <h2 id="发布"><a href="#发布" aria-hidden="true" class="header-anchor">#</a> 发布</h2> <p>如果你经常需要将代码发布到仓库中，可能你不想重复执行发布命令，如：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">git</span> <span class="token function">add</span> <span class="token keyword">.</span>
+<span class="token function">git</span> commit
+<span class="token function">git</span> pull
+<span class="token function">git</span> push origin master
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>你可以创建<code>script/release.sh</code>脚本，将重复的发布命令写在里面。然后在<code>package.json</code>中，
+添加<code>scripts.release: &quot;bash script/release.sh&quot;</code>。之后你就可以直接执行<code>npm run release</code>来发布了。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/linjinze999/vue-llplatform/edit/master/vuepress/docs/project/build.md" target="_blank" rel="noopener noreferrer">帮我改进此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2019-5-30 11:55:14</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/vue-llplatform/docs/project/theme.html" class="prev">
+          主题定制
+        </a></span> <span class="next"><a href="/vue-llplatform/docs/project/store.html">
+          状态管理
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-llplatform/assets/js/app.522378a8.js" defer></script><script src="/vue-llplatform/assets/js/2.701637f4.js" defer></script><script src="/vue-llplatform/assets/js/9.4670777b.js" defer></script>
+  </body>
+</html>
