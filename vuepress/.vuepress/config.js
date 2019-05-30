@@ -47,7 +47,7 @@ module.exports = {
           },
           {
             text: '在线预览',
-            link: 'https://github.com/linjinze999/vue-llplatform/preview/',
+            link: 'https://linjinze999.github.io/vue-llplatform/preview/#/login',
           }
         ],
         sidebar: {
