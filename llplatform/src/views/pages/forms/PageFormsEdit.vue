@@ -5,9 +5,9 @@
       <a style="color: #409eff"
          href="https://www.awesomes.cn/repo/surmon-china/vue-quill-editor">vue-quill-editor</a><br/>
       {{$t('else.example')}}
-      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue"
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/forms/PageFormsEdit.vue"
          style="color: #409eff" target="_blank">
-        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue
+        https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/forms/PageFormsEdit.vue
       </a>
     </el-card>
     <br/>

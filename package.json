@@ -10,7 +10,8 @@
   "scripts": {
     "docs:dev": "vuepress dev vuepress",
     "docs:dev2": "vuepress dev vuepress --host 192.168.116.136",
-    "docs:build": "vuepress build vuepress"
+    "docs:build": "vuepress build vuepress",
+    "build": "npm run docs:build && cd llplatform && npm run build"
   },
   "repository": {
     "type": "git",

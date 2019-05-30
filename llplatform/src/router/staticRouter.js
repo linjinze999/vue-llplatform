@@ -55,6 +55,30 @@ const staticRouter = [
         icon: 'el-icon-picture',
         component: () => import('@/views/pages/PageCharts')
       }, {
+        path: '/errorDemo',
+        name: 'errorDemo',
+        title: 'menu.error',
+        icon: 'el-icon-error',
+        component: () => import('@/views/layout/TheLayoutEmpty'),
+        children: [
+          {
+            path: '/errorDemo/403',
+            name: 'errorDemo403',
+            title: 'error.error403',
+            component: () => import('@/views/error/AppError403')
+          }, {
+            path: '/errorDemo/404',
+            name: 'errorDemo404',
+            title: 'error.error404',
+            component: () => import('@/views/error/AppError404')
+          }, {
+            path: '/errorDemo/500',
+            name: 'errorDemo500',
+            title: 'error.error500',
+            component: () => import('@/views/error/AppError500')
+          }
+        ]
+      }, {
         path: '/drag',
         name: 'drag',
         title: 'menu.drag',

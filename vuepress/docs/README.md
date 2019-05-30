@@ -13,7 +13,7 @@ vue-llplatform，基于[vue](https://cn.vuejs.org/)、[element](http://element-c
 
 源码地址：[https://github.com/linjinze999/vue-llplatform](https://github.com/linjinze999/vue-llplatform)
 
-在线预览：[https://linjinze999.github.io/preview/vue-llplatform/#/login](https://linjinze999.github.io/preview/vue-llplatform/#/login)
+在线预览：[https://linjinze999.github.io/vue-llplatform/preview/#/login](https://linjinze999.github.io/vue-llplatform/preview/#/login)
 
 ## 准备
 本项目技术栈基于[ES6](http://es6.ruanyifeng.com/)、

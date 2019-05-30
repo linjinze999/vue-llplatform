@@ -4,9 +4,9 @@
       {{$t('else.learn')}}
       <a style="color: #409eff" href="http://element-cn.eleme.io/#/zh-CN/component/table">Element Table</a><br/>
       {{$t('else.example')}}
-      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue"
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageTable.vue"
          style="color: #409eff" target="_blank">
-        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue
+        https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageTable.vue
       </a>
     </el-card>
     <el-card style="margin-top: 20px;">

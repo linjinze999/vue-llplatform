@@ -30,9 +30,9 @@
     <div>
       <h4>{{$t('about.preview')}}</h4>
       <p>
-        <a style="color: #409eff" href="https://linjinze999.github.io/preview/vue-llplatform/#/login"
+        <a style="color: #409eff" href="https://linjinze999.github.io/vue-llplatform/preview/#/login"
            target="_blank">
-          https://linjinze999.github.io/preview/vue-llplatform/#/login
+          https://linjinze999.github.io/vue-llplatform/preview/#/login
         </a>
       </p>
     </div>

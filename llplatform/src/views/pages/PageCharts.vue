@@ -4,9 +4,9 @@
       {{$t('else.learn')}}
       <a href="https://v-charts.js.org/#/" style="color: #409eff">v-charts</a><br/>
       {{$t('else.example')}}
-      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue"
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageCharts.vue"
          style="color: #409eff" target="_blank">
-        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue
+        https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageCharts.vue
       </a>
     </el-card>
     <br/>

@@ -4,9 +4,9 @@
       {{$t('else.learn')}}
       <a style="color: #409eff" href="https://www.npmjs.com/package/vuedraggable">Vue.Draggable</a><br/>
       {{$t('else.example')}}
-      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue"
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageDrag.vue"
          style="color: #409eff" target="_blank">
-        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue
+        https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/PageDrag.vue
       </a>
     </el-card>
     <br/>

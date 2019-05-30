@@ -4,9 +4,9 @@
       {{$t('else.learn')}}
       <a href="http://element-cn.eleme.io/#/zh-CN/component/form" style="color: #409eff">Element Form</a><br/>
       {{$t('else.example')}}
-      <a href="https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue"
+      <a href="https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/forms/PageFormsBase.vue"
          style="color: #409eff" target="_blank">
-        https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue
+        https://github.com/linjinze999/vue-llplatform/blob/vue-cli3/llplatform/src/views/pages/forms/PageFormsBase.vue
       </a>
     </el-card>
     <br/>
