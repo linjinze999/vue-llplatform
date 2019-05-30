@@ -97,10 +97,13 @@ Vue.use(Upload)
 Vue.prototype.$message = Message
 
 // 根据环境变量决定是否引入mock
-if (process.env.NODE_ENV !== 'production' && !process.env.VUE_APP_BACK_END_URL) {
-  const Mock = require('./mock/index').default
-  Mock.mockData()
-}
+// if (process.env.NODE_ENV !== 'production' && !process.env.VUE_APP_BACK_END_URL) {
+//   const Mock = require('./mock/index').default
+//   Mock.mockData()
+// }
+// 在线预览，引入mock数据
+const Mock = require('./mock/index').default
+Mock.mockData()
 
 /* vue-i18n */
 Vue.use(VueI18n)
