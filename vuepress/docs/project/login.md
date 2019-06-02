@@ -468,11 +468,11 @@ export default router
 
 登录页面：[http://localhost:8080/#/login](http://localhost:8080/#/login)
 
-<img src="/assets/img/vue-llplatform/login-login.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/login-login.png')" />
 
 注册页面：[http://localhost:8080/#/register](http://localhost:8080/#/register)
 
-<img src="/assets/img/vue-llplatform/login-register.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/login-register.png')" />
 
 ## 附录
 推荐一个网址，可以找到许多纯由html + css + js编写的有趣的特效页面：[https://codepen.io/](https://codepen.io/)，你可以把它引入到你的页面中。
@@ -483,4 +483,4 @@ export default router
 需执行`npm install gsap -S`。且最终代码已国际化。
 :::
 
-<img src="/assets/img/vue-llplatform/login-login2.gif" />
+<img :src="$withBase('/assets/img/vue-llplatform/login-login2.gif')" />

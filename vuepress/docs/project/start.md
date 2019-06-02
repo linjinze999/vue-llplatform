@@ -52,7 +52,7 @@ vue ui
 cd llplatform
 npm run serve
 ```
-<img src="/assets/img/vue-llplatform/start-demo.PNG" height="450" width="350" style="border: 1px solid #000">
+<img :src="$withBase('/assets/img/vue-llplatform/start-demo.PNG')" height="450" width="350" style="border: 1px solid #000">
 
 ## 安装Element
 本项目选择饿了么的[Element组件库](http://element-cn.eleme.io/#/zh-CN/component/installation)，个人感觉其风格看起来更舒服。
@@ -90,7 +90,7 @@ new Vue({
        ......
 ```
 
-<img src="/assets/img/vue-llplatform/start-demo-element.PNG" height="450" width="350" style="border: 1px solid #000">
+<img :src="$withBase('/assets/img/vue-llplatform/start-demo-element.PNG')" height="450" width="350" style="border: 1px solid #000">
 
 ::: warning 警告
 这边的示例全局引入了所有的Element组件，这会导致项目过大，后续你可以参考[按需引入](https://element.eleme.io/#/zh-CN/component/quickstart#an-xu-yin-ru)，

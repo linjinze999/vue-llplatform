@@ -506,4 +506,4 @@ export default staticRouter
 ## 流程示意图
 页面权限流程控制大体如下：
 
-<img src="/assets/img/vue-llplatform/permission-process.png" style="border: 1px solid #000"/>
+<img :src="$withBase('/assets/img/vue-llplatform/permission-process.png')" style="border: 1px solid #000"/>

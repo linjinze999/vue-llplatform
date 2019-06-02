@@ -3,7 +3,7 @@
 
 ## 布局选择
 界面布局有许多种（可参考 [Element 布局容器](http://element-cn.eleme.io/#/zh-CN/component/container)），本项目选择了以下这种：
-<img src="/assets/img/vue-llplatform/layout-demo.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/layout-demo.png')" />
 
 这里有一个要注意的点是，如何把一个页面嵌套在框架布局中？
 
@@ -125,7 +125,7 @@ export default {
 **主体**提供触发菜单栏展开收起的按钮，收起菜单的同时，**左边Logo**的文字也会隐藏起来，令Logo宽度和左侧折叠的菜单宽度一致。
 **右边用户**，当鼠标悬浮时可以操作退出登录（利用[Element 下拉菜单组件](http://element-cn.eleme.io/#/zh-CN/component/dropdown)）
 
-<img src="/assets/img/vue-llplatform/layout-header.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/layout-header.png')" />
 
 ### 实现
 需要操作父组件的`openNav`；用户名字从`vuex`中获取。创建`src/views/layout/TheLayoutHeader.vue`：
@@ -706,4 +706,4 @@ export default {
 ## 效果预览
 最终预览效果大体如下：
 
-<img src="/assets/img/vue-llplatform/layout-init.gif" />
+<img :src="$withBase('/assets/img/vue-llplatform/layout-init.gif')" />

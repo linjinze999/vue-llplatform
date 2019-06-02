@@ -2,7 +2,7 @@
 本章节介绍如何定制系统主题。
 
 > 正常各个系统都有自己的设计风格，使用组件库默认的色彩风格可能与系统并不搭配，此时就需要定制化我们的主题。
-> 
+>
 > 并且有时候为了满足用户的个性化需求，我们还会支持主题切换，但正常情况下不会特别提供此功能。
 
 
@@ -12,8 +12,8 @@
 
 示例：
 
-<img src="/assets/img/vue-llplatform/theme-skin-demo1.png" width="49%"/>
-<img src="/assets/img/vue-llplatform/theme-skin-demo2.png" width="49%"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-skin-demo1.png')" width="49%"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-skin-demo2.png')" width="49%"/>
 
 ## 二、指定主题色
 更换组件库的默认主题色，此方式只是修改了一下组件的色彩样式，我们只要引入指定的样式文件即可（参考[Element 自定义主题](http://element.eleme.io/#/zh-CN/component/custom-theme)），如：
@@ -23,7 +23,7 @@ import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 import '../theme/index.css'
 ```
-<img src="/assets/img/vue-llplatform/theme-one.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/theme-one.png')" />
 
 **定制化的样式文件有以下几种办法生成：**
 
@@ -135,7 +135,7 @@ Vue.use(ElementUI)
 
 这是比较常见的主题切换功能：系统内置多种主题颜色，用户选择其中一种作为本地主题。（参考[这篇文章](https://segmentfault.com/a/1190000009762198#articleHeader2)）
 
-<img src="/assets/img/vue-llplatform/theme-change.gif"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-change.gif')" />
 
 **实现思路大体为**：本地存放多套主题，两者有不同的命名空间，如写两套主题，一套叫`day-theme`，放在命名空间`.day-theme`下；一套叫`night-theme`，放在命名空间`night-theme`下。我们动态的在`body`的`class`上添加`day-theme`或者`night-theme`，达到切换主题的目的。
 ``` css
@@ -201,8 +201,8 @@ head.appendChild(style);
 ```
 2. 系统内置的主题色彩，最好保持视觉的连续性，即同一套色彩，尽量采取同一色环的色值。详情见：[Ant Design 视觉-色彩](https://ant.design/docs/spec/colors-cn)
 
-<img src="/assets/img/vue-llplatform/theme-change-color1.png"/>
-<img src="/assets/img/vue-llplatform/theme-change-color2.png"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-change-color1.png')"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-change-color2.png')" />
 
 
 ## 四、自定义主题色
@@ -212,7 +212,7 @@ head.appendChild(style);
 本项目就是采用这种方式。
 这种方式的优点是我们无需准备多套主题，用户可以自由动态换肤；缺点是自定义不够，只支持基础颜色的切换。
 
-<img src="/assets/img/vue-llplatform/theme-any.gif"/>
+<img :src="$withBase('/assets/img/vue-llplatform/theme-any.gif')" />
 
 ::: tip 提示
 参考[vue-element-admin 更换主题](https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/theme.html)

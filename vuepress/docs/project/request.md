@@ -272,10 +272,10 @@ export default {
 
 ```
 运行`npm run dev`，打开[localhost:8080](localhost:8080)，点击【按钮】即可看到返回数据：↓
-<img src="/assets/img/vue-llplatform/request-demo-success.PNG" height="350" width="350" style="border: 1px solid #000">
+<img :src="$withBase('/assets/img/vue-llplatform/request-demo-success.PNG')" height="350" width="350" style="border: 1px solid #000">
 
 你也可以修改返回数据`src/mock/index.js`，返回结果为：`'code': -1`↓
-<img src="/assets/img/vue-llplatform/request-demo-error-data.PNG" height="350" width="350" style="border: 1px solid #000">
+<img :src="$withBase('/assets/img/vue-llplatform/request-demo-error-data.PNG')" height="350" width="350" style="border: 1px solid #000">
 
 或者修改`src/api/user.js`，请求无效的url：`/api/user/logout`↓
-<img src="/assets/img/vue-llplatform/request-demo-error-res.PNG" height="350" width="350" style="border: 1px solid #000">
+<img :src="$withBase('/assets/img/vue-llplatform/request-demo-error-res.PNG')" height="350" width="350" style="border: 1px solid #000">

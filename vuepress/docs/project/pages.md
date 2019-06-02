@@ -13,39 +13,39 @@ vue图表有许多选择，看个人习惯用哪一种。若图表在项目中�
 
 本项目采用了百度的[ECharts](http://echarts.baidu.com/)，为了使用方便，引入[v-charts](https://v-charts.js.org/#/)组件（在使用 echarts 生成图表时，经常需要做繁琐的数据类型转化、修改复杂的配置项，v-charts 的出现正是为了解决这个痛点。基于 Vue2.0 和 echarts 封装的 v-charts 图表组件，只需要统一提供一种对前后端都友好的数据格式设置简单的配置项，便可轻松生成常见的图表）。
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/charts/FuncCharts.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageCharts.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageCharts.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/charts](https://linjinze999.github.io/preview/vue-llplatform/#/charts)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/charts](https://linjinze999.github.io/vue-llplatform/preview/#/charts)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-chart.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-chart.png')" />
 
 ## 表单
 【说明】
 
 [Element Form](http://element-cn.eleme.io/#/zh-CN/component/form)提供了基础的表单，如单选、多选、输入、选择、联级选择、开关、日期、文件、穿梭框、颜色选择等，参考官网使用即可。
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsBase.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/forms/PageFormsBase.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/forms/PageFormsBase.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/forms/base](https://linjinze999.github.io/preview/vue-llplatform/#/forms/base)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/forms/base](https://linjinze999.github.io/vue-llplatform/preview/#/forms/base)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-form.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-form.png')" />
 
 ## 富文本编辑器
 【说明】
 
 富文本编辑器可选项也较多（[常见富文本](https://panjiachen.github.io/vue-element-admin-site/zh/component/rich-editor.html)），本项目采用[vue-quill-editor](https://www.awesomes.cn/repo/surmon-china/vue-quill-editor)，其风格较为简洁。
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/forms/FuncFormsEdit.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/forms/PageFormsEdit.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/forms/PageFormsEdit.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/forms/edit](https://linjinze999.github.io/preview/vue-llplatform/#/forms/edit)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/forms/edit](https://linjinze999.github.io/vue-llplatform/preview/#/forms/edit)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-edit.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-edit.png')" />
 
 ## 表格
 【说明】
@@ -56,26 +56,26 @@ vue图表有许多选择，看个人习惯用哪一种。若图表在项目中�
 分页时，table需要过滤数据，只显示分页的数据，可以如此过滤：`:data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"`
 :::
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/table/FuncTable.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageTable.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageTable.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/table](https://linjinze999.github.io/preview/vue-llplatform/#/table)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/table](https://linjinze999.github.io/vue-llplatform/preview/#/table)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-table.png" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-table.png')" />
 
 ## 拖曳
 【说明】
 
 本项目采用了[vue.draggable](https://www.npmjs.com/package/vuedraggable)来提供拖曳功能。
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/drag/FuncDrag.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageDrag.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/PageDrag.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/drag](https://linjinze999.github.io/preview/vue-llplatform/#/drag)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/drag](https://linjinze999.github.io/vue-llplatform/preview/#/drag)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-drag.gif" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-drag.gif')" />
 
 ## 权限配置
 【说明】
@@ -84,13 +84,13 @@ vue图表有许多选择，看个人习惯用哪一种。若图表在项目中�
 
 权限设置页面分为三种：用户、角色、页面。一个用户可以有多个角色；角色指定了其拥有的页面权限和页面中的指令权限；页面记录了页面信息，包括指令权限。
 
-【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/user/FuncUserPermissions.vue](https://github.com/linjinze999/vue-llplatform/blob/master/src/pages/functions/user/FuncUserPermissions.vue)
+【代码示例】：[https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/user/PageUserPermissions.vue](https://github.com/linjinze999/vue-llplatform/blob/master/llplatform/src/views/pages/user/PageUserPermissions.vue)
 
-【在线演示】：[https://linjinze999.github.io/preview/vue-llplatform/#/user/permissions](https://linjinze999.github.io/preview/vue-llplatform/#http://localhost:8080)
+【在线演示】：[https://linjinze999.github.io/vue-llplatform/preview/#/user/permissions](https://linjinze999.github.io/vue-llplatform/preview/#/user/permissions)
 
 【预览图片】：
 
-<img src="/assets/img/vue-llplatform/func-permission.gif" />
+<img :src="$withBase('/assets/img/vue-llplatform/func-permission.gif')" />
 
 
 ## 其他
