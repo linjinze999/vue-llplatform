@@ -70,11 +70,6 @@ html, body {
   padding: 0;
 }
 
-/* [theme] support theme change */
-.theme-bg-blue{
-  background-color: #409eff;
-}
-
 /* Chrome 滚动条优化 */
 * {
   &::-webkit-scrollbar { /*滚动条整体样式*/
