@@ -142,7 +142,6 @@ export default {
 .header {
   color: #ffffff;
   line-height: 60px;
-  background-color: #409EFF;
   user-select: none;
 
   div {
