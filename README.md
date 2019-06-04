@@ -56,7 +56,10 @@
 ```
 
 ## 构建
-
+进入项目目录
+``` bash
+cd llplatform
+```
 ### Project setup
 ```
 npm install

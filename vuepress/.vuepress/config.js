@@ -19,6 +19,7 @@ module.exports = {
     ['meta', {name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png'}],
     ['meta', {name: 'msapplication-TileColor', content: '#000000'}],
     ['script', {src: '/assets/js/article.js'}],
+    ['script', {src: 'https://hm.baidu.com/hm.js?cb0f8a7853566f66e39ee136bc02bdb5'}],
     ['link', {rel: 'stylesheet', href: '/assets/css/common.css'}]
   ],
   markdown: {
@@ -48,7 +49,11 @@ module.exports = {
           {
             text: '在线预览',
             link: 'https://linjinze999.github.io/vue-llplatform/preview/#/login',
-          }
+          },
+          {
+            text: '支持一下',
+            link: '/support/',
+          },
         ],
         sidebar: {
           '/docs/': [
